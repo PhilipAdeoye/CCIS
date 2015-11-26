@@ -1,0 +1,676 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CCModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="CCModelStoreContainer">
+          <EntitySet Name="Human" EntityType="CCModel.Store.Human" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Organization" EntityType="CCModel.Store.Organization" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Race" EntityType="CCModel.Store.Race" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Role" EntityType="CCModel.Store.Role" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RunnerClassification" EntityType="CCModel.Store.RunnerClassification" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RunnerRaceRecord" EntityType="CCModel.Store.RunnerRaceRecord" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RunnerRaceRecordSegment" EntityType="CCModel.Store.RunnerRaceRecordSegment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VarsityLevel" EntityType="CCModel.Store.VarsityLevel" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Human_Organization" Association="CCModel.Store.FK_Human_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Human" EntitySet="Human" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Human_Role" Association="CCModel.Store.FK_Human_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Human" EntitySet="Human" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Race_Organization" Association="CCModel.Store.FK_Race_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Race" EntitySet="Race" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunnerRaceRecord_Human" Association="CCModel.Store.FK_RunnerRaceRecord_Human">
+            <End Role="Human" EntitySet="Human" />
+            <End Role="RunnerRaceRecord" EntitySet="RunnerRaceRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunnerRaceRecord_Race" Association="CCModel.Store.FK_RunnerRaceRecord_Race">
+            <End Role="Race" EntitySet="Race" />
+            <End Role="RunnerRaceRecord" EntitySet="RunnerRaceRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunnerRaceRecord_RunnerClassification" Association="CCModel.Store.FK_RunnerRaceRecord_RunnerClassification">
+            <End Role="RunnerClassification" EntitySet="RunnerClassification" />
+            <End Role="RunnerRaceRecord" EntitySet="RunnerRaceRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunnerRaceRecord_VarsityLevel" Association="CCModel.Store.FK_RunnerRaceRecord_VarsityLevel">
+            <End Role="VarsityLevel" EntitySet="VarsityLevel" />
+            <End Role="RunnerRaceRecord" EntitySet="RunnerRaceRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunnerRaceRecordSegment_RunnerRaceRecord" Association="CCModel.Store.FK_RunnerRaceRecordSegment_RunnerRaceRecord">
+            <End Role="RunnerRaceRecord" EntitySet="RunnerRaceRecord" />
+            <End Role="RunnerRaceRecordSegment" EntitySet="RunnerRaceRecordSegment" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Human">
+          <Key>
+            <PropertyRef Name="HumanId" />
+          </Key>
+          <Property Name="HumanId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="OrganizationId" Type="bigint" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Lastname" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Middlename" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="OrganizationId" />
+          </Key>
+          <Property Name="OrganizationId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="MascotName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MascotImageFileLocation" Type="nvarchar(max)" />
+          <Property Name="Tagline" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="RacetId" />
+          </Key>
+          <Property Name="RacetId" Type="bigint" Nullable="false" />
+          <Property Name="OrganizationId" Type="bigint" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="StartedOn" Type="datetime" />
+          <Property Name="CompletedOn" Type="datetime" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RunnerClassification">
+          <Key>
+            <PropertyRef Name="RunnerClassificationId" />
+          </Key>
+          <Property Name="RunnerClassificationId" Type="int" Nullable="false" />
+          <Property Name="RunnerClassificationName" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RunnerRaceRecord">
+          <Key>
+            <PropertyRef Name="RunnerRaceRecordId" />
+          </Key>
+          <Property Name="RunnerRaceRecordId" Type="bigint" Nullable="false" />
+          <Property Name="HumanId" Type="bigint" Nullable="false" />
+          <Property Name="RaceId" Type="bigint" Nullable="false" />
+          <Property Name="RunnerClassificationId" Type="int" Nullable="false" />
+          <Property Name="VarsityLevelId" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="bigint" />
+        </EntityType>
+        <EntityType Name="RunnerRaceRecordSegment">
+          <Key>
+            <PropertyRef Name="RunnerRaceRecordSegmentId" />
+          </Key>
+          <Property Name="RunnerRaceRecordSegmentId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RunnerRaceRecordId" Type="bigint" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="bigint" />
+        </EntityType>
+        <EntityType Name="VarsityLevel">
+          <Key>
+            <PropertyRef Name="VarsityLevelId" />
+          </Key>
+          <Property Name="VarsityLevelId" Type="int" Nullable="false" />
+          <Property Name="VarsityLevelName" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Human_Organization">
+          <End Role="Organization" Type="CCModel.Store.Organization" Multiplicity="1" />
+          <End Role="Human" Type="CCModel.Store.Human" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="Human">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Human_Role">
+          <End Role="Role" Type="CCModel.Store.Role" Multiplicity="1" />
+          <End Role="Human" Type="CCModel.Store.Human" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Human">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Race_Organization">
+          <End Role="Organization" Type="CCModel.Store.Organization" Multiplicity="1" />
+          <End Role="Race" Type="CCModel.Store.Race" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="Race">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunnerRaceRecord_Human">
+          <End Role="Human" Type="CCModel.Store.Human" Multiplicity="1" />
+          <End Role="RunnerRaceRecord" Type="CCModel.Store.RunnerRaceRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Human">
+              <PropertyRef Name="HumanId" />
+            </Principal>
+            <Dependent Role="RunnerRaceRecord">
+              <PropertyRef Name="HumanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunnerRaceRecord_Race">
+          <End Role="Race" Type="CCModel.Store.Race" Multiplicity="1" />
+          <End Role="RunnerRaceRecord" Type="CCModel.Store.RunnerRaceRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="RacetId" />
+            </Principal>
+            <Dependent Role="RunnerRaceRecord">
+              <PropertyRef Name="RaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunnerRaceRecord_RunnerClassification">
+          <End Role="RunnerClassification" Type="CCModel.Store.RunnerClassification" Multiplicity="1" />
+          <End Role="RunnerRaceRecord" Type="CCModel.Store.RunnerRaceRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunnerClassification">
+              <PropertyRef Name="RunnerClassificationId" />
+            </Principal>
+            <Dependent Role="RunnerRaceRecord">
+              <PropertyRef Name="RunnerClassificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunnerRaceRecord_VarsityLevel">
+          <End Role="VarsityLevel" Type="CCModel.Store.VarsityLevel" Multiplicity="1" />
+          <End Role="RunnerRaceRecord" Type="CCModel.Store.RunnerRaceRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VarsityLevel">
+              <PropertyRef Name="VarsityLevelId" />
+            </Principal>
+            <Dependent Role="RunnerRaceRecord">
+              <PropertyRef Name="VarsityLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunnerRaceRecordSegment_RunnerRaceRecord">
+          <End Role="RunnerRaceRecord" Type="CCModel.Store.RunnerRaceRecord" Multiplicity="1" />
+          <End Role="RunnerRaceRecordSegment" Type="CCModel.Store.RunnerRaceRecordSegment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunnerRaceRecord">
+              <PropertyRef Name="RunnerRaceRecordId" />
+            </Principal>
+            <Dependent Role="RunnerRaceRecordSegment">
+              <PropertyRef Name="RunnerRaceRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CCModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="CCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Humen" EntityType="CCModel.Human" />
+          <EntitySet Name="Organizations" EntityType="CCModel.Organization" />
+          <EntitySet Name="Races" EntityType="CCModel.Race" />
+          <EntitySet Name="Roles" EntityType="CCModel.Role" />
+          <EntitySet Name="RunnerClassifications" EntityType="CCModel.RunnerClassification" />
+          <EntitySet Name="RunnerRaceRecords" EntityType="CCModel.RunnerRaceRecord" />
+          <EntitySet Name="VarsityLevels" EntityType="CCModel.VarsityLevel" />
+          <AssociationSet Name="FK_Human_Organization" Association="CCModel.FK_Human_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Human" EntitySet="Humen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Human_Role" Association="CCModel.FK_Human_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Human" EntitySet="Humen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunnerRaceRecord_Human" Association="CCModel.FK_RunnerRaceRecord_Human">
+            <End Role="Human" EntitySet="Humen" />
+            <End Role="RunnerRaceRecord" EntitySet="RunnerRaceRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Race_Organization" Association="CCModel.FK_Race_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Race" EntitySet="Races" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunnerRaceRecord_Race" Association="CCModel.FK_RunnerRaceRecord_Race">
+            <End Role="Race" EntitySet="Races" />
+            <End Role="RunnerRaceRecord" EntitySet="RunnerRaceRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunnerRaceRecord_RunnerClassification" Association="CCModel.FK_RunnerRaceRecord_RunnerClassification">
+            <End Role="RunnerClassification" EntitySet="RunnerClassifications" />
+            <End Role="RunnerRaceRecord" EntitySet="RunnerRaceRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunnerRaceRecord_VarsityLevel" Association="CCModel.FK_RunnerRaceRecord_VarsityLevel">
+            <End Role="VarsityLevel" EntitySet="VarsityLevels" />
+            <End Role="RunnerRaceRecord" EntitySet="RunnerRaceRecords" />
+          </AssociationSet>
+          <EntitySet Name="RunnerRaceRecordSegments" EntityType="CCModel.RunnerRaceRecordSegment" />
+          <AssociationSet Name="FK_RunnerRaceRecordSegment_RunnerRaceRecord" Association="CCModel.FK_RunnerRaceRecordSegment_RunnerRaceRecord">
+            <End Role="RunnerRaceRecord" EntitySet="RunnerRaceRecords" />
+            <End Role="RunnerRaceRecordSegment" EntitySet="RunnerRaceRecordSegments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Human">
+          <Key>
+            <PropertyRef Name="HumanId" />
+          </Key>
+          <Property Name="HumanId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Middlename" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="DateTime" />
+          <NavigationProperty Name="Organization" Relationship="CCModel.FK_Human_Organization" FromRole="Human" ToRole="Organization" />
+          <NavigationProperty Name="Role" Relationship="CCModel.FK_Human_Role" FromRole="Human" ToRole="Role" />
+          <NavigationProperty Name="RunnerRaceRecords" Relationship="CCModel.FK_RunnerRaceRecord_Human" FromRole="Human" ToRole="RunnerRaceRecord" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="OrganizationId" />
+          </Key>
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MascotName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MascotImageFileLocation" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Tagline" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <NavigationProperty Name="Humen" Relationship="CCModel.FK_Human_Organization" FromRole="Organization" ToRole="Human" />
+          <NavigationProperty Name="Races" Relationship="CCModel.FK_Race_Organization" FromRole="Organization" ToRole="Race" />
+        </EntityType>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="RacetId" />
+          </Key>
+          <Property Name="RacetId" Type="Int64" Nullable="false" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="StartedOn" Type="DateTime" />
+          <Property Name="CompletedOn" Type="DateTime" />
+          <Property Name="CreatedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <NavigationProperty Name="Organization" Relationship="CCModel.FK_Race_Organization" FromRole="Race" ToRole="Organization" />
+          <NavigationProperty Name="RunnerRaceRecords" Relationship="CCModel.FK_RunnerRaceRecord_Race" FromRole="Race" ToRole="RunnerRaceRecord" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Humen" Relationship="CCModel.FK_Human_Role" FromRole="Role" ToRole="Human" />
+        </EntityType>
+        <EntityType Name="RunnerClassification">
+          <Key>
+            <PropertyRef Name="RunnerClassificationId" />
+          </Key>
+          <Property Name="RunnerClassificationId" Type="Int32" Nullable="false" />
+          <Property Name="RunnerClassificationName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="RunnerRaceRecords" Relationship="CCModel.FK_RunnerRaceRecord_RunnerClassification" FromRole="RunnerClassification" ToRole="RunnerRaceRecord" />
+        </EntityType>
+        <EntityType Name="RunnerRaceRecord">
+          <Key>
+            <PropertyRef Name="RunnerRaceRecordId" />
+          </Key>
+          <Property Name="RunnerRaceRecordId" Type="Int64" Nullable="false" />
+          <Property Name="HumanId" Type="Int64" Nullable="false" />
+          <Property Name="RaceId" Type="Int64" Nullable="false" />
+          <Property Name="RunnerClassificationId" Type="Int32" Nullable="false" />
+          <Property Name="VarsityLevelId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" />
+          <Property Name="EndTime" Type="DateTime" Nullable="true" />
+          <Property Name="CreatedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <NavigationProperty Name="Human" Relationship="CCModel.FK_RunnerRaceRecord_Human" FromRole="RunnerRaceRecord" ToRole="Human" />
+          <NavigationProperty Name="Race" Relationship="CCModel.FK_RunnerRaceRecord_Race" FromRole="RunnerRaceRecord" ToRole="Race" />
+          <NavigationProperty Name="RunnerClassification" Relationship="CCModel.FK_RunnerRaceRecord_RunnerClassification" FromRole="RunnerRaceRecord" ToRole="RunnerClassification" />
+          <NavigationProperty Name="VarsityLevel" Relationship="CCModel.FK_RunnerRaceRecord_VarsityLevel" FromRole="RunnerRaceRecord" ToRole="VarsityLevel" />
+          <NavigationProperty Name="RunnerRaceRecordSegments" Relationship="CCModel.FK_RunnerRaceRecordSegment_RunnerRaceRecord" FromRole="RunnerRaceRecord" ToRole="RunnerRaceRecordSegment" />
+        </EntityType>
+        <EntityType Name="VarsityLevel">
+          <Key>
+            <PropertyRef Name="VarsityLevelId" />
+          </Key>
+          <Property Name="VarsityLevelId" Type="Int32" Nullable="false" />
+          <Property Name="VarsityLevelName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="RunnerRaceRecords" Relationship="CCModel.FK_RunnerRaceRecord_VarsityLevel" FromRole="VarsityLevel" ToRole="RunnerRaceRecord" />
+        </EntityType>
+        <Association Name="FK_Human_Organization">
+          <End Role="Organization" Type="CCModel.Organization" Multiplicity="1" />
+          <End Role="Human" Type="CCModel.Human" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="Human">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Human_Role">
+          <End Role="Role" Type="CCModel.Role" Multiplicity="1" />
+          <End Role="Human" Type="CCModel.Human" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Human">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunnerRaceRecord_Human">
+          <End Role="Human" Type="CCModel.Human" Multiplicity="1" />
+          <End Role="RunnerRaceRecord" Type="CCModel.RunnerRaceRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Human">
+              <PropertyRef Name="HumanId" />
+            </Principal>
+            <Dependent Role="RunnerRaceRecord">
+              <PropertyRef Name="HumanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Race_Organization">
+          <End Role="Organization" Type="CCModel.Organization" Multiplicity="1" />
+          <End Role="Race" Type="CCModel.Race" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="Race">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunnerRaceRecord_Race">
+          <End Role="Race" Type="CCModel.Race" Multiplicity="1" />
+          <End Role="RunnerRaceRecord" Type="CCModel.RunnerRaceRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="RacetId" />
+            </Principal>
+            <Dependent Role="RunnerRaceRecord">
+              <PropertyRef Name="RaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunnerRaceRecord_RunnerClassification">
+          <End Role="RunnerClassification" Type="CCModel.RunnerClassification" Multiplicity="1" />
+          <End Role="RunnerRaceRecord" Type="CCModel.RunnerRaceRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunnerClassification">
+              <PropertyRef Name="RunnerClassificationId" />
+            </Principal>
+            <Dependent Role="RunnerRaceRecord">
+              <PropertyRef Name="RunnerClassificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunnerRaceRecord_VarsityLevel">
+          <End Role="VarsityLevel" Type="CCModel.VarsityLevel" Multiplicity="1" />
+          <End Role="RunnerRaceRecord" Type="CCModel.RunnerRaceRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VarsityLevel">
+              <PropertyRef Name="VarsityLevelId" />
+            </Principal>
+            <Dependent Role="RunnerRaceRecord">
+              <PropertyRef Name="VarsityLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RunnerRaceRecordSegment">
+          <Key>
+            <PropertyRef Name="RunnerRaceRecordSegmentId" />
+          </Key>
+          <Property Type="Int64" Name="RunnerRaceRecordSegmentId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="RunnerRaceRecordId" Nullable="false" />
+          <Property Type="DateTime" Name="StartTime" />
+          <Property Type="DateTime" Name="EndTime" />
+          <Property Type="DateTime" Name="CreatedOn" />
+          <Property Type="Int64" Name="CreatedBy" />
+          <Property Type="DateTime" Name="ModifiedOn" />
+          <Property Type="Int64" Name="ModifiedBy" />
+          <NavigationProperty Name="RunnerRaceRecord" Relationship="CCModel.FK_RunnerRaceRecordSegment_RunnerRaceRecord" FromRole="RunnerRaceRecordSegment" ToRole="RunnerRaceRecord" />
+        </EntityType>
+        <Association Name="FK_RunnerRaceRecordSegment_RunnerRaceRecord">
+          <End Type="CCModel.RunnerRaceRecord" Role="RunnerRaceRecord" Multiplicity="1" />
+          <End Type="CCModel.RunnerRaceRecordSegment" Role="RunnerRaceRecordSegment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunnerRaceRecord">
+              <PropertyRef Name="RunnerRaceRecordId" />
+            </Principal>
+            <Dependent Role="RunnerRaceRecordSegment">
+              <PropertyRef Name="RunnerRaceRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CCModelStoreContainer" CdmEntityContainer="CCEntities">
+          <EntitySetMapping Name="Humen">
+            <EntityTypeMapping TypeName="CCModel.Human">
+              <MappingFragment StoreEntitySet="Human">
+                <ScalarProperty Name="HumanId" ColumnName="HumanId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizations">
+            <EntityTypeMapping TypeName="CCModel.Organization">
+              <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MascotName" ColumnName="MascotName" />
+                <ScalarProperty Name="MascotImageFileLocation" ColumnName="MascotImageFileLocation" />
+                <ScalarProperty Name="Tagline" ColumnName="Tagline" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Races">
+            <EntityTypeMapping TypeName="CCModel.Race">
+              <MappingFragment StoreEntitySet="Race">
+                <ScalarProperty Name="RacetId" ColumnName="RacetId" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="StartedOn" ColumnName="StartedOn" />
+                <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="CCModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RunnerClassifications">
+            <EntityTypeMapping TypeName="CCModel.RunnerClassification">
+              <MappingFragment StoreEntitySet="RunnerClassification">
+                <ScalarProperty Name="RunnerClassificationId" ColumnName="RunnerClassificationId" />
+                <ScalarProperty Name="RunnerClassificationName" ColumnName="RunnerClassificationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RunnerRaceRecords">
+            <EntityTypeMapping TypeName="CCModel.RunnerRaceRecord">
+              <MappingFragment StoreEntitySet="RunnerRaceRecord">
+                <ScalarProperty Name="RunnerRaceRecordId" ColumnName="RunnerRaceRecordId" />
+                <ScalarProperty Name="HumanId" ColumnName="HumanId" />
+                <ScalarProperty Name="RaceId" ColumnName="RaceId" />
+                <ScalarProperty Name="RunnerClassificationId" ColumnName="RunnerClassificationId" />
+                <ScalarProperty Name="VarsityLevelId" ColumnName="VarsityLevelId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VarsityLevels">
+            <EntityTypeMapping TypeName="CCModel.VarsityLevel">
+              <MappingFragment StoreEntitySet="VarsityLevel">
+                <ScalarProperty Name="VarsityLevelId" ColumnName="VarsityLevelId" />
+                <ScalarProperty Name="VarsityLevelName" ColumnName="VarsityLevelName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RunnerRaceRecordSegments">
+            <EntityTypeMapping TypeName="CCModel.RunnerRaceRecordSegment">
+              <MappingFragment StoreEntitySet="RunnerRaceRecordSegment">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="RunnerRaceRecordId" ColumnName="RunnerRaceRecordId" />
+                <ScalarProperty Name="RunnerRaceRecordSegmentId" ColumnName="RunnerRaceRecordSegmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="CCData">
+        <EntityTypeShape EntityType="CCModel.Human" Width="1.5" PointX="0.5" PointY="0.75" Height="4.0956022135416656" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCModel.Organization" Width="2" PointX="0.5" PointY="5.5" Height="3.1340950520833331" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCModel.Race" Width="1.5" PointX="5.375" PointY="5.25" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCModel.Role" Width="1.5" PointX="3" PointY="0.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCModel.RunnerClassification" Width="2" PointX="5.375" PointY="0.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCModel.RunnerRaceRecord" Width="1.75" PointX="3" PointY="2.75" Height="3.9033007812499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCModel.VarsityLevel" Width="1.5" PointX="5.5" PointY="3.125" Height="1.5956835937499996" IsExpanded="true" />
+        <AssociationConnector Association="CCModel.FK_Human_Organization" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.25" PointY="5.5" />
+          <ConnectorPoint PointX="1.25" PointY="4.8456022135416656" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_Human_Role" ManuallyRouted="false">
+          <ConnectorPoint PointX="3" PointY="1.5478417968749998" />
+          <ConnectorPoint PointX="2" PointY="1.5478417968749998" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_RunnerRaceRecord_Human" ManuallyRouted="false">
+          <ConnectorPoint PointX="2" PointY="3.7978011067708328" />
+          <ConnectorPoint PointX="3" PointY="3.7978011067708328" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_Race_Organization" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.5" PointY="7.5835986328125" />
+          <ConnectorPoint PointX="3.7916666666666665" PointY="7.5835986328124987" />
+          <ConnectorPoint PointX="3.9583333333333335" PointY="7.5835986328125" />
+          <ConnectorPoint PointX="5.375" PointY="7.5835986328125" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_RunnerRaceRecord_Race" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.375" PointY="6.0478011067708328" />
+          <ConnectorPoint PointX="4.75" PointY="6.0478011067708328" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_RunnerRaceRecord_RunnerClassification" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.375" PointY="2.3456835937499996" />
+          <ConnectorPoint PointX="4.75" PointY="2.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_RunnerRaceRecord_VarsityLevel" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.5" PointY="3.922841796875" />
+          <ConnectorPoint PointX="4.75" PointY="3.922841796875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="CCModel.RunnerRaceRecordSegment" Width="1.5" PointX="5.5" PointY="9.375" Height="2.7494921874999996" />
+        <AssociationConnector Association="CCModel.FK_RunnerRaceRecordSegment_RunnerRaceRecord" >
+          <ConnectorPoint PointX="3.875" PointY="6.8456022135416656" />
+          <ConnectorPoint PointX="3.875" PointY="10.74974609375" />
+          <ConnectorPoint PointX="5.5" PointY="10.74974609375" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

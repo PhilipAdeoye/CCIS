@@ -6,24 +6,39 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CCData
 {
-    [MetadataType(typeof(Organization.MetaData))]
-    public partial class Organization: IValidatableObject, ICreatableEntity, IModifiableEntity
-    {
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    public partial class Organization : IValidatableEntity, ICreatableEntity, IModifiableEntity
+    {        
+        public class Ids
         {
-            using (var db = new CCEntities())
-            {
-                if (db.Organizations.Any(o => o.Name == Name && o.OrganizationId != OrganizationId))
-                    yield return new ValidationResult("Name must be unique", new[] { "Name" });
-            }
-        }
+            public const long KGB = 1;
+        } 
 
-        #region MetaData
-        private sealed class MetaData
+        #region SaveValidate
+        public IEnumerable<DbValidationError> SaveValidate()
         {
-            [Required(ErrorMessage = "Organization Name is required.")]
-            public string Name { get; set; }
-        }
+            var errors = new List<DbValidationError>();
+
+            if (string.IsNullOrWhiteSpace(Name))
+                errors.Add(new DbValidationError("Organization Name is required", "Name"));
+
+            if (errors.Count == 0)
+            {
+                using (var db = new CCEntities())
+                {
+                    if (db.Organizations.Any(o => o.Name == Name && o.OrganizationId != OrganizationId))
+                        errors.Add(new DbValidationError("Name must be unique", "Name"));
+                }
+            }
+
+            return errors;
+        } 
+        #endregion
+
+        #region DeleteValidate
+        public IEnumerable<DbValidationError> DeleteValidate()
+        {
+            return new List<DbValidationError> { };
+        } 
         #endregion
     }
 }

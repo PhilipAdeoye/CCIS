@@ -20,11 +20,47 @@ namespace CCData
                 if (!entry.IsRelationship)
                 {
                     UpdateTrackedEntity(entry);
+                    ValidateEntityToBeSaved(entry);
                 }
             }
 
+            foreach (var entry in ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Deleted))
+            {
+                if (!entry.IsRelationship)
+                {                    
+                    ValidateEntityToBeDeleted(entry);
+                }
+            }
             return base.SaveChanges(options);
-        } 
+        }
+        #endregion
+
+        #region ValidateEntity
+        private void ValidateEntityToBeSaved(System.Data.Objects.ObjectStateEntry entry)
+        {
+            var entity = entry.Entity as IValidatableEntity;
+            if (entity != null)
+            {
+                var errors = entity.SaveValidate();
+                if (errors.Count() > 0)
+                {
+                    throw new DbValidationException(errors);
+                }
+            }
+        }
+
+        private void ValidateEntityToBeDeleted(System.Data.Objects.ObjectStateEntry entry)
+        {
+            var entity = entry.Entity as IValidatableEntity;
+            if (entity != null)
+            {
+                var errors = entity.DeleteValidate();
+                if (errors.Count() > 0)
+                {
+                    throw new DbValidationException(errors);
+                }
+            }
+        }  
         #endregion
 
         #region UpdateTrackedEntity

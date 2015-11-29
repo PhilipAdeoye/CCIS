@@ -177,22 +177,6 @@ namespace CCData
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<VarsityLevel> VarsityLevels
-        {
-            get
-            {
-                if ((_VarsityLevels == null))
-                {
-                    _VarsityLevels = base.CreateObjectSet<VarsityLevel>("VarsityLevels");
-                }
-                return _VarsityLevels;
-            }
-        }
-        private ObjectSet<VarsityLevel> _VarsityLevels;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<RunnerRaceRecordSegment> RunnerRaceRecordSegments
         {
             get
@@ -205,6 +189,22 @@ namespace CCData
             }
         }
         private ObjectSet<RunnerRaceRecordSegment> _RunnerRaceRecordSegments;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<VarsityLevel> VarsityLevels
+        {
+            get
+            {
+                if ((_VarsityLevels == null))
+                {
+                    _VarsityLevels = base.CreateObjectSet<VarsityLevel>("VarsityLevels");
+                }
+                return _VarsityLevels;
+            }
+        }
+        private ObjectSet<VarsityLevel> _VarsityLevels;
 
         #endregion
 
@@ -259,19 +259,19 @@ namespace CCData
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the VarsityLevels EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToVarsityLevels(VarsityLevel varsityLevel)
-        {
-            base.AddObject("VarsityLevels", varsityLevel);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the RunnerRaceRecordSegments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToRunnerRaceRecordSegments(RunnerRaceRecordSegment runnerRaceRecordSegment)
         {
             base.AddObject("RunnerRaceRecordSegments", runnerRaceRecordSegment);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the VarsityLevels EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToVarsityLevels(VarsityLevel varsityLevel)
+        {
+            base.AddObject("VarsityLevels", varsityLevel);
         }
 
         #endregion
@@ -537,6 +537,30 @@ namespace CCData
         private global::System.String _Email;
         partial void OnEmailChanging(global::System.String value);
         partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String GraduationYear
+        {
+            get
+            {
+                return _GraduationYear;
+            }
+            set
+            {
+                OnGraduationYearChanging(value);
+                ReportPropertyChanging("GraduationYear");
+                _GraduationYear = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("GraduationYear");
+                OnGraduationYearChanged();
+            }
+        }
+        private global::System.String _GraduationYear;
+        partial void OnGraduationYearChanging(global::System.String value);
+        partial void OnGraduationYearChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1053,13 +1077,13 @@ namespace CCData
         /// <summary>
         /// Create a new Race object.
         /// </summary>
-        /// <param name="racetId">Initial value of the RacetId property.</param>
+        /// <param name="raceId">Initial value of the RaceId property.</param>
         /// <param name="organizationId">Initial value of the OrganizationId property.</param>
         /// <param name="description">Initial value of the Description property.</param>
-        public static Race CreateRace(global::System.Int64 racetId, global::System.Int64 organizationId, global::System.String description)
+        public static Race CreateRace(global::System.Int64 raceId, global::System.Int64 organizationId, global::System.String description)
         {
             Race race = new Race();
-            race.RacetId = racetId;
+            race.RaceId = raceId;
             race.OrganizationId = organizationId;
             race.Description = description;
             return race;
@@ -1074,27 +1098,27 @@ namespace CCData
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 RacetId
+        public global::System.Int64 RaceId
         {
             get
             {
-                return _RacetId;
+                return _RaceId;
             }
             set
             {
-                if (_RacetId != value)
+                if (_RaceId != value)
                 {
-                    OnRacetIdChanging(value);
-                    ReportPropertyChanging("RacetId");
-                    _RacetId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("RacetId");
-                    OnRacetIdChanged();
+                    OnRaceIdChanging(value);
+                    ReportPropertyChanging("RaceId");
+                    _RaceId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("RaceId");
+                    OnRaceIdChanged();
                 }
             }
         }
-        private global::System.Int64 _RacetId;
-        partial void OnRacetIdChanging(global::System.Int64 value);
-        partial void OnRacetIdChanged();
+        private global::System.Int64 _RaceId;
+        partial void OnRaceIdChanging(global::System.Int64 value);
+        partial void OnRaceIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

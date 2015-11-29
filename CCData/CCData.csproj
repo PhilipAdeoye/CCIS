@@ -59,8 +59,11 @@
       <DependentUpon>CCData.edmx</DependentUpon>
     </Compile>
     <Compile Include="CCEntities.cs" />
+    <Compile Include="DbValidationError.cs" />
+    <Compile Include="DbValidationException.cs" />
     <Compile Include="ICreatableEntity.cs" />
     <Compile Include="IModifiableEntity.cs" />
+    <Compile Include="IValidatableEntity.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

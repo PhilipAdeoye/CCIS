@@ -12,4 +12,4 @@ INSERT INTO CrossCountry.dbo.RunnerClassification
 VALUES ('Freshman'),('Sophomore'),('Junior'), ('Senior'), ('Senorita'), ('Weekend Warrior')
 
 INSERT INTO CrossCountry.dbo.Human
-VALUES (1,1,'nklassen', 'password', 'Niels', 'Klassen', NULL, NULL, GETDATE(), 1, NULL, NULL)
+VALUES (1,1,'nklassen', 'password', 'Niels', 'Klassen', NULL, NULL, NULL,GETDATE(), 1, NULL, NULL)

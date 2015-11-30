@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Validation;
-using System.Data.Entity.Infrastructure;
+using System.Linq;
+using CCData.Infrastructure;
 
 
 namespace CCData
@@ -43,9 +40,7 @@ namespace CCData
             {
                 var errors = entity.SaveValidate();
                 if (errors.Count() > 0)
-                {
                     throw new DbValidationException(errors);
-                }
             }
         }
 
@@ -56,9 +51,7 @@ namespace CCData
             {
                 var errors = entity.DeleteValidate();
                 if (errors.Count() > 0)
-                {
                     throw new DbValidationException(errors);
-                }
             }
         }  
         #endregion
@@ -70,20 +63,15 @@ namespace CCData
             {
                 var entity = entry.Entity as ICreatableEntity;
                 if (entity != null)
-                {
                     entity.CreatedOn = DateTime.UtcNow;
-                }
             }
             else if (entry.State == System.Data.EntityState.Modified)
             {
                 var entity = entry.Entity as IModifiableEntity;
                 if (entity != null)
-                {
                     entity.ModifiedOn = DateTime.UtcNow;
-                }
             }
         } 
         #endregion
-
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
-using System.ComponentModel.DataAnnotations;
+using CCData.Infrastructure;
 
 namespace CCData
 {
@@ -11,7 +12,12 @@ namespace CCData
         public class Ids
         {
             public const long KGB = 1;
-        } 
+        }
+
+        public class Names
+        {
+            public const string KGB = "KGB";
+        }
 
         #region SaveValidate
         public IEnumerable<DbValidationError> SaveValidate()

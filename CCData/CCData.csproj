@@ -52,20 +52,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseEntity.cs" />
     <Compile Include="CCData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CCData.edmx</DependentUpon>
     </Compile>
     <Compile Include="CCEntities.cs" />
-    <Compile Include="DbValidationError.cs" />
-    <Compile Include="DbValidationException.cs" />
-    <Compile Include="ICreatableEntity.cs" />
-    <Compile Include="IModifiableEntity.cs" />
-    <Compile Include="IValidatableEntity.cs" />
+    <Compile Include="Human.cs" />
+    <Compile Include="Infrastructure\DbValidationError.cs" />
+    <Compile Include="Infrastructure\DbValidationException.cs" />
+    <Compile Include="Infrastructure\ICreatableEntity.cs" />
+    <Compile Include="Infrastructure\IModifiableEntity.cs" />
+    <Compile Include="Infrastructure\IValidatableEntity.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Race.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="RunnerClassification.cs" />
+    <Compile Include="RunnerRaceRecord.cs" />
+    <Compile Include="RunnerRaceRecordSegment.cs" />
+    <Compile Include="VarsityLevel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

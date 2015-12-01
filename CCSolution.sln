@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FumeHood", "FumeHood\FumeHo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{DD4522D2-A1E5-4A1E-9D20-19A78A8F6358}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCMvc", "CCMvc\CCMvc.csproj", "{807A4004-560C-49CD-80E1-EF75A9A5F31B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{DD4522D2-A1E5-4A1E-9D20-19A78A8F6358}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DD4522D2-A1E5-4A1E-9D20-19A78A8F6358}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DD4522D2-A1E5-4A1E-9D20-19A78A8F6358}.Release|x86.ActiveCfg = Release|Any CPU
+		{807A4004-560C-49CD-80E1-EF75A9A5F31B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{807A4004-560C-49CD-80E1-EF75A9A5F31B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{807A4004-560C-49CD-80E1-EF75A9A5F31B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{807A4004-560C-49CD-80E1-EF75A9A5F31B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{807A4004-560C-49CD-80E1-EF75A9A5F31B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{807A4004-560C-49CD-80E1-EF75A9A5F31B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{807A4004-560C-49CD-80E1-EF75A9A5F31B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{807A4004-560C-49CD-80E1-EF75A9A5F31B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{807A4004-560C-49CD-80E1-EF75A9A5F31B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{807A4004-560C-49CD-80E1-EF75A9A5F31B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

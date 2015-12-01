@@ -1,0 +1,73 @@
+﻿/* Styling for "ValidationMessageFor" errors. Makes them red */
+.field-validation-error {
+    color: #e51c23;
+}
+
+/* Add a bit of left margin to stuff that follow a bit of text. */
+.left-gutter {
+    margin-left: 7px;
+}
+
+.right-gutter {
+    margin-right: 7px;
+}
+
+.file-input {
+    margin-top: 6px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Disable the transparency on toastr notifications */
+#toast-container > div {
+    opacity: 1;
+}
+/* Override the default toast-info blue with bootstrap-paper info purple */
+.toast-info {
+    background-color: #9c27b0;
+}
+
+/* Make the twitter typeahead width play nice when in a table*/
+table .twitter-typeahead {
+    width: inherit;
+}
+
+/* Override the min-width on twitter typeahead suggestions dropdown */
+.tt-dropdown-menu {
+    min-width: 0px;
+}
+
+/* Classes for datatables to disable sorting and searching on columns.*/
+.no-sort {
+}
+
+.no-search {
+}
+
+.action-code-glyphicon{
+    margin-right:2px;
+}
+
+/* Override default dropdown appearance for bootstrap-multiselect selects */
+ul.multiselect-container.dropdown-menu li.active a {
+    background-color: transparent;
+    color:#666666;
+}
+
+.navbar-brand img {
+    margin-top: -10px;
+}
+
+#uiActivityIndicator {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    display: none;
+    z-index: 999999;
+}
+
+.highlight-background {
+    background-color:rgba(255, 255, 0, 0.2);
+}

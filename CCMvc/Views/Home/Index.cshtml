@@ -1,0 +1,38 @@
+﻿@model CCMvc.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Welcome | CCCP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="well well-small col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger" role="alert">
+            <strong>Error!</strong>
+            @Html.ValidationSummary(false, "")
+        </div>
+    }
+    @using (Html.BeginForm("Index", "Home", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+    {
+        <h4 class="text-center">Please Sign In</h4>
+        
+        <div class="form-group">            
+            @Html.LabelFor(model => model.UserName, new { @class = "sr-only" })
+            <div>
+                @Html.TextBoxFor(model => model.UserName, new { @placeholder = "Username", @class = "form-control" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new { @class = "sr-only" })
+            <div>
+                @Html.PasswordFor(model => model.Password, new { @placeholder = "Password", @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
+            </div>
+        </div>
+    }
+</div>

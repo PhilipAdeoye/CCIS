@@ -25,7 +25,7 @@ namespace CCMvc.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(LoginViewModel model, string returnUrl)
+        public ActionResult Index(LoginVM model, string returnUrl)
         {
             if (ModelState.IsValid)
             {

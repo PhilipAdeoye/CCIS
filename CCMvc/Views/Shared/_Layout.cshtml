@@ -31,7 +31,13 @@
                 @if (Request.IsAuthenticated && Session["membershipUser"] != null)
                 {
                     <ul class="nav navbar-nav">
-                        
+                        @* Admin Nav dropdown *@
+                        @if (HttpContext.Current.User.IsInRole("Admin"))
+                        {
+                            @Html.MenuLink("Admin", "", "Admin", new MvcHtmlString[] {
+                                @Html.MenuLink("Schools", "Index", "Organization")
+                            })
+                        }
                        
 
                     </ul>

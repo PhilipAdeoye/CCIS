@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CCMvc.ViewModels
 {
-    public class LoginViewModel
+    public class LoginVM
     {
         [Required(ErrorMessage = "Your Username is required.")]
         [Display(Name = "Username")]

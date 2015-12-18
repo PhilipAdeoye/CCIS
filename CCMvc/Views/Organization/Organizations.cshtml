@@ -1,0 +1,24 @@
+﻿@model IEnumerable<CCMvc.ViewModels.OrganizationVM>
+<table id="organizationTable" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Mascot</th>
+            <th>Tagline</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var organization in Model)
+        {
+            <tr>
+                <td>
+                    <a href='@Url.Action("OrganizationDetail", "Organization",
+                    new { organizationId = organization.OrganizationId })'>
+                        @organization.Name</a>
+                </td>
+                <td>@organization.MascotName</td>
+                <td>@organization.Tagline</td>
+            </tr>
+        }
+    </tbody>
+</table>

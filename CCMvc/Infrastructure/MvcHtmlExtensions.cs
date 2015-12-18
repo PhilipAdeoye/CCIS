@@ -42,13 +42,11 @@ namespace CCMvc.Infrastructure
                 liBuilder.InnerHtml = linkBuilder.ToString() + "\n" + ulBuilder.ToString();
                 liBuilder.AddCssClass("dropdown");
 
-                //if (controllerName == "Admin"
-                //    && (currentController == "Company"
-                //    || currentController == "Payor"
-                //    || currentController == "BulkSubmissionMetrics"))
-                //{
-                //    liBuilder.AddCssClass("active");
-                //}
+                if (controllerName == "Admin"
+                    && (currentController == "Organization"))
+                {
+                    liBuilder.AddCssClass("active");
+                }
                 //else if (controllerName == "Applicants"
                 //    && (currentController == "ApplicantVisits"
                 //    || currentController == "InsuranceFinder"

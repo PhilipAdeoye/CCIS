@@ -40,7 +40,7 @@ namespace CCMvc
                         "~/ScriptsCC/SessionTimeout.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*")); 
+                        "~/Scripts/modernizr-*"));
             #endregion
 
             #region CSS bundles
@@ -56,6 +56,13 @@ namespace CCMvc
 
             bundles.Add(new StyleBundle("~/Content/sitecss").Include(
                         "~/ContentCC/Site.css"));
+
+            #endregion
+
+            #region Page specific Javascript bundles
+            
+            bundles.Add(new ScriptBundle("~/bundles/Organization").Include(
+                "~/ScriptsCC/Organization.js"));
 
             #endregion
         }

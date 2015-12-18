@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Schools | CCCP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li class="active">Schools</li>
+    </ol>
+}
+
+@Html.Partial("CreateModal")
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Schools</h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <button type="button" class="btn btn-primary" id="addNewOrganizationBtn" data-url='@Url.Action("Create", "Organization")'>Add New</button>
+        </li>
+    </ul>
+    @using (Ajax.BeginForm("Organizations", "Organization", null, new AjaxOptions
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "organizationTablePanel",
+        OnSuccess = "getOrganizationsSucceeded"
+    }))
+    {
+        <div class="panel-body" id="organizationTablePanel">
+        </div>
+    }
+</div>
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptFile("~/bundles/Organization");
+}

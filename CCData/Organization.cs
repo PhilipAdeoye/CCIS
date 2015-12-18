@@ -43,7 +43,12 @@ namespace CCData
         #region DeleteValidate
         public IEnumerable<DbValidationError> DeleteValidate()
         {
-            return new List<DbValidationError> { };
+            var errors = new List<DbValidationError>();
+
+            if (Name == Names.KGB || OrganizationId == Ids.KGB)
+                errors.Add(new DbValidationError("Sorry, but you cannot dismantle the KGB", "OrganizationId"));
+
+            return errors;
         } 
         #endregion
     }

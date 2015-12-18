@@ -1,0 +1,70 @@
+﻿@model CCMvc.ViewModels.OrganizationVM
+@{
+    ViewBag.Title = "School Details | CCCP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        @if (User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("Schools", "Index", "Organization")</li>
+        }
+        <li class="active">@Model.Name</li>
+    </ol>
+}
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li role="presentation" class="active">
+        <a href="#organizationDetailsTab" aria-controls="organizationDetailsTab" role="tab" data-toggle="tab">School Details</a>
+    </li>
+    <li role="presentation"><a href="#usersTab" aria-controls="usersTab" role="tab" data-toggle="tab">People</a></li>
+</ul>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active fade in" id="organizationDetailsTab">
+        @using (Ajax.BeginForm("Edit", "Organization", null, new AjaxOptions
+        {
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "editOrganizationForm",
+            OnSuccess = "editOrganizationSucceeded",
+            OnFailure = "editOrganizationFailed"
+        }, new { @class = "form-horizontal", @id = "frmEditOrganization" }))
+        {
+            @Html.AntiForgeryToken()
+            <br />
+            <div id="editOrganizationForm" 
+                    data-organization-id="@Model.OrganizationId" 
+                    data-edit-url="@Url.Action("Edit", "Organization")">
+                @{ Html.RenderAction("Edit", "Organization", new { organizationId = Model.OrganizationId }); }
+            </div>
+        }
+    </div>
+
+    <div role="tabpanel" class="tab-pane fade" id="usersTab">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-default" id="addNewUserBtn" 
+                    data-url='@Url.Action("Create", "User")' 
+                    data-organization-id='@Model.OrganizationId'>Add New</button>
+            </li>
+            <li class="list-group-item">
+                @using (Ajax.BeginForm("Users", "User", new { organizationId = Model.OrganizationId }, new AjaxOptions
+                {
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "userTablePanel",
+                    OnSuccess = "getUsersSucceeded"
+                }))
+                {
+                    <div id="userTablePanel">
+                    </div>
+                }
+            </li>
+        </ul>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptFile("~/bundles/OrganizationDetail");
+}

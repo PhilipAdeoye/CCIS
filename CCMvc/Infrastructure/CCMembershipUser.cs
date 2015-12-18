@@ -8,6 +8,13 @@ namespace CCMvc.Infrastructure
 {
     public class CCMembershipUser: MembershipUser
     {
+        private long organizationId;
+        public long OrganizationId
+        {
+            get { return organizationId; }
+            set { organizationId = value; }
+        }
+
         public CCMembershipUser(
             string providername,
             string username,
@@ -20,7 +27,8 @@ namespace CCMvc.Infrastructure
             DateTime lastLoginDate,
             DateTime lastActivityDate,
             DateTime lastPasswordChangedDate,
-            DateTime lastLockedOutDate
+            DateTime lastLockedOutDate,
+            long organizationId
             ) :
             base(providername,
                 username,
@@ -36,6 +44,7 @@ namespace CCMvc.Infrastructure
                 lastPasswordChangedDate,
                 lastLockedOutDate)
         {
+            this.organizationId = organizationId;
         }
     }
 }

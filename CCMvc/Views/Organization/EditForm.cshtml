@@ -1,0 +1,36 @@
+﻿@model CCMvc.ViewModels.OrganizationVM
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger" role="alert" id="organizationEditErrorAlert">
+        <strong>Please correct the following errors:</strong>
+        @Html.ValidationSummary(false, "")
+    </div>
+}
+
+@Html.HiddenFor(m => m.OrganizationId)
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Name, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.MascotName, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.MascotName, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Tagline, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.Tagline, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-9">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</div>

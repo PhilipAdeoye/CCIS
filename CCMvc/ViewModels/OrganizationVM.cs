@@ -10,6 +10,7 @@ namespace CCMvc.ViewModels
     {
         public long OrganizationId { get; set; }
 
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
         [Display(Name = "Mascot Name")]

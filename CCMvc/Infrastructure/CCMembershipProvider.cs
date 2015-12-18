@@ -44,7 +44,8 @@ namespace CCMvc.Infrastructure
                 DateTime.Now,
                 DateTime.Now,
                 DateTime.Now,
-                DateTime.Now);
+                DateTime.Now,
+                user.OrganizationId);
         }
         #endregion
 

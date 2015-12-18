@@ -14,11 +14,6 @@ namespace CCData
             public const long KGB = 1;
         }
 
-        public class Names
-        {
-            public const string KGB = "KGB";
-        }
-
         #region SaveValidate
         public IEnumerable<DbValidationError> SaveValidate()
         {
@@ -32,7 +27,7 @@ namespace CCData
                 using (var db = new CCEntities())
                 {
                     if (db.Organizations.Any(o => o.Name == Name && o.OrganizationId != OrganizationId))
-                        errors.Add(new DbValidationError("Name must be unique", "Name"));
+                        errors.Add(new DbValidationError("Sorry, but this name is already in use", "Name"));
                 }
             }
 
@@ -45,7 +40,7 @@ namespace CCData
         {
             var errors = new List<DbValidationError>();
 
-            if (Name == Names.KGB || OrganizationId == Ids.KGB)
+            if (OrganizationId == Ids.KGB)
                 errors.Add(new DbValidationError("Sorry, but you cannot dismantle the KGB", "OrganizationId"));
 
             return errors;

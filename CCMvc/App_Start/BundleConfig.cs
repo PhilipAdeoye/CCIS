@@ -63,6 +63,10 @@ namespace CCMvc
             
             bundles.Add(new ScriptBundle("~/bundles/Organization").Include(
                 "~/ScriptsCC/Organization.js"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/OrganizationDetail").Include(
+                "~/ScriptsCC/OrganizationDetail.js",
+                "~/ScriptsCC/User.js"));
 
             #endregion
         }

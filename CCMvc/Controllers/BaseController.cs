@@ -21,6 +21,14 @@ namespace CCMvc.Controllers
             }
         }
 
+        public long LoggedInUsersOrganizationId
+        {
+            get
+            {
+                return ((CCMembershipUser)Session["membershipUser"]).OrganizationId;
+            }
+        }
+
         public CCMembershipProvider CurrentMembershipProvider
         {
             get { return (CCMembershipProvider)Session["membershipProvider"]; }

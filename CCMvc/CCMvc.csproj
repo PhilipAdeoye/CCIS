@@ -139,6 +139,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -146,11 +147,16 @@
     <Compile Include="Infrastructure\CCMembershipProvider.cs" />
     <Compile Include="Infrastructure\CCMembershipUser.cs" />
     <Compile Include="Infrastructure\CCRoleProvider.cs" />
+    <Compile Include="Infrastructure\DataTablesModelBinder.cs" />
     <Compile Include="Infrastructure\InvalidCredentialsException.cs" />
+    <Compile Include="Infrastructure\ModelStateHelper.cs" />
     <Compile Include="Infrastructure\MvcHtmlExtensions.cs" />
+    <Compile Include="Infrastructure\StringTrimmingModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DataTablesParameterModel.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\OrganizationVM.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ContentCC\Images\ajax-loader.gif" />
@@ -218,10 +224,13 @@
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Content\typeahead.css" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ScriptsCC\Organization.js" />
+    <Content Include="ScriptsCC\OrganizationDetail.js" />
     <Content Include="ScriptsCC\SessionTimeout.js" />
     <Content Include="ScriptsCC\Site.js" />
+    <Content Include="ScriptsCC\User.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
@@ -307,6 +316,9 @@
     <Content Include="Views\Organization\Organizations.cshtml" />
     <Content Include="Views\Organization\CreateModal.cshtml" />
     <Content Include="Views\Organization\CreateForm.cshtml" />
+    <Content Include="Views\Organization\OrganizationDetail.cshtml" />
+    <Content Include="Views\Organization\EditForm.cshtml" />
+    <Content Include="Views\User\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CCData\CCData.csproj">

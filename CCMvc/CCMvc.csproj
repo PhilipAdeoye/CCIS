@@ -309,13 +309,13 @@
     <Content Include="Views\Organization\CreateForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Forloop.HtmlHelpers.Clone\Forloop.HtmlHelpers.Clone\Forloop.HtmlHelpers.Clone.csproj">
-      <Project>{45AB0844-8D0E-4BD9-9EBA-BABEFD01492B}</Project>
-      <Name>Forloop.HtmlHelpers.Clone</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CCData\CCData.csproj">
       <Project>{2E5512D0-320F-4A04-A1B2-A8A6C9BEADEC}</Project>
       <Name>CCData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forloop.HtmlHelpers.Clone\Forloop.HtmlHelpers.Clone.csproj">
+      <Project>{45AB0844-8D0E-4BD9-9EBA-BABEFD01492B}</Project>
+      <Name>Forloop.HtmlHelpers.Clone</Name>
     </ProjectReference>
     <ProjectReference Include="..\Helpers\Helpers.csproj">
       <Project>{DD4522D2-A1E5-4A1E-9D20-19A78A8F6358}</Project>

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCMvc", "CCMvc\CCMvc.csproj", "{807A4004-560C-49CD-80E1-EF75A9A5F31B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forloop.HtmlHelpers.Clone", "..\Forloop.HtmlHelpers.Clone\Forloop.HtmlHelpers.Clone\Forloop.HtmlHelpers.Clone.csproj", "{45AB0844-8D0E-4BD9-9EBA-BABEFD01492B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forloop.HtmlHelpers.Clone", "Forloop.HtmlHelpers.Clone\Forloop.HtmlHelpers.Clone.csproj", "{45AB0844-8D0E-4BD9-9EBA-BABEFD01492B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

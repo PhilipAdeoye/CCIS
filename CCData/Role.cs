@@ -20,5 +20,16 @@ namespace CCData
             public const string Coach = "Coach";
             public const string Athlete = "Athlete";
         }
+
+        public static IEnumerable<Role> GetRolesCreatableByRole(int roleId)
+        {
+            using (var db = new CCEntities())
+            {
+                if (roleId == Ids.Admin)
+                    return db.Roles;
+                else
+                    return db.Roles.Where(r => r.RoleId != Ids.Admin);
+            }
+        }
     }
 }

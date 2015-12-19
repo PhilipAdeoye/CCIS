@@ -30,8 +30,8 @@ namespace CCMvc.Controllers
                     HumanId = u.HumanId,
                     OrganizationId = u.OrganizationId,
                     Username = u.Username,
-                    FirstName = u.Firstname,
-                    LastName = u.Lastname,
+                    Firstname = u.Firstname,
+                    Lastname = u.Lastname,
                     Email = u.Email,
                     RoleName = u.Role.RoleName,
 
@@ -44,6 +44,23 @@ namespace CCMvc.Controllers
             return PartialView(model);
         } 
         #endregion
+
+        [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
+        [HttpGet]
+        public ActionResult Create(long organizationId)
+        {
+            if (!db.Organizations.Any(o => o.OrganizationId == organizationId)
+                || !AccessIsAllowed(organizationId))
+                return HttpNotFound();
+
+            var model = new UserCreateViewModel
+            {
+                OrganizationId = organizationId,
+                RoleList = new SelectList(Role.GetRolesCreatableByRole(GetLoggedInUser().RoleId), "RoleId", "RoleName"),
+            };
+
+            return PartialView("CreateForm", model);
+        }
 
         #region Helper Methods
 

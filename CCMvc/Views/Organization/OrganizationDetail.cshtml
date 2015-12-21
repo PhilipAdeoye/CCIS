@@ -13,11 +13,17 @@
         <li class="active">@Model.Name</li>
     </ol>
 }
+
+@Html.Partial("~/Views/User/CreateUserModal.cshtml")
+
+
 <ul class="nav nav-pills nav-justified" role="tablist">
     <li role="presentation" class="active">
         <a href="#organizationDetailsTab" aria-controls="organizationDetailsTab" role="tab" data-toggle="tab">School Details</a>
     </li>
-    <li role="presentation"><a href="#usersTab" aria-controls="usersTab" role="tab" data-toggle="tab">People</a></li>
+    <li role="presentation">
+        <a href="#usersTab" aria-controls="usersTab" role="tab" data-toggle="tab">People</a>
+    </li>
 </ul>
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active fade in" id="organizationDetailsTab">

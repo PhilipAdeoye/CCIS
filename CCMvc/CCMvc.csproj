@@ -324,6 +324,7 @@
     <Content Include="Views\User\Users.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\User\CreateUserModal.cshtml" />
+    <Content Include="Views\User\CreateForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CCData\CCData.csproj">

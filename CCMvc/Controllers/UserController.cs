@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using CCData;
 using CCData.Infrastructure;
 using CCMvc.ViewModels;
+using Helpers;
 
 namespace CCMvc.Controllers
 {
@@ -58,6 +59,42 @@ namespace CCMvc.Controllers
                 OrganizationId = organizationId,
                 RoleList = new SelectList(Role.GetRolesCreatableByRole(GetLoggedInUser().RoleId), "RoleId", "RoleName"),
             };
+
+            return PartialView("CreateForm", model);
+        }
+
+        [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(UserCreateViewModel model)
+        {
+            if (!db.Organizations.Any(o => o.OrganizationId == model.OrganizationId)
+                || !AccessIsAllowed(model.OrganizationId))
+                ModelState.AddModelError("Error", "You're not authorized to add users");
+
+            if (GetLoggedInUser().RoleId > model.RoleId)
+                ModelState.AddModelError("RoleId", "You're not authorized to add a user in this role");
+
+            if (ModelState.IsValid)
+            {
+                var user = new Human
+                {
+                    OrganizationId = model.OrganizationId,
+                    Username = model.Username,
+                    Password = PasswordHash.CreateHash(model.Password),
+                    RoleId = model.RoleId,
+                    Email = model.Email,
+                    Firstname = model.Firstname,
+                    Lastname = model.Lastname,
+                    Middlename = model.Middlename,
+                    GraduationYear = model.GraduationYear,
+                    CreatedBy = LoggedInUserId,
+                };
+                db.Humen.AddObject(user);
+                TryDBChange(() => db.SaveChanges());
+            }
+
+            model.RoleList = new SelectList(Role.GetRolesCreatableByRole(GetLoggedInUser().RoleId), "RoleId", "RoleName");
 
             return PartialView("CreateForm", model);
         }

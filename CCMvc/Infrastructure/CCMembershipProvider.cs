@@ -49,20 +49,6 @@ namespace CCMvc.Infrastructure
         }
         #endregion
 
-        #region EncryptPassword
-        public string EncryptPassword(string value)
-        {
-            return PasswordHash.CreateHash(value);
-        }
-        #endregion
-
-        #region PasswordsAreEqual
-        public bool PasswordsAreEqual(string newPassword, string oldPasswordHash)
-        {
-            return PasswordHash.ValidatePassword(newPassword, oldPasswordHash);
-        }
-        #endregion
-
         #region #region Overrides of MembershipProvider that throw NotImplementedException
         public override bool ValidateUser(string username, string password)
         {

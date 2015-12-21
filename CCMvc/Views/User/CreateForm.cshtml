@@ -1,0 +1,67 @@
+﻿@model CCMvc.ViewModels.UserCreateViewModel
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger" role="alert" id="userCreateErrorAlert">
+        <strong>Please correct the following errors:</strong>
+        @Html.ValidationSummary(false, "")
+    </div>
+}
+
+@Html.HiddenFor(m => m.OrganizationId)
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Username, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.Username, new { @autocomplete = "off", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Username)
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Password, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.PasswordFor(model => model.Password, new { @autocomplete="off", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Password)
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.RoleId, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.DropDownListFor(m => m.RoleId, (SelectList)Model.RoleList, "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.RoleId)
+    </div>
+</div>
+<hr />
+<div class="form-group">
+    @Html.LabelFor(model => model.Firstname, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.Firstname, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Firstname)
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Lastname, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.Lastname, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Lastname)
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Middlename, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.Middlename, new { @class = "form-control" })        
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Email, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.GraduationYear, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.GraduationYear, new { @class = "form-control" })
+    </div>
+</div>

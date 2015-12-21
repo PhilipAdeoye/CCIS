@@ -32,7 +32,7 @@
                 {
                     <ul class="nav navbar-nav">
                         @* Admin Nav dropdown *@
-                        @if (HttpContext.Current.User.IsInRole("Admin"))
+                        @if (HttpContext.Current.User.IsInRole(CCData.Role.Names.Admin))
                         {
                             @Html.MenuLink("Admin", "", "Admin", new MvcHtmlString[] {
                                 @Html.MenuLink("Schools", "Index", "Organization")

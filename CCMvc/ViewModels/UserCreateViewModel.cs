@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using CCData;
 
 namespace CCMvc.ViewModels
 {
@@ -39,8 +40,9 @@ namespace CCMvc.ViewModels
         [Display(Name = "Grad. Year")]
         public string GraduationYear { get; set; }
 
-        [Required(ErrorMessage = "User Role is required.")]
-        public int? RoleId { get; set; }
+        [Display(Name = "Role")]
+        [Range(1, int.MaxValue, ErrorMessage = "User Role is required.")]
+        public int RoleId { get; set; }
 
         public SelectList RoleList { get; set; }
     }

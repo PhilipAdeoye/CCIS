@@ -228,6 +228,7 @@
     <Content Include="Content\toastr.min.css" />
     <Content Include="Content\typeahead.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="ScriptsCC\Organization.js" />
     <Content Include="ScriptsCC\OrganizationDetail.js" />
@@ -310,6 +311,10 @@
   <ItemGroup>
     <None Include="Content\DataTables\css\dataTables.jqueryui.scss" />
     <None Include="Content\DataTables\css\dataTables.responsive.scss" />
+    <None Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="fonts\glyphicons-halflings-regular.woff" />
+    <None Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Views\Shared\_BareBonesLayout.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />

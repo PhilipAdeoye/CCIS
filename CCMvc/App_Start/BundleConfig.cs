@@ -23,8 +23,8 @@ namespace CCMvc
                         "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
-                        "~/Scripts/DataTables/jquery.dataTables.*",
-                        "~/Scripts/DataTables/dataTables.*"));
+                        "~/Scripts/DataTables/jquery.dataTables.*"));
+                        //"~/Scripts/DataTables/dataTables.*"));
 
             bundles.Add(new ScriptBundle("~/bundles/utils").Include(
                         "~/Scripts/moment.*",

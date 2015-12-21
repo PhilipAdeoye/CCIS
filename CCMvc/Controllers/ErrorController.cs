@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using CCData;
 using CCData.Infrastructure;
 using CCMvc.ViewModels;
+using System.Configuration;
+using System.Net.Mail;
+using Helpers;
 
 namespace CCMvc.Controllers
 {
@@ -29,7 +32,18 @@ namespace CCMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                //TODO: Something useful with the user input
+                using (MailMessage msg = new MailMessage(
+                ConfigurationManager.AppSettings[ConfigKeys.SendExceptionEmailsFrom],
+                ConfigurationManager.AppSettings[ConfigKeys.SendExceptionEmailsTo]))
+                {
+                    msg.Body = "The user with the email address " + model.Email +
+                        " sent the following: " + model.Message;
+
+                    using (SmtpClient mailClient = new SmtpClient(ConfigurationManager.AppSettings[ConfigKeys.MailServer]))
+                    {
+                        mailClient.Send(msg);
+                    }
+                }
                 return RedirectToAction("Index", "Home");
             }
             return View(model);

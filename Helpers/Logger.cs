@@ -9,7 +9,7 @@ namespace Helpers
 {
     public class Logger
     {
-        private static string LogFileDirectory = ConfigurationManager.AppSettings["LogFileDirectory"];
+        private static string LogFileDirectory = ConfigurationManager.AppSettings[ConfigKeys.LogFileDirectory];
 
         public static void LogEvent(string message)
         {
@@ -20,11 +20,10 @@ namespace Helpers
                     sw.WriteLine(Environment.NewLine + DateTime.Now.ToString() + ": " + message);
                 }
             }
-            catch (Exception)
-            { }
+            catch (Exception) { }
         }
 
-        public static void LogException(Exception ex, string message = "", List<KeyValuePair<string, string>> ExtraData = null)
+        public static void LogException(Exception ex, string message = "")
         {
             try
             {
@@ -36,16 +35,8 @@ namespace Helpers
                     sw.WriteLine("Stacktrace: " + ex.StackTrace);
                     sw.Write(GetInnerExceptionDetails(ex.InnerException));
                 }
-
-                new ExceptionEmail
-                {
-                    ex = ex,
-                    ExtraData = ExtraData,
-                    Subject = "[CCCP] Unhandled Exception: " + message
-                }.Send();
             }
-            catch (Exception)
-            { }
+            catch (Exception) { }
         }
 
         private static string GetLogFileName()
@@ -53,7 +44,7 @@ namespace Helpers
             if (!Directory.Exists(LogFileDirectory))
                 Directory.CreateDirectory(LogFileDirectory);
 
-            return Path.Combine(LogFileDirectory, DateTime.Today.ToString("yyyy-MM-dd.txt"));
+            return Path.Combine(LogFileDirectory, DateTime.Today.ToString("yyyy-MM-dd") + ".txt");
         }
 
         private static string GetInnerExceptionDetails(Exception ex)

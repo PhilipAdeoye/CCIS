@@ -21,14 +21,14 @@ namespace CCData
             public const string Athlete = "Athlete";
         }
 
-        public static IEnumerable<Role> GetRolesCreatableByRole(int roleId)
+        public static List<Role> GetRolesForOrganizationCreatableByRole(long organizationId, int creatorRoleId)
         {
             using (var db = new CCEntities())
             {
-                if (roleId == Ids.Admin)
-                    return db.Roles;
+                if (creatorRoleId == Ids.Admin && organizationId == Organization.Ids.KGB)
+                    return db.Roles.ToList();
                 else
-                    return db.Roles.Where(r => r.RoleId != Ids.Admin);
+                    return db.Roles.Where(r => r.RoleId != Ids.Admin).ToList();
             }
         }
     }

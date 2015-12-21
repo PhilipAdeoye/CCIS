@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigKeys.cs" />
     <Compile Include="ExceptionEmail.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MiscFunctions.cs" />

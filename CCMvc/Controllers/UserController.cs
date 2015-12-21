@@ -57,7 +57,8 @@ namespace CCMvc.Controllers
             var model = new UserCreateViewModel
             {
                 OrganizationId = organizationId,
-                RoleList = new SelectList(Role.GetRolesCreatableByRole(GetLoggedInUser().RoleId), "RoleId", "RoleName"),
+                RoleList = new SelectList(Role.GetRolesForOrganizationCreatableByRole(organizationId, GetLoggedInUser().RoleId), 
+                    "RoleId", "RoleName"),
             };
 
             return PartialView("CreateForm", model);
@@ -70,10 +71,10 @@ namespace CCMvc.Controllers
         {
             if (!db.Organizations.Any(o => o.OrganizationId == model.OrganizationId)
                 || !AccessIsAllowed(model.OrganizationId))
-                ModelState.AddModelError("Error", "You're not authorized to add users");
+                ModelState.AddModelError("Error", "You are not authorized to add users");
 
             if (GetLoggedInUser().RoleId > model.RoleId)
-                ModelState.AddModelError("RoleId", "You're not authorized to add a user in this role");
+                ModelState.AddModelError("RoleId", "You are not authorized to add a user in this role");
 
             if (ModelState.IsValid)
             {
@@ -94,7 +95,8 @@ namespace CCMvc.Controllers
                 TryDBChange(() => db.SaveChanges());
             }
 
-            model.RoleList = new SelectList(Role.GetRolesCreatableByRole(GetLoggedInUser().RoleId), "RoleId", "RoleName");
+            model.RoleList = new SelectList(Role.GetRolesForOrganizationCreatableByRole(model.OrganizationId, GetLoggedInUser().RoleId),
+                    "RoleId", "RoleName");
 
             return PartialView("CreateForm", model);
         }

@@ -38,13 +38,13 @@ namespace Helpers
                 try
                 {
                     using (MailMessage msg = new MailMessage(
-                            ConfigurationManager.AppSettings["SendExceptionEmailsFrom"],
-                            ConfigurationManager.AppSettings["SendExceptionEmailsTo"],
+                            ConfigurationManager.AppSettings[ConfigKeys.SendExceptionEmailsFrom],
+                            ConfigurationManager.AppSettings[ConfigKeys.SendExceptionEmailsTo],
                             string.IsNullOrWhiteSpace(Subject) ? "[CCCP] Unhandled Exception" : Subject,
                             body))
                     {
                         msg.IsBodyHtml = true;
-                        using (SmtpClient mailClient = new SmtpClient(ConfigurationManager.AppSettings["MailServer"]))
+                        using (SmtpClient mailClient = new SmtpClient(ConfigurationManager.AppSettings[ConfigKeys.MailServer]))
                         {                            
                             mailClient.Send(msg);
                         }
@@ -52,7 +52,7 @@ namespace Helpers
                 }
                 catch
                 {
-                    Logger.LogEvent("Trouble Sending Exception Email");
+                    Logger.LogEvent("Trouble Sending Exception Email: " + ex.GetType() + ": " + ex.Message);
                 }
             }
         }

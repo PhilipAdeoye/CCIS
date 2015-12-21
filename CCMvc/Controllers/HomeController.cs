@@ -42,21 +42,23 @@ namespace CCMvc.Controllers
                 {
                     ModelState.AddModelError("Error", "Sorry, but the user name or password provided you provided is incorrect.");
                 }
-                catch (Exception exception)
+                catch (Exception ex)
                 {
                     ModelState.AddModelError("Error", "Sorry, but we are having technical problems logging you in. " +
-                        "Please try again. If this persists, please contact Payorlogic.");
-                    //new ExceptionEmail()
-                    //{
-                    //    ex = exception,
-                    //    Subject = "Unhandled Exception in Payorlogic Portal",
-                    //    ExtraData = new List<KeyValuePair<string, string>>()
-                    //    {
-                    //        new KeyValuePair<string, string>("URL", Request.Url.ToString()),
-                    //        new KeyValuePair<string, string>("Query String", Request.QueryString.ToString()),
-                    //        new KeyValuePair<string, string>("HTTP Request Headers", string.Join("<br>", Request.Headers.AllKeys.Select(key => key + ": " + Request.Headers[key]).ToArray()))
-                    //    }
-                    //}.Send();
+                        "Please try again. If this persists, please contact us.");
+
+                    Logger.LogException(ex, "Unhandled Exception in CCMvc");
+                    new ExceptionEmail()
+                    {
+                        ex = ex,
+                        Subject = "Unhandled Exception in CCMvc",
+                        ExtraData = new List<KeyValuePair<string, string>>()
+                        {
+                            new KeyValuePair<string, string>("URL", Request.Url.ToString()),
+                            new KeyValuePair<string, string>("Query String", Request.QueryString.ToString()),
+                            new KeyValuePair<string, string>("HTTP Request Headers", string.Join("<br>", Request.Headers.AllKeys.Select(key => key + ": " + Request.Headers[key]).ToArray()))
+                        }
+                    }.Send();
                 }
 
                 if (ableToValidate)

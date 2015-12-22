@@ -17,7 +17,7 @@ namespace Helpers
         #region Send
         public void Send()
         {
-            if (ex != null)
+            if (ConfigurationManager.AppSettings[ConfigKeys.ShouldSendExceptionEmails] == "Y" && ex != null)
             {
                 string body =
                     "<strong>Exception Type:</strong> " + ex.GetType().ToString() + "<br>" +

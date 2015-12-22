@@ -2,6 +2,7 @@
 /// <reference path="../Scripts/jquery-2.1.4.js" />
 
 var userTablePanel = $("#userTablePanel");
+var editModal = $("#userEditModal");
 
 $(document).ready(function () {
 
@@ -21,6 +22,7 @@ $(document).ready(function () {
     });
 
     createModal.on("click", ".modal-footer > .btn-primary", submitForm);
+    editModal.on("click", ".modal-footer > .btn-primary", submitForm);
 
     drawUserTable();
 
@@ -44,6 +46,25 @@ function getUsersSucceeded() {
     userTable.dataTable();
 
 
+    userTable.on("click", ".editUserBtn", function () {
+
+        var url = $(this).data("url");
+        var userId = $(this).data("id");
+        var organizationId = $(this).data("organizationId");
+
+        $.get(url, {
+            userId: userId,
+            organizationId: organizationId
+        }).done(function (data) {
+            editModal.find(".modal-body #editUserForm").html(data);
+            editModal.modal("show");
+        }).fail(function () {
+            toastrRegularError("Sorry, User editing encountered an error", "Error");
+        });
+
+        return false;
+    });
+
 }
 
 function createUserSucceeded() {
@@ -59,4 +80,19 @@ function createUserSucceeded() {
 
 function createUserFailed() {
     toastrStickyError("Sorry, but the user could not be added, please try again...", "Error!");
+}
+
+function editUserSucceeded() {
+    var errors = $("#userEditErrorAlert");
+
+    if (!errors.is(":visible")) {
+        drawUserTable();
+        toastrRegularSuccess("User successfully modified", "Success!");
+
+        $("#userEditModal").modal("hide");
+    }
+}
+
+function editUserFailed() {
+    toastrStickyError("Sorry, but the user could not be edited, please try again...", "Error!");
 }

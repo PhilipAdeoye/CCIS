@@ -19,7 +19,11 @@
         @foreach (var user in Model)
         {
             <tr>
-                <td><a href="#" class="editUserBtn" data-id='@user.HumanId' data-url='@Url.Action("Edit", "User")'>@user.Username</a> </td>
+                <td><a href="#" class="editUserBtn" 
+                        data-id='@user.HumanId' 
+                        data-organization-id='@user.OrganizationId'
+                        data-url='@Url.Action("Edit", "User")'>
+                    @user.Username</a> </td>
                 <td>@user.Email</td>
                 <td>@user.Firstname</td>
                 <td>@user.Lastname</td>

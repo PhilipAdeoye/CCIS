@@ -62,7 +62,7 @@ namespace CCMvc
                 new ExceptionEmail()
                 {
                     ex = ex,
-                    Subject = "Unhandled Exception in CCMvc",
+                    Subject = "[CCCP] Unhandled Exception in CCMvc",
                     ExtraData = new List<KeyValuePair<string, string>>()
                         {
                             new KeyValuePair<string, string>("URL", Request.Url.ToString()),

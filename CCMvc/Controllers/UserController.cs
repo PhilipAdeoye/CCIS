@@ -46,6 +46,7 @@ namespace CCMvc.Controllers
         } 
         #endregion
 
+        #region Create
         [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
         [HttpGet]
         public ActionResult Create(long organizationId)
@@ -57,7 +58,7 @@ namespace CCMvc.Controllers
             var model = new UserCreateViewModel
             {
                 OrganizationId = organizationId,
-                RoleList = new SelectList(Role.GetRolesForOrganizationCreatableByRole(organizationId, GetLoggedInUser().RoleId), 
+                RoleList = new SelectList(Role.GetRolesForOrganizationCreatableByRole(organizationId, GetLoggedInUser().RoleId),
                     "RoleId", "RoleName"),
             };
 
@@ -99,7 +100,69 @@ namespace CCMvc.Controllers
                     "RoleId", "RoleName");
 
             return PartialView("CreateForm", model);
+        } 
+        #endregion
+
+        #region Edit
+        [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
+        [HttpGet]
+        public ActionResult Edit(long userId, long organizationId)
+        {
+            if (!db.Humen.Any(u => u.HumanId == userId && u.OrganizationId == organizationId)
+                || !AccessIsAllowed(organizationId))
+                return HttpNotFound();
+
+            var user = db.Humen.Single(u => u.HumanId == userId);
+            var model = new UserEditViewModel
+            {
+                UserId = user.HumanId,
+                OrganizationId = user.OrganizationId,
+                Username = user.Username,
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                Middlename = user.Middlename,
+                Email = user.Email,
+                GraduationYear = user.GraduationYear,
+                RoleId = user.RoleId,
+                RoleList = new SelectList(Role.GetRolesForOrganizationCreatableByRole(organizationId, GetLoggedInUser().RoleId)
+                    , "RoleId", "RoleName"),
+            };
+
+            return PartialView("EditForm", model);
         }
+
+        [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(UserEditViewModel model)
+        {
+            if (!db.Humen.Any(u => u.HumanId == model.UserId && u.OrganizationId == model.OrganizationId)
+                || !AccessIsAllowed(model.OrganizationId))
+                ModelState.AddModelError("Error", "You are not authorized to modify this user");
+
+            if (GetLoggedInUser().RoleId > model.RoleId)
+                ModelState.AddModelError("RoleId", "You are not authorized to modify a user in this role");
+
+            if (ModelState.IsValid)
+            {
+                var user = db.Humen.Single(u => u.HumanId == model.UserId);
+                user.Firstname = model.Firstname;
+                user.Lastname = model.Lastname;
+                user.Middlename = model.Middlename;
+                user.Email = model.Email;
+                user.GraduationYear = model.GraduationYear;
+                user.RoleId = model.RoleId;
+                //user.ModifiedBy = LoggedInUserId;
+
+                TryDBChange(() => db.SaveChanges());
+            }
+
+            model.RoleList = new SelectList(Role.GetRolesForOrganizationCreatableByRole(model.OrganizationId, GetLoggedInUser().RoleId),
+                    "RoleId", "RoleName");
+
+            return PartialView("EditForm", model);
+        }  
+        #endregion
 
         #region Helper Methods
 
@@ -107,21 +170,6 @@ namespace CCMvc.Controllers
         private bool AccessIsAllowed(long organizationId)
         {
             return organizationId > 0 && (organizationId == LoggedInUsersOrganizationId || User.IsInRole(Role.Names.Admin));
-        }
-        #endregion
-
-        #region WorkingOrgId
-        // Admins are allowed to access every organization's data
-        // Non admins can only access their org's data
-        private long WorkingOrgId(long organizationId)
-        {
-            if (organizationId == 0)
-                organizationId = LoggedInUsersOrganizationId;
-
-            if (!User.IsInRole(Role.Names.Admin))
-                organizationId = LoggedInUsersOrganizationId;
-
-            return organizationId;
         }
         #endregion
 

@@ -11,6 +11,7 @@ namespace Helpers
     {
         private static string LogFileDirectory = ConfigurationManager.AppSettings[ConfigKeys.LogFileDirectory];
 
+        #region LogEvent
         public static void LogEvent(string message)
         {
             try
@@ -21,32 +22,41 @@ namespace Helpers
                 }
             }
             catch (Exception) { }
-        }
+        } 
+        #endregion
 
+        #region LogException
         public static void LogException(Exception ex, string message = "")
         {
-            try
+            if (ConfigurationManager.AppSettings[ConfigKeys.ShouldLogExceptions] == "Y")
             {
-                using (var sw = File.AppendText(GetLogFileName()))
+                try
                 {
-                    sw.WriteLine(Environment.NewLine + DateTime.Now.ToString() + ": " + message);
-                    sw.WriteLine("Exception Type: " + ex.GetType().ToString());
-                    sw.WriteLine("Exception Message: " + ex.Message);
-                    sw.WriteLine("Stacktrace: " + ex.StackTrace);
-                    sw.Write(GetInnerExceptionDetails(ex.InnerException));
+                    using (var sw = File.AppendText(GetLogFileName()))
+                    {
+                        sw.WriteLine(Environment.NewLine + DateTime.Now.ToString() + ": " + message);
+                        sw.WriteLine("Exception Type: " + ex.GetType().ToString());
+                        sw.WriteLine("Exception Message: " + ex.Message);
+                        sw.WriteLine("Stacktrace: " + ex.StackTrace);
+                        sw.Write(GetInnerExceptionDetails(ex.InnerException));
+                    }
                 }
+                catch (Exception) { }
             }
-            catch (Exception) { }
-        }
+        } 
+        #endregion
 
+        #region GetLogFileName
         private static string GetLogFileName()
         {
             if (!Directory.Exists(LogFileDirectory))
                 Directory.CreateDirectory(LogFileDirectory);
 
             return Path.Combine(LogFileDirectory, DateTime.Today.ToString("yyyy-MM-dd") + ".txt");
-        }
+        } 
+        #endregion
 
+        #region GetInnerExceptionDetails
         private static string GetInnerExceptionDetails(Exception ex)
         {
             string details = "";
@@ -60,6 +70,7 @@ namespace Helpers
                 details = details + GetInnerExceptionDetails(ex.InnerException);
             }
             return details;
-        }
+        } 
+        #endregion
     }
 }

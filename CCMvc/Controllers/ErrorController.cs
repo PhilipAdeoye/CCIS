@@ -36,6 +36,7 @@ namespace CCMvc.Controllers
                 ConfigurationManager.AppSettings[ConfigKeys.SendExceptionEmailsFrom],
                 ConfigurationManager.AppSettings[ConfigKeys.SendExceptionEmailsTo]))
                 {
+                    msg.Subject = "[CCCP] User Feedback on Unhandled Exception";
                     msg.Body = "The user with the email address " + model.Email +
                         " sent the following: " + model.Message;
 

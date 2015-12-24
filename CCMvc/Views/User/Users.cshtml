@@ -20,7 +20,7 @@
         {
             <tr>
                 <td><a href="#" class="editUserBtn" 
-                        data-id='@user.HumanId' 
+                        data-id='@user.UserId' 
                         data-organization-id='@user.OrganizationId'
                         data-url='@Url.Action("Edit", "User")'>
                     @user.Username</a> </td>
@@ -32,7 +32,7 @@
                     @if (user.CanBeDeleted)
                     {
                         <span class="glyphicon glyphicon-remove cursor-pointer delete-icon"
-                           aria-label="delete" title="Delete" data-id='@user.HumanId'></span>
+                           aria-label="delete" title="Delete" data-id='@user.UserId'></span>
                     }
                 </td>
             </tr>

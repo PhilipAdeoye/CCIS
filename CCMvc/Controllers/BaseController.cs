@@ -102,7 +102,7 @@ namespace CCMvc.Controllers
             throw new NotImplementedException("Method Not Implemented: TryDBChange()");
         }
 
-        protected virtual Human GetLoggedInUser()
+        protected virtual User GetLoggedInUser()
         {
             throw new NotImplementedException("Method Not Implemented: GetLoggedInUser()");
         }

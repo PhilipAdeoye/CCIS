@@ -19,12 +19,13 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("CCModel", "FK_Human_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.Organization), "Human", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.Human), true)]
-[assembly: EdmRelationshipAttribute("CCModel", "FK_Human_Role", "Role", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.Role), "Human", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.Human), true)]
-[assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecord_Human", "Human", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.Human), "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.RunnerRaceRecord), true)]
 [assembly: EdmRelationshipAttribute("CCModel", "FK_Race_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.Organization), "Race", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.Race), true)]
+[assembly: EdmRelationshipAttribute("CCModel", "FK_User_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.Organization), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.User), true)]
 [assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecord_Race", "Race", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.Race), "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.RunnerRaceRecord), true)]
+[assembly: EdmRelationshipAttribute("CCModel", "FK_User_Role", "Role", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.Role), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.User), true)]
 [assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecord_RunnerClassification", "RunnerClassification", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.RunnerClassification), "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.RunnerRaceRecord), true)]
+[assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.RunnerRaceRecord), "RunnerRaceRecord1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(CCData.RunnerRaceRecord), true)]
+[assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecord_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.User), "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.RunnerRaceRecord), true)]
 [assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecord_VarsityLevel", "VarsityLevel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.VarsityLevel), "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.RunnerRaceRecord), true)]
 [assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecordSegment_RunnerRaceRecord", "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.RunnerRaceRecord), "RunnerRaceRecordSegment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.RunnerRaceRecordSegment), true)]
 
@@ -77,22 +78,6 @@ namespace CCData
         #endregion
     
         #region ObjectSet Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Human> Humen
-        {
-            get
-            {
-                if ((_Humen == null))
-                {
-                    _Humen = base.CreateObjectSet<Human>("Humen");
-                }
-                return _Humen;
-            }
-        }
-        private ObjectSet<Human> _Humen;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -193,6 +178,22 @@ namespace CCData
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<User> Users
+        {
+            get
+            {
+                if ((_Users == null))
+                {
+                    _Users = base.CreateObjectSet<User>("Users");
+                }
+                return _Users;
+            }
+        }
+        private ObjectSet<User> _Users;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<VarsityLevel> VarsityLevels
         {
             get
@@ -209,14 +210,6 @@ namespace CCData
         #endregion
 
         #region AddTo Methods
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Humen EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToHumen(Human human)
-        {
-            base.AddObject("Humen", human);
-        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Organizations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -267,6 +260,14 @@ namespace CCData
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUsers(User user)
+        {
+            base.AddObject("Users", user);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the VarsityLevels EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToVarsityLevels(VarsityLevel varsityLevel)
@@ -281,489 +282,6 @@ namespace CCData
     #endregion
 
     #region Entities
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="CCModel", Name="Human")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Human : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Human object.
-        /// </summary>
-        /// <param name="humanId">Initial value of the HumanId property.</param>
-        /// <param name="roleId">Initial value of the RoleId property.</param>
-        /// <param name="organizationId">Initial value of the OrganizationId property.</param>
-        /// <param name="username">Initial value of the Username property.</param>
-        /// <param name="password">Initial value of the Password property.</param>
-        /// <param name="firstname">Initial value of the Firstname property.</param>
-        /// <param name="lastname">Initial value of the Lastname property.</param>
-        public static Human CreateHuman(global::System.Int64 humanId, global::System.Int32 roleId, global::System.Int64 organizationId, global::System.String username, global::System.String password, global::System.String firstname, global::System.String lastname)
-        {
-            Human human = new Human();
-            human.HumanId = humanId;
-            human.RoleId = roleId;
-            human.OrganizationId = organizationId;
-            human.Username = username;
-            human.Password = password;
-            human.Firstname = firstname;
-            human.Lastname = lastname;
-            return human;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int64 HumanId
-        {
-            get
-            {
-                return _HumanId;
-            }
-            set
-            {
-                if (_HumanId != value)
-                {
-                    OnHumanIdChanging(value);
-                    ReportPropertyChanging("HumanId");
-                    _HumanId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("HumanId");
-                    OnHumanIdChanged();
-                }
-            }
-        }
-        private global::System.Int64 _HumanId;
-        partial void OnHumanIdChanging(global::System.Int64 value);
-        partial void OnHumanIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 RoleId
-        {
-            get
-            {
-                return _RoleId;
-            }
-            set
-            {
-                OnRoleIdChanging(value);
-                ReportPropertyChanging("RoleId");
-                _RoleId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("RoleId");
-                OnRoleIdChanged();
-            }
-        }
-        private global::System.Int32 _RoleId;
-        partial void OnRoleIdChanging(global::System.Int32 value);
-        partial void OnRoleIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int64 OrganizationId
-        {
-            get
-            {
-                return _OrganizationId;
-            }
-            set
-            {
-                OnOrganizationIdChanging(value);
-                ReportPropertyChanging("OrganizationId");
-                _OrganizationId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("OrganizationId");
-                OnOrganizationIdChanged();
-            }
-        }
-        private global::System.Int64 _OrganizationId;
-        partial void OnOrganizationIdChanging(global::System.Int64 value);
-        partial void OnOrganizationIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Username
-        {
-            get
-            {
-                return _Username;
-            }
-            set
-            {
-                OnUsernameChanging(value);
-                ReportPropertyChanging("Username");
-                _Username = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Username");
-                OnUsernameChanged();
-            }
-        }
-        private global::System.String _Username;
-        partial void OnUsernameChanging(global::System.String value);
-        partial void OnUsernameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Password
-        {
-            get
-            {
-                return _Password;
-            }
-            set
-            {
-                OnPasswordChanging(value);
-                ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Password");
-                OnPasswordChanged();
-            }
-        }
-        private global::System.String _Password;
-        partial void OnPasswordChanging(global::System.String value);
-        partial void OnPasswordChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Firstname
-        {
-            get
-            {
-                return _Firstname;
-            }
-            set
-            {
-                OnFirstnameChanging(value);
-                ReportPropertyChanging("Firstname");
-                _Firstname = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Firstname");
-                OnFirstnameChanged();
-            }
-        }
-        private global::System.String _Firstname;
-        partial void OnFirstnameChanging(global::System.String value);
-        partial void OnFirstnameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Lastname
-        {
-            get
-            {
-                return _Lastname;
-            }
-            set
-            {
-                OnLastnameChanging(value);
-                ReportPropertyChanging("Lastname");
-                _Lastname = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Lastname");
-                OnLastnameChanged();
-            }
-        }
-        private global::System.String _Lastname;
-        partial void OnLastnameChanging(global::System.String value);
-        partial void OnLastnameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Middlename
-        {
-            get
-            {
-                return _Middlename;
-            }
-            set
-            {
-                OnMiddlenameChanging(value);
-                ReportPropertyChanging("Middlename");
-                _Middlename = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Middlename");
-                OnMiddlenameChanged();
-            }
-        }
-        private global::System.String _Middlename;
-        partial void OnMiddlenameChanging(global::System.String value);
-        partial void OnMiddlenameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Email
-        {
-            get
-            {
-                return _Email;
-            }
-            set
-            {
-                OnEmailChanging(value);
-                ReportPropertyChanging("Email");
-                _Email = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Email");
-                OnEmailChanged();
-            }
-        }
-        private global::System.String _Email;
-        partial void OnEmailChanging(global::System.String value);
-        partial void OnEmailChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String GraduationYear
-        {
-            get
-            {
-                return _GraduationYear;
-            }
-            set
-            {
-                OnGraduationYearChanging(value);
-                ReportPropertyChanging("GraduationYear");
-                _GraduationYear = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("GraduationYear");
-                OnGraduationYearChanged();
-            }
-        }
-        private global::System.String _GraduationYear;
-        partial void OnGraduationYearChanging(global::System.String value);
-        partial void OnGraduationYearChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> CreatedOn
-        {
-            get
-            {
-                return _CreatedOn;
-            }
-            set
-            {
-                OnCreatedOnChanging(value);
-                ReportPropertyChanging("CreatedOn");
-                _CreatedOn = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedOn");
-                OnCreatedOnChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _CreatedOn;
-        partial void OnCreatedOnChanging(Nullable<global::System.DateTime> value);
-        partial void OnCreatedOnChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int64> CreatedBy
-        {
-            get
-            {
-                return _CreatedBy;
-            }
-            set
-            {
-                OnCreatedByChanging(value);
-                ReportPropertyChanging("CreatedBy");
-                _CreatedBy = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedBy");
-                OnCreatedByChanged();
-            }
-        }
-        private Nullable<global::System.Int64> _CreatedBy;
-        partial void OnCreatedByChanging(Nullable<global::System.Int64> value);
-        partial void OnCreatedByChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> ModifiedOn
-        {
-            get
-            {
-                return _ModifiedOn;
-            }
-            set
-            {
-                OnModifiedOnChanging(value);
-                ReportPropertyChanging("ModifiedOn");
-                _ModifiedOn = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedOn");
-                OnModifiedOnChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _ModifiedOn;
-        partial void OnModifiedOnChanging(Nullable<global::System.DateTime> value);
-        partial void OnModifiedOnChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> ModifiedBy
-        {
-            get
-            {
-                return _ModifiedBy;
-            }
-            set
-            {
-                OnModifiedByChanging(value);
-                ReportPropertyChanging("ModifiedBy");
-                _ModifiedBy = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedBy");
-                OnModifiedByChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _ModifiedBy;
-        partial void OnModifiedByChanging(Nullable<global::System.DateTime> value);
-        partial void OnModifiedByChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_Human_Organization", "Organization")]
-        public Organization Organization
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("CCModel.FK_Human_Organization", "Organization").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("CCModel.FK_Human_Organization", "Organization").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Organization> OrganizationReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("CCModel.FK_Human_Organization", "Organization");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Organization>("CCModel.FK_Human_Organization", "Organization", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_Human_Role", "Role")]
-        public Role Role
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("CCModel.FK_Human_Role", "Role").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("CCModel.FK_Human_Role", "Role").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Role> RoleReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("CCModel.FK_Human_Role", "Role");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Role>("CCModel.FK_Human_Role", "Role", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_RunnerRaceRecord_Human", "RunnerRaceRecord")]
-        public EntityCollection<RunnerRaceRecord> RunnerRaceRecords
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_Human", "RunnerRaceRecord");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_Human", "RunnerRaceRecord", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -1022,28 +540,6 @@ namespace CCData
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_Human_Organization", "Human")]
-        public EntityCollection<Human> Humen
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Human>("CCModel.FK_Human_Organization", "Human");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Human>("CCModel.FK_Human_Organization", "Human", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_Race_Organization", "Race")]
         public EntityCollection<Race> Races
         {
@@ -1056,6 +552,28 @@ namespace CCData
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Race>("CCModel.FK_Race_Organization", "Race", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_User_Organization", "User")]
+        public EntityCollection<User> Users
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("CCModel.FK_User_Organization", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("CCModel.FK_User_Organization", "User", value);
                 }
             }
         }
@@ -1494,18 +1012,18 @@ namespace CCData
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_Human_Role", "Human")]
-        public EntityCollection<Human> Humen
+        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_User_Role", "User")]
+        public EntityCollection<User> Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Human>("CCModel.FK_Human_Role", "Human");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("CCModel.FK_User_Role", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Human>("CCModel.FK_Human_Role", "Human", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("CCModel.FK_User_Role", "User", value);
                 }
             }
         }
@@ -1637,15 +1155,15 @@ namespace CCData
         /// Create a new RunnerRaceRecord object.
         /// </summary>
         /// <param name="runnerRaceRecordId">Initial value of the RunnerRaceRecordId property.</param>
-        /// <param name="humanId">Initial value of the HumanId property.</param>
+        /// <param name="userId">Initial value of the UserId property.</param>
         /// <param name="raceId">Initial value of the RaceId property.</param>
         /// <param name="runnerClassificationId">Initial value of the RunnerClassificationId property.</param>
         /// <param name="varsityLevelId">Initial value of the VarsityLevelId property.</param>
-        public static RunnerRaceRecord CreateRunnerRaceRecord(global::System.Int64 runnerRaceRecordId, global::System.Int64 humanId, global::System.Int64 raceId, global::System.Int32 runnerClassificationId, global::System.Int32 varsityLevelId)
+        public static RunnerRaceRecord CreateRunnerRaceRecord(global::System.Int64 runnerRaceRecordId, global::System.Int64 userId, global::System.Int64 raceId, global::System.Int32 runnerClassificationId, global::System.Int32 varsityLevelId)
         {
             RunnerRaceRecord runnerRaceRecord = new RunnerRaceRecord();
             runnerRaceRecord.RunnerRaceRecordId = runnerRaceRecordId;
-            runnerRaceRecord.HumanId = humanId;
+            runnerRaceRecord.UserId = userId;
             runnerRaceRecord.RaceId = raceId;
             runnerRaceRecord.RunnerClassificationId = runnerClassificationId;
             runnerRaceRecord.VarsityLevelId = varsityLevelId;
@@ -1688,24 +1206,24 @@ namespace CCData
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 HumanId
+        public global::System.Int64 UserId
         {
             get
             {
-                return _HumanId;
+                return _UserId;
             }
             set
             {
-                OnHumanIdChanging(value);
-                ReportPropertyChanging("HumanId");
-                _HumanId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("HumanId");
-                OnHumanIdChanged();
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
             }
         }
-        private global::System.Int64 _HumanId;
-        partial void OnHumanIdChanging(global::System.Int64 value);
-        partial void OnHumanIdChanged();
+        private global::System.Int64 _UserId;
+        partial void OnUserIdChanging(global::System.Int64 value);
+        partial void OnUserIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1934,44 +1452,6 @@ namespace CCData
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_RunnerRaceRecord_Human", "Human")]
-        public Human Human
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Human>("CCModel.FK_RunnerRaceRecord_Human", "Human").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Human>("CCModel.FK_RunnerRaceRecord_Human", "Human").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Human> HumanReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Human>("CCModel.FK_RunnerRaceRecord_Human", "Human");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Human>("CCModel.FK_RunnerRaceRecord_Human", "Human", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_RunnerRaceRecord_Race", "Race")]
         public Race Race
         {
@@ -2038,6 +1518,120 @@ namespace CCData
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RunnerClassification>("CCModel.FK_RunnerRaceRecord_RunnerClassification", "RunnerClassification", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord1")]
+        public RunnerRaceRecord RunnerRaceRecord1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord1").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord1").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<RunnerRaceRecord> RunnerRaceRecord1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord")]
+        public RunnerRaceRecord RunnerRaceRecord2
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<RunnerRaceRecord> RunnerRaceRecord2Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_RunnerRaceRecord_User", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("CCModel.FK_RunnerRaceRecord_User", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("CCModel.FK_RunnerRaceRecord_User", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("CCModel.FK_RunnerRaceRecord_User", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("CCModel.FK_RunnerRaceRecord_User", "User", value);
                 }
             }
         }
@@ -2367,6 +1961,489 @@ namespace CCData
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecordSegment_RunnerRaceRecord", "RunnerRaceRecord", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="CCModel", Name="User")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class User : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new User object.
+        /// </summary>
+        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="roleId">Initial value of the RoleId property.</param>
+        /// <param name="organizationId">Initial value of the OrganizationId property.</param>
+        /// <param name="username">Initial value of the Username property.</param>
+        /// <param name="password">Initial value of the Password property.</param>
+        /// <param name="firstname">Initial value of the Firstname property.</param>
+        /// <param name="lastname">Initial value of the Lastname property.</param>
+        public static User CreateUser(global::System.Int64 userId, global::System.Int32 roleId, global::System.Int64 organizationId, global::System.String username, global::System.String password, global::System.String firstname, global::System.String lastname)
+        {
+            User user = new User();
+            user.UserId = userId;
+            user.RoleId = roleId;
+            user.OrganizationId = organizationId;
+            user.Username = username;
+            user.Password = password;
+            user.Firstname = firstname;
+            user.Lastname = lastname;
+            return user;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                if (_UserId != value)
+                {
+                    OnUserIdChanging(value);
+                    ReportPropertyChanging("UserId");
+                    _UserId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserId");
+                    OnUserIdChanged();
+                }
+            }
+        }
+        private global::System.Int64 _UserId;
+        partial void OnUserIdChanging(global::System.Int64 value);
+        partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RoleId
+        {
+            get
+            {
+                return _RoleId;
+            }
+            set
+            {
+                OnRoleIdChanging(value);
+                ReportPropertyChanging("RoleId");
+                _RoleId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RoleId");
+                OnRoleIdChanged();
+            }
+        }
+        private global::System.Int32 _RoleId;
+        partial void OnRoleIdChanging(global::System.Int32 value);
+        partial void OnRoleIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 OrganizationId
+        {
+            get
+            {
+                return _OrganizationId;
+            }
+            set
+            {
+                OnOrganizationIdChanging(value);
+                ReportPropertyChanging("OrganizationId");
+                _OrganizationId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OrganizationId");
+                OnOrganizationIdChanged();
+            }
+        }
+        private global::System.Int64 _OrganizationId;
+        partial void OnOrganizationIdChanging(global::System.Int64 value);
+        partial void OnOrganizationIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Username
+        {
+            get
+            {
+                return _Username;
+            }
+            set
+            {
+                OnUsernameChanging(value);
+                ReportPropertyChanging("Username");
+                _Username = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Username");
+                OnUsernameChanged();
+            }
+        }
+        private global::System.String _Username;
+        partial void OnUsernameChanging(global::System.String value);
+        partial void OnUsernameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Password
+        {
+            get
+            {
+                return _Password;
+            }
+            set
+            {
+                OnPasswordChanging(value);
+                ReportPropertyChanging("Password");
+                _Password = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Password");
+                OnPasswordChanged();
+            }
+        }
+        private global::System.String _Password;
+        partial void OnPasswordChanging(global::System.String value);
+        partial void OnPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Firstname
+        {
+            get
+            {
+                return _Firstname;
+            }
+            set
+            {
+                OnFirstnameChanging(value);
+                ReportPropertyChanging("Firstname");
+                _Firstname = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Firstname");
+                OnFirstnameChanged();
+            }
+        }
+        private global::System.String _Firstname;
+        partial void OnFirstnameChanging(global::System.String value);
+        partial void OnFirstnameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Lastname
+        {
+            get
+            {
+                return _Lastname;
+            }
+            set
+            {
+                OnLastnameChanging(value);
+                ReportPropertyChanging("Lastname");
+                _Lastname = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Lastname");
+                OnLastnameChanged();
+            }
+        }
+        private global::System.String _Lastname;
+        partial void OnLastnameChanging(global::System.String value);
+        partial void OnLastnameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Middlename
+        {
+            get
+            {
+                return _Middlename;
+            }
+            set
+            {
+                OnMiddlenameChanging(value);
+                ReportPropertyChanging("Middlename");
+                _Middlename = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Middlename");
+                OnMiddlenameChanged();
+            }
+        }
+        private global::System.String _Middlename;
+        partial void OnMiddlenameChanging(global::System.String value);
+        partial void OnMiddlenameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String GraduationYear
+        {
+            get
+            {
+                return _GraduationYear;
+            }
+            set
+            {
+                OnGraduationYearChanging(value);
+                ReportPropertyChanging("GraduationYear");
+                _GraduationYear = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("GraduationYear");
+                OnGraduationYearChanged();
+            }
+        }
+        private global::System.String _GraduationYear;
+        partial void OnGraduationYearChanging(global::System.String value);
+        partial void OnGraduationYearChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> CreatedOn
+        {
+            get
+            {
+                return _CreatedOn;
+            }
+            set
+            {
+                OnCreatedOnChanging(value);
+                ReportPropertyChanging("CreatedOn");
+                _CreatedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedOn");
+                OnCreatedOnChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _CreatedOn;
+        partial void OnCreatedOnChanging(Nullable<global::System.DateTime> value);
+        partial void OnCreatedOnChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _CreatedBy;
+        partial void OnCreatedByChanging(Nullable<global::System.Int64> value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ModifiedOn
+        {
+            get
+            {
+                return _ModifiedOn;
+            }
+            set
+            {
+                OnModifiedOnChanging(value);
+                ReportPropertyChanging("ModifiedOn");
+                _ModifiedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedOn");
+                OnModifiedOnChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ModifiedOn;
+        partial void OnModifiedOnChanging(Nullable<global::System.DateTime> value);
+        partial void OnModifiedOnChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> ModifiedBy
+        {
+            get
+            {
+                return _ModifiedBy;
+            }
+            set
+            {
+                OnModifiedByChanging(value);
+                ReportPropertyChanging("ModifiedBy");
+                _ModifiedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedBy");
+                OnModifiedByChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _ModifiedBy;
+        partial void OnModifiedByChanging(Nullable<global::System.Int64> value);
+        partial void OnModifiedByChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_User_Organization", "Organization")]
+        public Organization Organization
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("CCModel.FK_User_Organization", "Organization").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("CCModel.FK_User_Organization", "Organization").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Organization> OrganizationReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("CCModel.FK_User_Organization", "Organization");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Organization>("CCModel.FK_User_Organization", "Organization", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_User_Role", "Role")]
+        public Role Role
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("CCModel.FK_User_Role", "Role").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("CCModel.FK_User_Role", "Role").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Role> RoleReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("CCModel.FK_User_Role", "Role");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Role>("CCModel.FK_User_Role", "Role", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_RunnerRaceRecord_User", "RunnerRaceRecord")]
+        public EntityCollection<RunnerRaceRecord> RunnerRaceRecords
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_User", "RunnerRaceRecord");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_User", "RunnerRaceRecord", value);
                 }
             }
         }

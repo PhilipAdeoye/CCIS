@@ -15,7 +15,7 @@ namespace CCMvc.Infrastructure
         {
             using (var db = new CCEntities())
             {
-                var user = db.Humen.SingleOrDefault(u => u.Username == username);
+                var user = db.Users.SingleOrDefault(u => u.Username == username);
                 if (user == null)
                     throw new InvalidCredentialsException();
                 else
@@ -30,12 +30,12 @@ namespace CCMvc.Infrastructure
         #endregion
 
         #region Initialize
-        public CCMembershipUser Initialize(Human user)
+        public CCMembershipUser Initialize(User user)
         {
             return new CCMembershipUser(
                 "CCMembershipProvider",
                 user.Username,
-                user.HumanId,
+                user.UserId,
                 user.Email,
                 "",
                 false,

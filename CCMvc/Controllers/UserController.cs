@@ -25,10 +25,10 @@ namespace CCMvc.Controllers
 
             var loggedInUserRoleId = GetLoggedInUser().RoleId;
 
-            var model = db.Humen.Where(o => o.OrganizationId == organizationId)
+            var model = db.Users.Where(o => o.OrganizationId == organizationId)
                 .Select(u => new UserViewModel
                 {
-                    HumanId = u.HumanId,
+                    UserId = u.UserId,
                     OrganizationId = u.OrganizationId,
                     Username = u.Username,
                     Firstname = u.Firstname,
@@ -39,7 +39,7 @@ namespace CCMvc.Controllers
                     // u can be deleted if u isn't the logged in user && its roleId
                     // is higher than the logged in user's (i.e u's role is subject to that
                     // of the logged in user)
-                    CanBeDeleted = u.HumanId != LoggedInUserId && u.RoleId > loggedInUserRoleId
+                    CanBeDeleted = u.UserId != LoggedInUserId && u.RoleId > loggedInUserRoleId
                 });
 
             return PartialView(model);
@@ -79,7 +79,7 @@ namespace CCMvc.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new Human
+                var user = new User
                 {
                     OrganizationId = model.OrganizationId,
                     Username = model.Username,
@@ -92,7 +92,7 @@ namespace CCMvc.Controllers
                     GraduationYear = model.GraduationYear,
                     CreatedBy = LoggedInUserId,
                 };
-                db.Humen.AddObject(user);
+                db.Users.AddObject(user);
                 TryDBChange(() => db.SaveChanges());
             }
 
@@ -108,14 +108,14 @@ namespace CCMvc.Controllers
         [HttpGet]
         public ActionResult Edit(long userId, long organizationId)
         {
-            if (!db.Humen.Any(u => u.HumanId == userId && u.OrganizationId == organizationId)
+            if (!db.Users.Any(u => u.UserId == userId && u.OrganizationId == organizationId)
                 || !AccessIsAllowed(organizationId))
                 return HttpNotFound();
 
-            var user = db.Humen.Single(u => u.HumanId == userId);
+            var user = db.Users.Single(u => u.UserId == userId);
             var model = new UserEditViewModel
             {
-                UserId = user.HumanId,
+                UserId = user.UserId,
                 OrganizationId = user.OrganizationId,
                 Username = user.Username,
                 Firstname = user.Firstname,
@@ -136,7 +136,7 @@ namespace CCMvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserEditViewModel model)
         {
-            if (!db.Humen.Any(u => u.HumanId == model.UserId && u.OrganizationId == model.OrganizationId)
+            if (!db.Users.Any(u => u.UserId == model.UserId && u.OrganizationId == model.OrganizationId)
                 || !AccessIsAllowed(model.OrganizationId))
                 ModelState.AddModelError("Error", "You are not authorized to modify this user");
 
@@ -145,14 +145,14 @@ namespace CCMvc.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = db.Humen.Single(u => u.HumanId == model.UserId);
+                var user = db.Users.Single(u => u.UserId == model.UserId);
                 user.Firstname = model.Firstname;
                 user.Lastname = model.Lastname;
                 user.Middlename = model.Middlename;
                 user.Email = model.Email;
                 user.GraduationYear = model.GraduationYear;
                 user.RoleId = model.RoleId;
-                //user.ModifiedBy = LoggedInUserId;
+                user.ModifiedBy = LoggedInUserId;
 
                 TryDBChange(() => db.SaveChanges());
             }
@@ -174,9 +174,9 @@ namespace CCMvc.Controllers
         #endregion
 
         #region GetLoggedInUser
-        protected override Human GetLoggedInUser()
+        protected override User GetLoggedInUser()
         {
-            return db.Humen.Single(u => u.HumanId == LoggedInUserId);
+            return db.Users.Single(u => u.UserId == LoggedInUserId);
         }
         #endregion
 

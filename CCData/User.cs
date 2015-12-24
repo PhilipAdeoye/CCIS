@@ -7,7 +7,7 @@ using System.Net.Mail;
 
 namespace CCData
 {
-    public partial class Human: IValidatableEntity, ICreatableEntity, IModifiableEntity
+    public partial class User: IValidatableEntity, ICreatableEntity, IModifiableEntity
     {
         #region SaveValidate
         public IEnumerable<DbValidationError> SaveValidate()
@@ -39,8 +39,8 @@ namespace CCData
             {
                 using (var db = new CCEntities())
                 {
-                    if(db.Humen.Any(h => h.Username.Equals(Username, StringComparison.InvariantCultureIgnoreCase) 
-                            && h.HumanId != HumanId))
+                    if(db.Users.Any(h => h.Username.Equals(Username, StringComparison.InvariantCultureIgnoreCase) 
+                            && h.UserId != UserId))
                         errors.Add(new DbValidationError("Username must be unique", "Username"));
 
                     if (!db.Roles.Any(r => r.RoleId == RoleId))

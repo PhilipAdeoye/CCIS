@@ -8,7 +8,7 @@ namespace CCMvc.ViewModels
 {
     public class UserViewModel
     {
-        public long HumanId { get; set; }
+        public long UserId { get; set; }
         public long OrganizationId { get; set; }
 
         [Display(Name = "Username")]

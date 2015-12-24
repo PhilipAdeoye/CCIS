@@ -14,9 +14,9 @@ namespace CCMvc.Infrastructure
             using (var db = new CCEntities())
             {
                 string[] array;
-                Human user = db.Humen.FirstOrDefault(u => u.Username.Equals(username, StringComparison.CurrentCultureIgnoreCase));
+                User user = db.Users.FirstOrDefault(u => u.Username.Equals(username, StringComparison.CurrentCultureIgnoreCase));
                 var roles = (from ur in db.Roles
-                             join u in db.Humen on ur.RoleId equals u.RoleId
+                             join u in db.Users on ur.RoleId equals u.RoleId
                              where u.Username == username
                              select ur.RoleName);
 
@@ -35,7 +35,7 @@ namespace CCMvc.Infrastructure
             using (var db = new CCEntities())
             {
                 return (from r in db.Roles
-                        join u in db.Humen on r.RoleId equals u.RoleId
+                        join u in db.Users on r.RoleId equals u.RoleId
                         where r.RoleName.Equals(roleName, StringComparison.CurrentCultureIgnoreCase)
                         select u.Username).ToArray();
 
@@ -47,11 +47,11 @@ namespace CCMvc.Infrastructure
             using (var db = new CCEntities())
             {
                 // Find user by username
-                Human user = db.Humen.FirstOrDefault(u => u.Username.Equals(username, StringComparison.CurrentCultureIgnoreCase));
+                User user = db.Users.FirstOrDefault(u => u.Username.Equals(username, StringComparison.CurrentCultureIgnoreCase));
 
                 // Select user role by username, compare
                 var role = (from ur in db.Roles
-                            join u in db.Humen on ur.RoleId equals u.RoleId
+                            join u in db.Users on ur.RoleId equals u.RoleId
                             where u.Username == username
                             select ur.RoleName);
 

@@ -54,9 +54,9 @@ namespace CCMvc.Controllers
         #region Helper Methods
 
         #region GetLoggedInUser
-        protected override Human GetLoggedInUser()
+        protected override User GetLoggedInUser()
         {
-            return db.Humen.Single(u => u.HumanId == LoggedInUserId);
+            return db.Users.Single(u => u.UserId == LoggedInUserId);
         }
         #endregion
 

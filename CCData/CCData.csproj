@@ -58,7 +58,7 @@
       <DependentUpon>CCData.edmx</DependentUpon>
     </Compile>
     <Compile Include="CCEntities.cs" />
-    <Compile Include="Human.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="Infrastructure\DbValidationError.cs" />
     <Compile Include="Infrastructure\DbValidationException.cs" />
     <Compile Include="Infrastructure\ICreatableEntity.cs" />

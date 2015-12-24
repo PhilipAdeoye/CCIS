@@ -24,7 +24,6 @@ namespace CCMvc
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                         "~/Scripts/DataTables/jquery.dataTables.*"));
-                        //"~/Scripts/DataTables/dataTables.*"));
 
             bundles.Add(new ScriptBundle("~/bundles/utils").Include(
                         "~/Scripts/moment.*",
@@ -65,8 +64,7 @@ namespace CCMvc
                 "~/ScriptsCC/Organization.js"));
             
             bundles.Add(new ScriptBundle("~/bundles/OrganizationDetail").Include(
-                "~/ScriptsCC/OrganizationDetail.js",
-                "~/ScriptsCC/User.js"));
+                "~/ScriptsCC/OrganizationDetail.js"));
 
             #endregion
         }

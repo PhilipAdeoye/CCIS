@@ -19,15 +19,18 @@
 
 
 <ul class="nav nav-pills nav-justified" role="tablist">
-    <li role="presentation" class="active">
+    <li role="presentation">
         <a href="#organizationDetailsTab" aria-controls="organizationDetailsTab" role="tab" data-toggle="tab">School Details</a>
     </li>
     <li role="presentation">
         <a href="#usersTab" aria-controls="usersTab" role="tab" data-toggle="tab">People</a>
     </li>
+    <li role="presentation" class="active" >
+        <a href="#racesTab" aria-controls="racesTab" role="tab" data-toggle="tab">Races</a>
+    </li>
 </ul>
 <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active fade in" id="organizationDetailsTab">
+    <div role="tabpanel" class="tab-pane fade" id="organizationDetailsTab">
         @using (Ajax.BeginForm("Edit", "Organization", null, new AjaxOptions
         {
             HttpMethod = "POST",
@@ -64,6 +67,41 @@
                 }))
                 {
                     <div id="userTablePanel">
+                    </div>
+                }
+            </li>
+        </ul>
+    </div>
+
+    <div role="tabpanel" class="tab-pane active fade in" id="racesTab">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-default" id="addNewRaceBtn" 
+                    data-url='@Url.Action("Create", "Race")' 
+                    data-organization-id='@Model.OrganizationId'>Create</button>
+            </li>
+            <li class="list-group-item">
+                @using (Ajax.BeginForm("UpcomingRaces", "Race", new { organizationId = Model.OrganizationId }, new AjaxOptions
+                {
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "upcomingRacesTablePanel",
+                    OnSuccess = "getUpcomingRacesSucceeded"
+                }))
+                {
+                    <div id="upcomingRacesTablePanel">
+                    </div>
+                }
+
+                @using (Ajax.BeginForm("CompletedRaces", "Race", new { organizationId = Model.OrganizationId }, new AjaxOptions
+                {
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "completedRacesTablePanel",
+                    OnSuccess = "getCompletedRacesSucceeded"
+                }))
+                {
+                    <div id="completedRacesTablePanel">
                     </div>
                 }
             </li>

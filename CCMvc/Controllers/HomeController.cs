@@ -118,9 +118,9 @@ namespace CCMvc.Controllers
             if (String.IsNullOrWhiteSpace(userName))
             {
                 if (User.IsInRole(Role.Names.Admin))
-                    return RedirectToAction("Landing", "Home");
+                    return RedirectToAction("Index", "Organization");
                 else if (User.IsInRole(Role.Names.Coach))
-                    return RedirectToAction("Landing", "Home");
+                    return RedirectToAction("OrganizationDetail", "Organization");
                 else if (User.IsInRole(Role.Names.Athlete))
                     return RedirectToAction("Landing", "Home");
                 else
@@ -129,9 +129,9 @@ namespace CCMvc.Controllers
             else
             {
                 if (Roles.Provider.IsUserInRole(userName, Role.Names.Admin))
-                    return RedirectToAction("Landing", "Home");
+                    return RedirectToAction("Index", "Organization");
                 else if (Roles.Provider.IsUserInRole(userName, Role.Names.Coach))
-                    return RedirectToAction("Landing", "Home");
+                    return RedirectToAction("OrganizationDetail", "Organization");
                 else if (Roles.Provider.IsUserInRole(userName, Role.Names.Athlete))
                     return RedirectToAction("Landing", "Home");
                 else

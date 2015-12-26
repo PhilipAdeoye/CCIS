@@ -43,10 +43,18 @@ namespace CCMvc.ViewModels
         [Display(Name = "Eligible For Races")]
         public bool EligibleForRaces { get; set; }
 
+        [Display(Name = "Def. Varsity")]
+        public int? DefaultVarsityLevelId { get; set; }
+
+        [Display(Name = "Classification")]
+        public int? DefaultRunnerClassificationId { get; set; }
+
         [Display(Name = "Role")]
         [Range(1, int.MaxValue, ErrorMessage = "User Role is required.")]
         public int RoleId { get; set; }
 
         public SelectList RoleList { get; set; }
+        public SelectList VarsityLevels { get; set; }
+        public SelectList RunnerClassifications { get; set; }
     }
 }

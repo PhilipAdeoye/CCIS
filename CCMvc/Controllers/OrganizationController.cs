@@ -75,7 +75,7 @@ namespace CCMvc.Controllers
         #region OrganizationDetail
         [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
         [HttpGet]
-        public ActionResult OrganizationDetail(long organizationId)
+        public ActionResult OrganizationDetail(long organizationId = 0)
         {
             organizationId = WorkingOrgId(organizationId);
 

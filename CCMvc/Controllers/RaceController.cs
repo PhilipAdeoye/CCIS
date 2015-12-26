@@ -16,6 +16,22 @@ namespace CCMvc.Controllers
 
         [HttpGet]
         [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
+        public ActionResult Create(long organizationId)
+        {
+            if (!db.Organizations.Any(o => o.OrganizationId == organizationId)
+                || !AccessIsAllowed(organizationId))
+                return HttpNotFound();
+
+            var model = new RaceViewModel
+            {
+                OrganizationId = organizationId
+            };
+
+            return PartialView("CreateForm", model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
         public ActionResult UpcomingRaces(long organizationId)
         {
             if (!db.Organizations.Any(o => o.OrganizationId == organizationId)

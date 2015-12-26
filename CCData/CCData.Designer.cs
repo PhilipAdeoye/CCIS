@@ -2370,6 +2370,54 @@ namespace CCData
         private global::System.Boolean _EligibleForRaces;
         partial void OnEligibleForRacesChanging(global::System.Boolean value);
         partial void OnEligibleForRacesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DefaultVarsityLevelId
+        {
+            get
+            {
+                return _DefaultVarsityLevelId;
+            }
+            set
+            {
+                OnDefaultVarsityLevelIdChanging(value);
+                ReportPropertyChanging("DefaultVarsityLevelId");
+                _DefaultVarsityLevelId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DefaultVarsityLevelId");
+                OnDefaultVarsityLevelIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DefaultVarsityLevelId;
+        partial void OnDefaultVarsityLevelIdChanging(Nullable<global::System.Int32> value);
+        partial void OnDefaultVarsityLevelIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DefaultRunnerClassificationId
+        {
+            get
+            {
+                return _DefaultRunnerClassificationId;
+            }
+            set
+            {
+                OnDefaultRunnerClassificationIdChanging(value);
+                ReportPropertyChanging("DefaultRunnerClassificationId");
+                _DefaultRunnerClassificationId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DefaultRunnerClassificationId");
+                OnDefaultRunnerClassificationIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DefaultRunnerClassificationId;
+        partial void OnDefaultRunnerClassificationIdChanging(Nullable<global::System.Int32> value);
+        partial void OnDefaultRunnerClassificationIdChanged();
 
         #endregion
 

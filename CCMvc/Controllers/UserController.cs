@@ -61,6 +61,9 @@ namespace CCMvc.Controllers
                 OrganizationId = organizationId,
                 RoleList = new SelectList(Role.GetRolesForOrganizationCreatableByRole(organizationId, GetLoggedInUser().RoleId),
                     "RoleId", "RoleName"),
+                RunnerClassifications = new SelectList(db.RunnerClassifications.ToList(), 
+                    "RunnerClassificationId", "RunnerClassificationName"),
+                VarsityLevels = new SelectList(db.VarsityLevels.ToList(), "VarsityLevelId", "VarsityLevelName"),
             };
 
             return PartialView("CreateForm", model);
@@ -92,6 +95,9 @@ namespace CCMvc.Controllers
                     Middlename = model.Middlename,
                     GraduationYear = model.GraduationYear,
                     EligibleForRaces = model.EligibleForRaces,
+                    DefaultVarsityLevelId = model.DefaultVarsityLevelId.HasValue ? (int?)model.DefaultVarsityLevelId.Value : null,
+                    DefaultRunnerClassificationId = model.DefaultRunnerClassificationId.HasValue ? 
+                        (int?)model.DefaultRunnerClassificationId : null,
                     CreatedBy = LoggedInUserId,
                 };
                 db.Users.AddObject(user);
@@ -100,6 +106,9 @@ namespace CCMvc.Controllers
 
             model.RoleList = new SelectList(Role.GetRolesForOrganizationCreatableByRole(model.OrganizationId, GetLoggedInUser().RoleId),
                     "RoleId", "RoleName");
+            model.RunnerClassifications = new SelectList(db.RunnerClassifications.ToList(),
+                    "RunnerClassificationId", "RunnerClassificationName");
+            model.VarsityLevels = new SelectList(db.VarsityLevels.ToList(), "VarsityLevelId", "VarsityLevelName");
 
             return PartialView("CreateForm", model);
         } 
@@ -126,9 +135,14 @@ namespace CCMvc.Controllers
                 Email = user.Email,
                 GraduationYear = user.GraduationYear,
                 EligibleForRaces = user.EligibleForRaces,
+                DefaultVarsityLevelId = user.DefaultVarsityLevelId,
+                DefaultRunnerClassificationId = user.DefaultRunnerClassificationId,
                 RoleId = user.RoleId,
                 RoleList = new SelectList(Role.GetRolesForOrganizationCreatableByRole(organizationId, GetLoggedInUser().RoleId)
                     , "RoleId", "RoleName"),
+                RunnerClassifications = new SelectList(db.RunnerClassifications.ToList(),
+                    "RunnerClassificationId", "RunnerClassificationName"),
+                VarsityLevels = new SelectList(db.VarsityLevels.ToList(), "VarsityLevelId", "VarsityLevelName"),
             };
 
             return PartialView("EditForm", model);
@@ -156,6 +170,9 @@ namespace CCMvc.Controllers
                 user.GraduationYear = model.GraduationYear;
                 user.EligibleForRaces = model.EligibleForRaces;
                 user.RoleId = model.RoleId;
+                user.DefaultVarsityLevelId = model.DefaultVarsityLevelId.HasValue ? (int?)model.DefaultVarsityLevelId.Value : null;
+                user.DefaultRunnerClassificationId = model.DefaultRunnerClassificationId.HasValue ?
+                        (int?)model.DefaultRunnerClassificationId : null;
                 user.ModifiedBy = LoggedInUserId;
 
                 TryDBChange(() => db.SaveChanges());
@@ -163,6 +180,9 @@ namespace CCMvc.Controllers
 
             model.RoleList = new SelectList(Role.GetRolesForOrganizationCreatableByRole(model.OrganizationId, GetLoggedInUser().RoleId),
                     "RoleId", "RoleName");
+            model.RunnerClassifications = new SelectList(db.RunnerClassifications.ToList(),
+                    "RunnerClassificationId", "RunnerClassificationName");
+            model.VarsityLevels = new SelectList(db.VarsityLevels.ToList(), "VarsityLevelId", "VarsityLevelName");
 
             return PartialView("EditForm", model);
         }  

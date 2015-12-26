@@ -42,6 +42,12 @@ namespace CCMvc.ViewModels
         [Display(Name = "Eligible For Races")]
         public bool EligibleForRaces { get; set; }
 
+        [Display(Name = "Def. Varsity")]
+        public int? DefaultVarsityLevelId { get; set; }
+
+        [Display(Name = "Classification")]
+        public int? DefaultRunnerClassificationId { get; set; }
+
         [Display(Name = "Grad. Year")]
         public string GraduationYear { get; set; }
 
@@ -49,6 +55,8 @@ namespace CCMvc.ViewModels
         public string Middlename { get; set; }
 
         public SelectList RoleList { get; set; }
+        public SelectList VarsityLevels { get; set; }
+        public SelectList RunnerClassifications { get; set; }
         
     }
 }

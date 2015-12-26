@@ -140,6 +140,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RaceController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Global.asax.cs">
@@ -158,6 +159,7 @@
     <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\OrganizationVM.cs" />
+    <Compile Include="ViewModels\RaceViewModel.cs" />
     <Compile Include="ViewModels\UserCreateViewModel.cs" />
     <Compile Include="ViewModels\UserEditViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
@@ -233,9 +235,10 @@
     <Content Include="Global.asax" />
     <Content Include="ScriptsCC\Organization.js" />
     <Content Include="ScriptsCC\OrganizationDetail.js" />
+    <Content Include="ScriptsCC\OrganizationDetailRace.js" />
+    <Content Include="ScriptsCC\OrganizationDetailUser.js" />
     <Content Include="ScriptsCC\SessionTimeout.js" />
     <Content Include="ScriptsCC\Site.js" />
-    <Content Include="ScriptsCC\User.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
@@ -312,6 +315,8 @@
     <Content Include="Views\User\CreateForm.cshtml" />
     <Content Include="Views\User\EditUserModal.cshtml" />
     <Content Include="Views\User\EditForm.cshtml" />
+    <Content Include="Views\Race\UpcomingRaces.cshtml" />
+    <Content Include="Views\Race\CompletedRaces.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CCData\CCData.csproj">

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CCModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="CCModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="CCModelStoreContainer">
           <EntitySet Name="Organization" EntityType="CCModel.Store.Organization" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Race" EntityType="CCModel.Store.Race" store:Type="Tables" Schema="dbo" />
@@ -141,6 +141,7 @@
           <Property Name="CreatedBy" Type="bigint" />
           <Property Name="ModifiedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="EligibleForRaces" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="VarsityLevel">
           <Key>
@@ -257,8 +258,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CCModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -415,6 +415,7 @@
           <NavigationProperty Name="Organization" Relationship="CCModel.FK_User_Organization" FromRole="User" ToRole="Organization" />
           <NavigationProperty Name="Role" Relationship="CCModel.FK_User_Role" FromRole="User" ToRole="Role" />
           <NavigationProperty Name="RunnerRaceRecords" Relationship="CCModel.FK_RunnerRaceRecord_User" FromRole="User" ToRole="RunnerRaceRecord" />
+          <Property Type="Boolean" Name="EligibleForRaces" Nullable="false" />
         </EntityType>
         <EntityType Name="VarsityLevel">
           <Key>
@@ -619,6 +620,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="CCModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="EligibleForRaces" ColumnName="EligibleForRaces" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />

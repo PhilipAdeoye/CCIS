@@ -80,7 +80,13 @@
                     data-url='@Url.Action("Create", "Race")' 
                     data-organization-id='@Model.OrganizationId'>Create</button>
             </li>
-            <li class="list-group-item">
+        </ul>            
+        <div>
+            
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Upcoming</h3>
+                </div>
                 @using (Ajax.BeginForm("UpcomingRaces", "Race", new { organizationId = Model.OrganizationId }, new AjaxOptions
                 {
                     HttpMethod = "GET",
@@ -89,10 +95,16 @@
                     OnSuccess = "getUpcomingRacesSucceeded"
                 }))
                 {
-                    <div id="upcomingRacesTablePanel">
+                    <div id="upcomingRacesTablePanel" class="panel-body">
+                    
                     </div>
                 }
+            </div>
 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Completed</h3>
+                </div>
                 @using (Ajax.BeginForm("CompletedRaces", "Race", new { organizationId = Model.OrganizationId }, new AjaxOptions
                 {
                     HttpMethod = "GET",
@@ -101,11 +113,11 @@
                     OnSuccess = "getCompletedRacesSucceeded"
                 }))
                 {
-                    <div id="completedRacesTablePanel">
+                    <div id="completedRacesTablePanel" class="panel-body">
                     </div>
                 }
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -39,6 +39,9 @@ namespace CCMvc.ViewModels
         [Range(1, int.MaxValue, ErrorMessage = "User Role is required.")]
         public int RoleId { get; set; }
 
+        [Display(Name = "Eligible For Races")]
+        public bool EligibleForRaces { get; set; }
+
         [Display(Name = "Grad. Year")]
         public string GraduationYear { get; set; }
 

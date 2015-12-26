@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CCMvc.ViewModels.RaceViewModel>
+
+<table id="upcomingRacesTable" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>No. of Runners</th>
+            <th>Starts On</th>
+            <th>Remarks</th>
+            <th class="no-sort no-search"></th>
+        </tr> 
+    </thead>
+    <tbody>
+        @foreach (var race in Model)
+        {
+            <tr>
+                <td>
+                    <a href='@Url.Action("RaceDetail", "Race", new { raceId = race.RaceId })'>
+                        @race.Description</a>
+                </td>
+                <td>@race.Runners</td>
+                <td class="utc-to-local">@(race.StartedOnUTC.HasValue? race.StartedOnUTC.Value.ToString("o") : "")</td>
+                <td>@race.Remarks</td>
+                <td>
+                    @if (race.CanBeDeleted)
+                    {
+                        <span class="glyphicon glyphicon-remove cursor-pointer delete-icon"
+                            aria-label="delete" title="Cancel Race" data-id='@race.RaceId'></span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

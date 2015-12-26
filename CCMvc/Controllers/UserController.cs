@@ -35,6 +35,7 @@ namespace CCMvc.Controllers
                     Lastname = u.Lastname,
                     Email = u.Email,
                     RoleName = u.Role.RoleName,
+                    EligibleForRaces = u.EligibleForRaces,
 
                     // u can be deleted if u isn't the logged in user && its roleId
                     // is higher than the logged in user's (i.e u's role is subject to that
@@ -90,6 +91,7 @@ namespace CCMvc.Controllers
                     Lastname = model.Lastname,
                     Middlename = model.Middlename,
                     GraduationYear = model.GraduationYear,
+                    EligibleForRaces = model.EligibleForRaces,
                     CreatedBy = LoggedInUserId,
                 };
                 db.Users.AddObject(user);
@@ -123,6 +125,7 @@ namespace CCMvc.Controllers
                 Middlename = user.Middlename,
                 Email = user.Email,
                 GraduationYear = user.GraduationYear,
+                EligibleForRaces = user.EligibleForRaces,
                 RoleId = user.RoleId,
                 RoleList = new SelectList(Role.GetRolesForOrganizationCreatableByRole(organizationId, GetLoggedInUser().RoleId)
                     , "RoleId", "RoleName"),
@@ -151,6 +154,7 @@ namespace CCMvc.Controllers
                 user.Middlename = model.Middlename;
                 user.Email = model.Email;
                 user.GraduationYear = model.GraduationYear;
+                user.EligibleForRaces = model.EligibleForRaces;
                 user.RoleId = model.RoleId;
                 user.ModifiedBy = LoggedInUserId;
 

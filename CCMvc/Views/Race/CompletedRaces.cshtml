@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CCMvc.ViewModels.RaceViewModel>
+
+<table id="completedRacesTable" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>No. of Runners</th>
+            <th>Started On</th>
+            <th>Completed On</th>
+            <th>Remarks</th>
+        </tr> 
+    </thead>
+    <tbody>
+        @foreach (var race in Model)
+        {
+            <tr>
+                <td>
+                    <a href='@Url.Action("RaceDetail", "Race", new { raceId = race.RaceId })'>
+                        @race.Description</a>
+                </td>
+                <td>@race.Runners</td>
+                <td class="utc-to-local">@(race.StartedOnUTC.HasValue? race.StartedOnUTC.Value.ToString("o") : "")</td>
+                <td class="utc-to-local">@(race.CompletedOnUTC.HasValue? race.CompletedOnUTC.Value.ToString("o") : "")</td>
+                <td>@race.Remarks</td>
+            </tr>
+        }
+    </tbody>
+</table>

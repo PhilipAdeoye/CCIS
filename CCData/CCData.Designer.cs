@@ -1989,7 +1989,8 @@ namespace CCData
         /// <param name="password">Initial value of the Password property.</param>
         /// <param name="firstname">Initial value of the Firstname property.</param>
         /// <param name="lastname">Initial value of the Lastname property.</param>
-        public static User CreateUser(global::System.Int64 userId, global::System.Int32 roleId, global::System.Int64 organizationId, global::System.String username, global::System.String password, global::System.String firstname, global::System.String lastname)
+        /// <param name="eligibleForRaces">Initial value of the EligibleForRaces property.</param>
+        public static User CreateUser(global::System.Int64 userId, global::System.Int32 roleId, global::System.Int64 organizationId, global::System.String username, global::System.String password, global::System.String firstname, global::System.String lastname, global::System.Boolean eligibleForRaces)
         {
             User user = new User();
             user.UserId = userId;
@@ -1999,6 +2000,7 @@ namespace CCData
             user.Password = password;
             user.Firstname = firstname;
             user.Lastname = lastname;
+            user.EligibleForRaces = eligibleForRaces;
             return user;
         }
 
@@ -2344,6 +2346,30 @@ namespace CCData
         private Nullable<global::System.Int64> _ModifiedBy;
         partial void OnModifiedByChanging(Nullable<global::System.Int64> value);
         partial void OnModifiedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean EligibleForRaces
+        {
+            get
+            {
+                return _EligibleForRaces;
+            }
+            set
+            {
+                OnEligibleForRacesChanging(value);
+                ReportPropertyChanging("EligibleForRaces");
+                _EligibleForRaces = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EligibleForRaces");
+                OnEligibleForRacesChanged();
+            }
+        }
+        private global::System.Boolean _EligibleForRaces;
+        partial void OnEligibleForRacesChanging(global::System.Boolean value);
+        partial void OnEligibleForRacesChanged();
 
         #endregion
 

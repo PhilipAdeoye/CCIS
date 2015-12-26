@@ -11,7 +11,8 @@
             <th>Email</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th class="no-search">Role</th>            
+            <th class="no-search">Role</th> 
+            <th class="no-search">Eligible</th>
             <th class="no-search no-sort"></th>
         </tr>
     </thead>
@@ -27,7 +28,8 @@
                 <td>@user.Email</td>
                 <td>@user.Firstname</td>
                 <td>@user.Lastname</td>
-                <td>@user.RoleName</td>                
+                <td>@user.RoleName</td> 
+                <td>@(user.EligibleForRaces ? "Yes": "No")</td>               
                 <td>
                     @if (user.CanBeDeleted)
                     {

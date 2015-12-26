@@ -64,7 +64,9 @@ namespace CCMvc
                 "~/ScriptsCC/Organization.js"));
             
             bundles.Add(new ScriptBundle("~/bundles/OrganizationDetail").Include(
-                "~/ScriptsCC/OrganizationDetail.js"));
+                "~/ScriptsCC/OrganizationDetail.js",
+                "~/ScriptsCC/OrganizationDetailUser.js",
+                "~/ScriptsCC/OrganizationDetailRace.js"));
 
             #endregion
         }

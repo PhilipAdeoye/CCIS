@@ -29,8 +29,11 @@ namespace CCMvc.ViewModels
         [Required(ErrorMessage = "Last Name is required.")]
         public string Lastname { get; set; }
 
-        [Display(Name = "Middle Name")]        
+        [Display(Name = "Middle Name")]
         public string Middlename { get; set; }
+
+        [Required(ErrorMessage="Gender is required")]
+        public string Gender { get; set; }
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email is required.")]
@@ -56,5 +59,17 @@ namespace CCMvc.ViewModels
         public SelectList RoleList { get; set; }
         public SelectList VarsityLevels { get; set; }
         public SelectList RunnerClassifications { get; set; }
+        public SelectList GenderList
+        {
+            get
+            {
+                return new SelectList(new List<SelectListItem>()
+                {
+                    new SelectListItem() { Value = Genders.Female, Text = Genders.Female},
+                    new SelectListItem() { Value = Genders.Male, Text = Genders.Male},
+                    new SelectListItem() { Value = Genders.Unspecified, Text = Genders.Unspecified}
+                }, "Value", "Text", Gender);
+            }
+        }
     }
 }

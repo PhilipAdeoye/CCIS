@@ -79,6 +79,7 @@
           <Property Name="CreatedBy" Type="bigint" />
           <Property Name="ModifiedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="GenderRestriction" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -144,6 +145,7 @@
           <Property Name="EligibleForRaces" Type="bit" Nullable="false" />
           <Property Name="DefaultVarsityLevelId" Type="int" />
           <Property Name="DefaultRunnerClassificationId" Type="int" />
+          <Property Name="Gender" Type="nvarchar" Nullable="false" MaxLength="12" />
         </EntityType>
         <EntityType Name="VarsityLevel">
           <Key>
@@ -342,6 +344,7 @@
           <Property Name="ModifiedBy" Type="Int64" />
           <NavigationProperty Name="Organization" Relationship="CCModel.FK_Race_Organization" FromRole="Race" ToRole="Organization" />
           <NavigationProperty Name="RunnerRaceRecords" Relationship="CCModel.FK_RunnerRaceRecord_Race" FromRole="Race" ToRole="RunnerRaceRecord" />
+          <Property Type="String" Name="GenderRestriction" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -420,6 +423,7 @@
           <Property Type="Boolean" Name="EligibleForRaces" Nullable="false" />
           <Property Type="Int32" Name="DefaultVarsityLevelId" />
           <Property Type="Int32" Name="DefaultRunnerClassificationId" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VarsityLevel">
           <Key>
@@ -561,6 +565,7 @@
           <EntitySetMapping Name="Races">
             <EntityTypeMapping TypeName="CCModel.Race">
               <MappingFragment StoreEntitySet="Race">
+                <ScalarProperty Name="GenderRestriction" ColumnName="GenderRestriction" />
                 <ScalarProperty Name="RaceId" ColumnName="RaceId" />
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -624,6 +629,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="CCModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="DefaultRunnerClassificationId" ColumnName="DefaultRunnerClassificationId" />
                 <ScalarProperty Name="DefaultVarsityLevelId" ColumnName="DefaultVarsityLevelId" />
                 <ScalarProperty Name="EligibleForRaces" ColumnName="EligibleForRaces" />

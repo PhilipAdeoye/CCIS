@@ -17,7 +17,12 @@ namespace CCData
                 errors.Add(new DbValidationError("Description is required", "Description"));
 
             if (StartedOn.HasValue && CompletedOn.HasValue && CompletedOn < StartedOn)
-                errors.Add(new DbValidationError("Completed On cannot be earlier than Started On", "CompletedOn"));                        
+                errors.Add(new DbValidationError("Completed On cannot be earlier than Started On", "CompletedOn"));
+
+            if (!(GenderRestriction == Genders.Male || GenderRestriction == Genders.Female 
+                    || GenderRestriction == Genders.Unspecified))
+                errors.Add(new DbValidationError("A Gender Restriction is required. Open Races can be '" 
+                    + Genders.Unspecified + "'", "GenderRestriction"));
 
             return errors;
         }

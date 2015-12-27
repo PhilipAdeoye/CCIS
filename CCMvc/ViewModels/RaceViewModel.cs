@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using CCData;
+using System.Web.Mvc;
 
 namespace CCMvc.ViewModels
 {
@@ -17,7 +19,7 @@ namespace CCMvc.ViewModels
         public int Runners { get; set; }
 
         public string Remarks { get; set; }
-
+                
         public DateTime? StartedOnUTC { get; set; }
 
         public DateTime? CompletedOnUTC { get; set; }

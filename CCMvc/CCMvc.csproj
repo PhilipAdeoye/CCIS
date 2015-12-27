@@ -159,6 +159,7 @@
     <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\OrganizationVM.cs" />
+    <Compile Include="ViewModels\RaceCreateViewModel.cs" />
     <Compile Include="ViewModels\RaceViewModel.cs" />
     <Compile Include="ViewModels\UserCreateViewModel.cs" />
     <Compile Include="ViewModels\UserEditViewModel.cs" />
@@ -317,6 +318,8 @@
     <Content Include="Views\User\EditForm.cshtml" />
     <Content Include="Views\Race\UpcomingRaces.cshtml" />
     <Content Include="Views\Race\CompletedRaces.cshtml" />
+    <Content Include="Views\Race\CreateForm.cshtml" />
+    <Content Include="Views\Race\CreateModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CCData\CCData.csproj">

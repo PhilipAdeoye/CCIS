@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using CCData;
 
 namespace CCMvc.ViewModels
 {
@@ -29,6 +30,9 @@ namespace CCMvc.ViewModels
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = "Last Name is required.")]
         public string Lastname { get; set; }
+
+        [Required(ErrorMessage = "Gender is required")]
+        public string Gender { get; set; }
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email is required.")]
@@ -57,6 +61,18 @@ namespace CCMvc.ViewModels
         public SelectList RoleList { get; set; }
         public SelectList VarsityLevels { get; set; }
         public SelectList RunnerClassifications { get; set; }
+        public SelectList GenderList
+        {
+            get
+            {
+                return new SelectList(new List<SelectListItem>()
+                {
+                    new SelectListItem() { Value = Genders.Female, Text = Genders.Female},
+                    new SelectListItem() { Value = Genders.Male, Text = Genders.Male},
+                    new SelectListItem() { Value = Genders.Unspecified, Text = Genders.Unspecified}
+                }, "Value", "Text", Gender);
+            }
+        }
         
     }
 }

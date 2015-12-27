@@ -598,12 +598,14 @@ namespace CCData
         /// <param name="raceId">Initial value of the RaceId property.</param>
         /// <param name="organizationId">Initial value of the OrganizationId property.</param>
         /// <param name="description">Initial value of the Description property.</param>
-        public static Race CreateRace(global::System.Int64 raceId, global::System.Int64 organizationId, global::System.String description)
+        /// <param name="genderRestriction">Initial value of the GenderRestriction property.</param>
+        public static Race CreateRace(global::System.Int64 raceId, global::System.Int64 organizationId, global::System.String description, global::System.String genderRestriction)
         {
             Race race = new Race();
             race.RaceId = raceId;
             race.OrganizationId = organizationId;
             race.Description = description;
+            race.GenderRestriction = genderRestriction;
             return race;
         }
 
@@ -853,6 +855,30 @@ namespace CCData
         private Nullable<global::System.Int64> _ModifiedBy;
         partial void OnModifiedByChanging(Nullable<global::System.Int64> value);
         partial void OnModifiedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String GenderRestriction
+        {
+            get
+            {
+                return _GenderRestriction;
+            }
+            set
+            {
+                OnGenderRestrictionChanging(value);
+                ReportPropertyChanging("GenderRestriction");
+                _GenderRestriction = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("GenderRestriction");
+                OnGenderRestrictionChanged();
+            }
+        }
+        private global::System.String _GenderRestriction;
+        partial void OnGenderRestrictionChanging(global::System.String value);
+        partial void OnGenderRestrictionChanged();
 
         #endregion
 
@@ -1990,7 +2016,8 @@ namespace CCData
         /// <param name="firstname">Initial value of the Firstname property.</param>
         /// <param name="lastname">Initial value of the Lastname property.</param>
         /// <param name="eligibleForRaces">Initial value of the EligibleForRaces property.</param>
-        public static User CreateUser(global::System.Int64 userId, global::System.Int32 roleId, global::System.Int64 organizationId, global::System.String username, global::System.String password, global::System.String firstname, global::System.String lastname, global::System.Boolean eligibleForRaces)
+        /// <param name="gender">Initial value of the Gender property.</param>
+        public static User CreateUser(global::System.Int64 userId, global::System.Int32 roleId, global::System.Int64 organizationId, global::System.String username, global::System.String password, global::System.String firstname, global::System.String lastname, global::System.Boolean eligibleForRaces, global::System.String gender)
         {
             User user = new User();
             user.UserId = userId;
@@ -2001,6 +2028,7 @@ namespace CCData
             user.Firstname = firstname;
             user.Lastname = lastname;
             user.EligibleForRaces = eligibleForRaces;
+            user.Gender = gender;
             return user;
         }
 
@@ -2418,6 +2446,30 @@ namespace CCData
         private Nullable<global::System.Int32> _DefaultRunnerClassificationId;
         partial void OnDefaultRunnerClassificationIdChanging(Nullable<global::System.Int32> value);
         partial void OnDefaultRunnerClassificationIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Gender
+        {
+            get
+            {
+                return _Gender;
+            }
+            set
+            {
+                OnGenderChanging(value);
+                ReportPropertyChanging("Gender");
+                _Gender = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Gender");
+                OnGenderChanged();
+            }
+        }
+        private global::System.String _Gender;
+        partial void OnGenderChanging(global::System.String value);
+        partial void OnGenderChanged();
 
         #endregion
 

@@ -93,6 +93,7 @@ namespace CCMvc.Controllers
                     Firstname = model.Firstname,
                     Lastname = model.Lastname,
                     Middlename = model.Middlename,
+                    Gender = model.Gender,
                     GraduationYear = model.GraduationYear,
                     EligibleForRaces = model.EligibleForRaces,
                     DefaultVarsityLevelId = model.DefaultVarsityLevelId.HasValue ? (int?)model.DefaultVarsityLevelId.Value : null,
@@ -132,6 +133,7 @@ namespace CCMvc.Controllers
                 Firstname = user.Firstname,
                 Lastname = user.Lastname,
                 Middlename = user.Middlename,
+                Gender = user.Gender,
                 Email = user.Email,
                 GraduationYear = user.GraduationYear,
                 EligibleForRaces = user.EligibleForRaces,
@@ -166,6 +168,7 @@ namespace CCMvc.Controllers
                 user.Firstname = model.Firstname;
                 user.Lastname = model.Lastname;
                 user.Middlename = model.Middlename;
+                user.Gender = model.Gender;
                 user.Email = model.Email;
                 user.GraduationYear = model.GraduationYear;
                 user.EligibleForRaces = model.EligibleForRaces;

@@ -26,6 +26,9 @@ namespace CCData
             if (string.IsNullOrWhiteSpace(Password))
                 errors.Add(new DbValidationError("Password is required", "Password"));
 
+            if (!(Gender == Genders.Male || Gender == Genders.Female || Gender == Genders.Unspecified))
+                errors.Add(new DbValidationError("Gender is required", "Gender"));
+
             if (string.IsNullOrWhiteSpace(Email))
                 errors.Add(new DbValidationError("Email Address is required", "Email"));
             else

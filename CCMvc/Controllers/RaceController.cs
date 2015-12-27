@@ -14,6 +14,7 @@ namespace CCMvc.Controllers
     {
         private CCEntities db = new CCEntities();
 
+        #region Create
         [HttpGet]
         [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
         public ActionResult Create(long organizationId)
@@ -22,7 +23,7 @@ namespace CCMvc.Controllers
                 || !AccessIsAllowed(organizationId))
                 return HttpNotFound();
 
-            var model = new RaceViewModel
+            var model = new RaceCreateViewModel
             {
                 OrganizationId = organizationId
             };
@@ -30,6 +31,35 @@ namespace CCMvc.Controllers
             return PartialView("CreateForm", model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
+        public ActionResult Create(RaceCreateViewModel model)
+        {
+            if (!db.Organizations.Any(o => o.OrganizationId == model.OrganizationId)
+                || !AccessIsAllowed(model.OrganizationId))
+                ModelState.AddModelError("Error", "You are unauthorized to create races for this school");
+
+            if (ModelState.IsValid)
+            {
+                var race = new Race
+                {
+                    OrganizationId = model.OrganizationId,
+                    Description = model.Description,
+                    StartedOn = model.StartsAtUTC.Value.ToUniversalTime(),
+                    Remarks = model.Remarks,
+                    GenderRestriction = model.GenderRestriction,
+                    CreatedBy = LoggedInUserId,
+                };
+                db.Races.AddObject(race);
+                TryDBChange(() => db.SaveChanges());
+            }
+
+            return PartialView("CreateForm", model);
+        } 
+        #endregion
+
+        #region UpcomingRaces
         [HttpGet]
         [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
         public ActionResult UpcomingRaces(long organizationId)
@@ -38,33 +68,24 @@ namespace CCMvc.Controllers
                 || !AccessIsAllowed(organizationId))
                 return HttpNotFound();
 
-            //var model = db.Races
-            //    .Where(r => r.OrganizationId == organizationId && r.StartedOn > DateTime.UtcNow)
-            //    .Select(r => new RaceViewModel
-            //    {
-            //        RaceId = r.RaceId,
-            //        OrganizationId = r.OrganizationId,
-            //        Description = r.Description,
-            //        Remarks = r.Remarks,
-            //        Runners = r.RunnerRaceRecords.Count,
-            //        StartedOnUTC = r.StartedOn,
-            //        CompletedOnUTC = r.CompletedOn
-            //    });
-
-            var model = new List<RaceViewModel>() {
-                new RaceViewModel {
-                    RaceId = 1,
-                    OrganizationId = 1,
-                    Description = "First Race",
-                    Remarks = "Run Run Away!",
-                    Runners = 3,
-                    StartedOnUTC = DateTime.UtcNow,
-                }
-            };
+            var model = db.Races
+                .Where(r => r.OrganizationId == organizationId 
+                    && (r.StartedOn > DateTime.UtcNow || !r.CompletedOn.HasValue))
+                .Select(r => new RaceViewModel
+                {
+                    RaceId = r.RaceId,
+                    OrganizationId = r.OrganizationId,
+                    Description = r.Description,
+                    Remarks = r.Remarks,
+                    Runners = r.RunnerRaceRecords.Count,
+                    StartedOnUTC = r.StartedOn,
+                }).OrderByDescending(r => r.RaceId);
 
             return PartialView(model);
-        }
+        } 
+        #endregion
 
+        #region CompletedRaces
         [HttpGet]
         [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
         public ActionResult CompletedRaces(long organizationId)
@@ -73,34 +94,23 @@ namespace CCMvc.Controllers
                 || !AccessIsAllowed(organizationId))
                 return HttpNotFound();
 
-            //var model = db.Races
-            //    .Where(r => r.OrganizationId == organizationId && r.CompletedOn.HasValue)
-            //    .Select(r => new RaceViewModel
-            //    {
-            //        RaceId = r.RaceId,
-            //        OrganizationId = r.OrganizationId,
-            //        Description = r.Description,
-            //        Remarks = r.Remarks,
-            //        Runners = r.RunnerRaceRecords.Count,
-            //        StartedOnUTC = r.StartedOn,
-            //        CompletedOnUTC = r.CompletedOn
-            //    })
-            //    .OrderByDescending(r => r.StartedOnUTC);
-
-            var model = new List<RaceViewModel>() {
-                new RaceViewModel {
-                    RaceId = 1,
-                    OrganizationId = 1,
-                    Description = "Completed Race",
-                    Remarks = "Jimmy in First Place",
-                    Runners = 7,
-                    StartedOnUTC = DateTime.Parse("01/24/2012 4:42:34 PM"),
-                    CompletedOnUTC = DateTime.Parse("01/24/2012 5:30:56 PM")
-                }
-            };
+            var model = db.Races
+                .Where(r => r.OrganizationId == organizationId && r.CompletedOn.HasValue)
+                .Select(r => new RaceViewModel
+                {
+                    RaceId = r.RaceId,
+                    OrganizationId = r.OrganizationId,
+                    Description = r.Description,
+                    Remarks = r.Remarks,
+                    Runners = r.RunnerRaceRecords.Count,
+                    StartedOnUTC = r.StartedOn,
+                    CompletedOnUTC = r.CompletedOn
+                })
+                .OrderByDescending(r => r.RaceId);
 
             return PartialView(model);
-        }
+        } 
+        #endregion
 
         #region Helper Methods
 

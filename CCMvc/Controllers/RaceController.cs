@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CCData;
 using CCData.Infrastructure;
+using CCMvc.Infrastructure;
 using CCMvc.ViewModels;
 
 namespace CCMvc.Controllers
@@ -59,7 +60,6 @@ namespace CCMvc.Controllers
         } 
         #endregion
 
-
         #region UpcomingRaces
         [HttpGet]
         [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
@@ -70,8 +70,7 @@ namespace CCMvc.Controllers
                 return HttpNotFound();
 
             var model = db.Races
-                .Where(r => r.OrganizationId == organizationId 
-                    && (r.StartedOn > DateTime.UtcNow || !r.CompletedOn.HasValue))
+                .Where(r => r.OrganizationId == organizationId && !r.CompletedOn.HasValue)
                 .Select(r => new RaceViewModel
                 {
                     RaceId = r.RaceId,
@@ -113,6 +112,7 @@ namespace CCMvc.Controllers
         } 
         #endregion
 
+        #region RaceDetail
         [HttpGet]
         [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
         public ActionResult RaceDetail(long raceId, long organizationId)
@@ -131,8 +131,10 @@ namespace CCMvc.Controllers
             }).SingleOrDefault();
 
             return View(model);
-        }
+        } 
+        #endregion
 
+        #region Edit
         [HttpGet]
         [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
         public ActionResult Edit(long raceId, long organizationId)
@@ -163,7 +165,7 @@ namespace CCMvc.Controllers
         {
             if (!db.Races.Any(r => r.RaceId == model.RaceId && r.OrganizationId == model.OrganizationId)
                 || !AccessIsAllowed(model.OrganizationId))
-                ModelState.AddModelError("Error", "You are unauthorized to make changes to races for this school");
+                ModelState.AddModelError("Error", "You are unauthorized to make changes to this race");
 
             if (ModelState.IsValid)
             {
@@ -186,7 +188,54 @@ namespace CCMvc.Controllers
             }
 
             return PartialView("EditForm", model);
-        }
+        } 
+        #endregion
+
+
+        #region MarkAsCompleted
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
+        public ActionResult MarkAsCompleted(long raceId, long organizationId)
+        {
+            if (!db.Races.Any(r => r.RaceId == raceId && r.OrganizationId == organizationId)
+                || !AccessIsAllowed(organizationId))
+                ModelState.AddModelError("Error", "You are not authorized to modify this race");
+            else
+            {
+                var race = db.Races.Single(r => r.RaceId == raceId);
+                race.CompletedOn = DateTime.UtcNow;
+                TryDBChange(() => db.SaveChanges());
+            }
+
+            if (ModelState.IsValid)
+                return Json(new { });
+
+            return Json(new { Errors = ModelState.Errors() });
+        } 
+        #endregion
+
+        #region Cancel
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
+        public ActionResult Cancel(long raceId, long organizationId)
+        {
+            if (!db.Races.Any(r => r.RaceId == raceId && r.OrganizationId == organizationId)
+                || !AccessIsAllowed(organizationId))
+                ModelState.AddModelError("Error", "You are not authorized to cancel this race");
+            else if (db.Races.Where(r => r.RaceId == raceId).Select(r => r.CompletedOn).SingleOrDefault().HasValue)
+                ModelState.AddModelError("Error", "You may not cancel a completed race");
+            else
+                TryDBChange(() => Race.DeleteWithId(raceId));
+
+            if (ModelState.IsValid)
+                return Json(new { });
+
+            return Json(new { Errors = ModelState.Errors() });
+        } 
+        #endregion
+
 
         #region Helper Methods
 

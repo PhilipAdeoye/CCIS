@@ -7,11 +7,12 @@
             <th>No. of Runners</th>
             <th>Starts On</th>
             <th>Remarks</th>
-            <th class="no-sort no-search"></th>
         </tr> 
     </thead>
     <tbody>
-        @foreach (var race in Model)
+    @if (Model.Count() > 0)
+    {
+        foreach (var race in Model)
         {
             <tr>
                 <td>
@@ -19,16 +20,18 @@
                         @race.Description</a>
                 </td>
                 <td>@race.Runners</td>
-                <td class="utc-to-local">@(race.StartedOnUTC.HasValue? race.StartedOnUTC.Value.ToString("o") : "")</td>
+                <td class="utc-to-local">@(race.StartedOnUTC.HasValue ? race.StartedOnUTC.Value.ToString("o") : "")</td>
                 <td>@race.Remarks</td>
-                <td>
-                    @if (race.CanBeDeleted)
-                    {
-                        <span class="glyphicon glyphicon-remove cursor-pointer delete-icon"
-                            aria-label="delete" title="Cancel Race" data-id='@race.RaceId'></span>
-                    }
-                </td>
             </tr>
         }
+    }
+    else 
+    { 
+        <tr>
+            <td colspan="4">There are no upcoming races</td>
+        </tr>
+    }
+
+        
     </tbody>
 </table>

@@ -1,0 +1,19 @@
+﻿<div class="modal fade" id="cancelModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cancel Race</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to cancel this race? <span class="text-danger">This action is irreversible</span></p>                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" 
+                    data-race-id="" data-organization-id="" 
+                    data-url='@Url.Action("Cancel", "Race")'>Boldly Proceed!</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Perhaps Not</button>
+            </div>
+        </div>
+    </div>
+</div>

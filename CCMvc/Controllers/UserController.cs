@@ -35,12 +35,7 @@ namespace CCMvc.Controllers
                     Lastname = u.Lastname,
                     Email = u.Email,
                     RoleName = u.Role.RoleName,
-                    EligibleForRaces = u.EligibleForRaces,
-
-                    // u can be deleted if u isn't the logged in user && its roleId
-                    // is higher than the logged in user's (i.e u's role is subject to that
-                    // of the logged in user)
-                    CanBeDeleted = u.UserId != LoggedInUserId && u.RoleId > loggedInUserRoleId
+                    EligibleForRaces = u.EligibleForRaces
                 });
 
             return PartialView(model);

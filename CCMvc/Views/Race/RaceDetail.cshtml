@@ -17,6 +17,9 @@
     </ol>
 }
 
+@Html.Partial("MarkAsCompletedModal")
+@Html.Partial("CancelModal")
+
 <ul class="nav nav-pills nav-justified" role="tablist">
     <li role="presentation" class="active">
         <a href="#raceDetailsTab" aria-controls="raceDetailsTab" role="tab" data-toggle="tab">Race Details</a>
@@ -40,13 +43,13 @@
         { 
             <li class="list-group-item">
                 <button type="button" class="btn btn-warning" id="markAsCompletedBtn" 
-                    data-url='@Url.Action("MarkAsCompleted", "Race")' 
                     data-organization-id='@Model.OrganizationId'
                     data-race-id='@Model.RaceId'>Mark As Completed</button>
                 <button type="button" class="btn btn-danger" id="cancelBtn" 
-                    data-url='@Url.Action("Cancel", "Race")' 
                     data-organization-id='@Model.OrganizationId'
-                    data-race-id='@Model.RaceId'>Cancel Race</button>
+                    data-race-id='@Model.RaceId'
+                    data-redirect-url='@Url.Action("OrganizationDetail", "Organization", new { organizationId = Model.OrganizationId })'>
+                    Cancel Race</button>
             </li> 
         }                       
         </ul>

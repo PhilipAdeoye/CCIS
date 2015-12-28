@@ -28,7 +28,5 @@ namespace CCMvc.ViewModels
 
         [Display(Name = "Eligible For Races")]
         public bool EligibleForRaces { get; set; }
-
-        public bool CanBeDeleted { get; set; }
     }
 }

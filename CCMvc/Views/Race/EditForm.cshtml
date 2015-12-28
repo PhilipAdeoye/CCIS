@@ -11,6 +11,7 @@
 @Html.HiddenFor(m => m.OrganizationId)
 @Html.HiddenFor(m => m.RaceId)
 @Html.HiddenFor(m => m.GenderRestriction)
+@Html.HiddenFor(m => m.CompletedTimeInUTC)
 @Html.HiddenFor(m => m.StartTimeInUTC, new { @id = "raceEditStartTimeInUTC", data_iso_time = @Model.StartTimeInUTC.Value.ToString("o") })
 
 <div class="form-group">
@@ -23,10 +24,8 @@
 <div class="form-group">
     @Html.LabelFor(m => m.GenderRestriction, new { @class = "col-sm-2 control-label" })
     <div class="col-sm-9">
-        @if (Model.CompletedTimeInUTC.HasValue) {
-            <p class="form-control-static">@Html.DisplayFor(m => m.GenderRestriction)</p>
-        }
-        else if (Model.NumberOfRunners > 0) {
+        @if (Model.CompletedTimeInUTC.HasValue || Model.NumberOfRunners > 0)
+        {
             <p class="form-control-static">@Html.DisplayFor(m => m.GenderRestriction)</p>
         }
         else {

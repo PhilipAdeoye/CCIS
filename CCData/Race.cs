@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CCData.Infrastructure;
+using System.Data.SqlClient;
 
 namespace CCData
 {
@@ -15,9 +16,6 @@ namespace CCData
 
             if (string.IsNullOrWhiteSpace(Description))
                 errors.Add(new DbValidationError("Description is required", "Description"));
-
-            if (StartedOn.HasValue && CompletedOn.HasValue && CompletedOn < StartedOn)
-                errors.Add(new DbValidationError("Completed On cannot be earlier than Started On", "CompletedOn"));
 
             if (!(GenderRestriction == Genders.Male || GenderRestriction == Genders.Female 
                     || GenderRestriction == Genders.Unspecified))
@@ -33,6 +31,30 @@ namespace CCData
         {
             return new List<DbValidationError> { };
         }
+        #endregion
+
+        #region DeleteWithId
+        public static void DeleteWithId(long raceId)
+        {
+            using (var db = new CCEntities())
+            {
+                var runnerRaceRecordIds = db.RunnerRaceRecords.Where(rr => rr.RaceId == raceId)
+                    .Select(rr => rr.RunnerRaceRecordId);
+
+                if (runnerRaceRecordIds.Count() > 0)
+                {
+                    db.ExecuteStoreCommand(@"
+                        DELETE FROM RunnerRaceRecordSegment 
+                        WHERE RunnerRaceRecordId IN(" + string.Join(",", runnerRaceRecordIds) + ");");
+                }
+
+                db.ExecuteStoreCommand(@"
+                    DELETE FROM RunnerRaceRecord WHERE RaceId = @raceId;
+
+                    DELETE FROM Race WHERE RaceId = @raceId;",
+                new SqlParameter("raceId", raceId));
+            }
+        } 
         #endregion
     }
 }

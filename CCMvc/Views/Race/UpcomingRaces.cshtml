@@ -15,7 +15,7 @@
         {
             <tr>
                 <td>
-                    <a href='@Url.Action("RaceDetail", "Race", new { raceId = race.RaceId })'>
+                    <a href='@Url.Action("RaceDetail", "Race", new { raceId = race.RaceId, organizationId = race.OrganizationId })'>
                         @race.Description</a>
                 </td>
                 <td>@race.Runners</td>

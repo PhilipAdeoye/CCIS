@@ -25,5 +25,7 @@ namespace CCMvc.ViewModels
         public DateTime? CompletedOnUTC { get; set; }
 
         public bool CanBeDeleted { get; set; }
+
+        public string OrganizationName { get; set; }
     }
 }

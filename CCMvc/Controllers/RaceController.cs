@@ -59,6 +59,7 @@ namespace CCMvc.Controllers
         } 
         #endregion
 
+
         #region UpcomingRaces
         [HttpGet]
         [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
@@ -112,6 +113,81 @@ namespace CCMvc.Controllers
         } 
         #endregion
 
+        [HttpGet]
+        [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
+        public ActionResult RaceDetail(long raceId, long organizationId)
+        {
+            if (!db.Races.Any(r => r.RaceId == raceId && r.OrganizationId == organizationId)
+                || !AccessIsAllowed(organizationId))
+                return View("NotFound");
+
+            var model = db.Races.Where(r => r.RaceId == raceId).Select(r => new RaceViewModel
+            {
+                RaceId = raceId,
+                OrganizationId = organizationId,
+                Description = r.Description,
+                CompletedOnUTC = r.CompletedOn,
+                OrganizationName = r.Organization.Name,
+            }).SingleOrDefault();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
+        public ActionResult Edit(long raceId, long organizationId)
+        {
+            if (!db.Races.Any(r => r.RaceId == raceId && r.OrganizationId == organizationId)
+                || !AccessIsAllowed(organizationId))
+                return HttpNotFound();
+
+            var model = db.Races.Where(r => r.RaceId == raceId).Select(r => new RaceEditViewModel
+            {
+                RaceId = raceId,
+                OrganizationId = organizationId,
+                Description = r.Description,
+                GenderRestriction = r.GenderRestriction,
+                StartTimeInUTC = r.StartedOn,
+                CompletedTimeInUTC = r.CompletedOn,
+                Remarks = r.Remarks,
+                NumberOfRunners = r.RunnerRaceRecords.Count,
+            }).SingleOrDefault();
+
+            return PartialView("EditForm", model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(RaceEditViewModel model)
+        {
+            if (!db.Races.Any(r => r.RaceId == model.RaceId && r.OrganizationId == model.OrganizationId)
+                || !AccessIsAllowed(model.OrganizationId))
+                ModelState.AddModelError("Error", "You are unauthorized to make changes to races for this school");
+
+            if (ModelState.IsValid)
+            {
+                var race = db.Races.Single(r => r.RaceId == model.RaceId);
+                if (race.CompletedOn.HasValue)
+                {
+                    race.Description = model.Description;
+                    race.Remarks = model.Remarks;
+                }
+                else
+                {
+                    race.Description = model.Description;
+                    race.StartedOn = model.StartTimeInUTC.Value.ToUniversalTime();
+                    race.Remarks = model.Remarks;
+                    if (!race.RunnerRaceRecords.Any())
+                        race.GenderRestriction = model.GenderRestriction;
+                }
+                race.ModifiedBy = LoggedInUserId;
+                TryDBChange(() => db.SaveChanges());
+            }
+
+            return PartialView("EditForm", model);
+        }
+
         #region Helper Methods
 
         #region AccessIsAllowed
@@ -139,7 +215,7 @@ namespace CCMvc.Controllers
             {
                 ex.DbValidationErrors.ToList().ForEach(delegate(DbValidationError error)
                 {
-                    ModelState.AddModelError(error.Message, error.PropertyName);
+                    ModelState.AddModelError(error.PropertyName, error.Message);
                 });
             }
         }

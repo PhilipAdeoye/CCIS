@@ -160,6 +160,7 @@
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\OrganizationVM.cs" />
     <Compile Include="ViewModels\RaceCreateViewModel.cs" />
+    <Compile Include="ViewModels\RaceEditViewModel.cs" />
     <Compile Include="ViewModels\RaceViewModel.cs" />
     <Compile Include="ViewModels\UserCreateViewModel.cs" />
     <Compile Include="ViewModels\UserEditViewModel.cs" />
@@ -238,6 +239,7 @@
     <Content Include="ScriptsCC\OrganizationDetail.js" />
     <Content Include="ScriptsCC\OrganizationDetailRace.js" />
     <Content Include="ScriptsCC\OrganizationDetailUser.js" />
+    <Content Include="ScriptsCC\RaceDetail.js" />
     <Content Include="ScriptsCC\SessionTimeout.js" />
     <Content Include="ScriptsCC\Site.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
@@ -320,6 +322,8 @@
     <Content Include="Views\Race\CompletedRaces.cshtml" />
     <Content Include="Views\Race\CreateForm.cshtml" />
     <Content Include="Views\Race\CreateModal.cshtml" />
+    <Content Include="Views\Race\RaceDetail.cshtml" />
+    <Content Include="Views\Race\EditForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CCData\CCData.csproj">

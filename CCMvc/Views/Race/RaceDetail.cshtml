@@ -1,0 +1,83 @@
+﻿@model CCMvc.ViewModels.RaceViewModel
+
+@{
+    ViewBag.Title = "Race Detail | CCCP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        @if (User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("Schools", "Index", "Organization")</li>
+        }
+        <li>@Html.ActionLink(Model.OrganizationName, "OrganizationDetail", "Organization", new { organizationId = Model.OrganizationId }, null)</li>
+        <li class="active">@Model.Description</li>
+    </ol>
+}
+
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li role="presentation" class="active">
+        <a href="#raceDetailsTab" aria-controls="raceDetailsTab" role="tab" data-toggle="tab">Race Details</a>
+    </li>
+    <li role="presentation">
+        <a href="#usersTab" aria-controls="usersTab" role="tab" data-toggle="tab">People</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active fade in" id="raceDetailsTab">
+        <ul class="list-group">
+        @if (Model.CompletedOnUTC.HasValue)
+        {
+            <li class="list-group-item">
+                <div class="alert alert-info" style="margin-bottom:0px">
+                    You are presently viewing a completed race
+                </div>
+            </li>
+        }
+        else
+        { 
+            <li class="list-group-item">
+                <button type="button" class="btn btn-warning" id="markAsCompletedBtn" 
+                    data-url='@Url.Action("MarkAsCompleted", "Race")' 
+                    data-organization-id='@Model.OrganizationId'
+                    data-race-id='@Model.RaceId'>Mark As Completed</button>
+                <button type="button" class="btn btn-danger" id="cancelBtn" 
+                    data-url='@Url.Action("Cancel", "Race")' 
+                    data-organization-id='@Model.OrganizationId'
+                    data-race-id='@Model.RaceId'>Cancel Race</button>
+            </li> 
+        }                       
+        </ul>
+        @using (Ajax.BeginForm("Edit", "Race", null, new AjaxOptions
+        {
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "editRaceForm",
+            OnSuccess = "editRaceSucceeded",
+            OnFailure = "editRaceFailed"
+        }, new { @class = "form-horizontal", @id = "frmEditRace" }))
+        {
+            @Html.AntiForgeryToken()
+            <br />
+            <div id="editRaceForm" 
+                    data-organization-id="@Model.OrganizationId"
+                    data-race-id='@Model.RaceId' 
+                    data-edit-url="@Url.Action("Edit", "Race")">
+                @{ Html.RenderAction("Edit", "Race", new { organizationId = Model.OrganizationId, raceId = Model.RaceId }); }
+            </div>
+        }
+        
+    </div>
+
+    <div role="tabpanel" class="tab-pane fade" id="usersTab">
+    </div>
+
+    
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptFile("~/bundles/RaceDetail");
+}

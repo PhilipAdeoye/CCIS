@@ -1,0 +1,96 @@
+﻿@model CCMvc.ViewModels.RaceEditViewModel
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger" role="alert" id="raceEditErrorAlert">
+        <strong>Please correct the following errors:</strong>
+        @Html.ValidationSummary(false, "")
+    </div>
+}
+
+@Html.HiddenFor(m => m.OrganizationId)
+@Html.HiddenFor(m => m.RaceId)
+@Html.HiddenFor(m => m.GenderRestriction)
+@Html.HiddenFor(m => m.StartTimeInUTC, new { @id = "raceEditStartTimeInUTC", data_iso_time = @Model.StartTimeInUTC.Value.ToString("o") })
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Description, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Description)
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.GenderRestriction, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-9">
+        @if (Model.CompletedTimeInUTC.HasValue) {
+            <p class="form-control-static">@Html.DisplayFor(m => m.GenderRestriction)</p>
+        }
+        else if (Model.NumberOfRunners > 0) {
+            <p class="form-control-static">@Html.DisplayFor(m => m.GenderRestriction)</p>
+        }
+        else {
+            @Html.DropDownListFor(m => m.GenderRestriction, (SelectList)Model.GenderList, new { @class = "form-control" }) 
+        }        
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.StartTimeInUTC, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-9">
+        @if (Model.CompletedTimeInUTC.HasValue) {
+            <p class="form-control-static utc-to-local">@Model.StartTimeInUTC.Value.ToString("o")</p>
+        }
+        else
+        { 
+            <input type="text" class="form-control" id="raceEditStartTimeLocal" />
+        }
+    </div>
+</div>
+ @if (Model.CompletedTimeInUTC.HasValue)
+ {
+     <div class="form-group">
+        @Html.LabelFor(m => m.CompletedTimeInUTC, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-9">
+            <p class="form-control-static utc-to-local">@Model.CompletedTimeInUTC.Value.ToString("o")</p>
+        </div>
+    </div>
+}
+<div class="form-group">
+    @Html.LabelFor(model => model.Remarks, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-9">
+        @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control", @rows = "3" })
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-9">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</div>
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script>
+             $(document).ready(function () {
+
+                 // If the race is completed, load up the static displays with the local start time
+                 // after converting from UTC
+                 $("#editRaceForm").find("p.utc-to-local").each(function () {
+                     $(this).html((new Date($(this).text())).toLocaleString());
+                 });
+
+                 var localTimeInput = $("#raceEditStartTimeLocal");
+                 var utcTimeInput = $("#raceEditStartTimeInUTC");
+
+                 // If the race isn't completed, load the input with the local start time
+                 // after converting from UTC
+                 localTimeInput.val(new Date(utcTimeInput.data("isoTime")).toLocaleString());
+
+                 // Set up the datetimepicker to allow for changing the start time
+                 localTimeInput.datetimepicker();
+                 localTimeInput.on("dp.change", function (e) {
+                     utcTimeInput.val(e.date.toISOString());
+                 });
+             });
+        </script>
+    , true);
+}

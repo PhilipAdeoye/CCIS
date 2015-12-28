@@ -180,7 +180,7 @@ namespace CCMvc.Controllers
             {
                 ex.DbValidationErrors.ToList().ForEach(delegate(DbValidationError error)
                 {
-                    ModelState.AddModelError(error.Message, error.PropertyName);
+                    ModelState.AddModelError(error.PropertyName, error.Message);
                 });
             }
         }

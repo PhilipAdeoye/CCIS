@@ -1,0 +1,26 @@
+﻿@model CCMvc.ViewModels.RunnerViewModel
+
+@Html.HiddenFor(m => m.UserId)
+@Html.HiddenFor(m => m.RunnerRaceRecordId)
+@Html.HiddenFor(m => m.Name)
+@Html.HiddenFor(m => m.RaceIsComplete)
+
+<div class="form-group">
+    <div class="col-xs-offset-0 col-xs-1 col-sm-offset-1">
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(m => m.UserIsEnrolled, new { @class = "runnerIsEnrolledCB" })
+            </label>
+        </div>
+    </div>
+    <div class="col-xs-9 col-sm-4">
+        <p class="form-control-static">@Model.Name</p>
+    </div>
+    <div class="col-sm-3">
+        @Html.DropDownListFor(m => m.VarsityLevelId, (SelectList)Model.VarsityLevels, new { @class = "form-control"})
+    </div>
+    <div class="col-sm-3">
+        @Html.DropDownListFor(m => m.RunnerClassificationId, (SelectList)Model.RunnerClassifications, new { @class = "form-control"})
+    </div>
+</div>
+<hr />

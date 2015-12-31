@@ -1,0 +1,34 @@
+﻿@model CCMvc.ViewModels.ManageRunnersViewModel
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div id="manageRunnersErrorAlert" class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-hide="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Error!</strong>
+        @Html.ValidationSummary(false, "")
+    </div>
+}
+
+@Html.HiddenFor(m => m.RaceId)
+@Html.HiddenFor(m => m.OrganizationId)
+
+@if (Model.Runners.Count() > 0)
+{
+    <div class="alert alert-warning" role="alert" >
+        <strong>Friendly reminder:</strong> Unchecking any runner will delete any recorded splits
+    </div>
+    
+    @Html.EditorFor(m => m.Runners)
+
+    <div class="form-group">
+        <div class="col-xs-offset-1 col-sm-8">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>    
+}
+else
+{
+    <div class="alert alert-info" role="alert" >
+        There are no eligible runners for this race
+    </div>
+}

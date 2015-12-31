@@ -17,7 +17,9 @@ namespace CCMvc
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/mvcfoolproof.unobtrusive.min.js",
+                        "~/Scripts/MvcFoolproofJQueryValidation.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/bootstrap.js"));
@@ -69,7 +71,8 @@ namespace CCMvc
                 "~/ScriptsCC/OrganizationDetailRace.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/RaceDetail").Include(
-                "~/ScriptsCC/RaceDetail.js"));
+                "~/ScriptsCC/RaceDetail.js",
+                "~/ScriptsCC/RaceDetailRunner.js"));
 
             #endregion
         }

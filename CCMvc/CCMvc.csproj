@@ -48,6 +48,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MVC Foolproof Validation, Version=0.9.4517.16477, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\foolproof.0.9.4517\lib\MVC Foolproof Validation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -141,6 +145,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RaceController.cs" />
+    <Compile Include="Controllers\RunnerRaceRecordController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Global.asax.cs">
@@ -158,10 +163,12 @@
     <Compile Include="ViewModels\DataTablesParameterModel.cs" />
     <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
+    <Compile Include="ViewModels\ManageRunnersViewModel.cs" />
     <Compile Include="ViewModels\OrganizationVM.cs" />
     <Compile Include="ViewModels\RaceCreateViewModel.cs" />
     <Compile Include="ViewModels\RaceEditViewModel.cs" />
     <Compile Include="ViewModels\RaceViewModel.cs" />
+    <Compile Include="ViewModels\RunnerViewModel.cs" />
     <Compile Include="ViewModels\UserCreateViewModel.cs" />
     <Compile Include="ViewModels\UserEditViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
@@ -240,6 +247,7 @@
     <Content Include="ScriptsCC\OrganizationDetailRace.js" />
     <Content Include="ScriptsCC\OrganizationDetailUser.js" />
     <Content Include="ScriptsCC\RaceDetail.js" />
+    <Content Include="ScriptsCC\RaceDetailRunner.js" />
     <Content Include="ScriptsCC\SessionTimeout.js" />
     <Content Include="ScriptsCC\Site.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
@@ -266,6 +274,9 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\mvcfoolproof.unobtrusive.min.js" />
+    <Content Include="Scripts\MvcFoolproofJQueryValidation.min.js" />
+    <Content Include="Scripts\MvcFoolproofValidation.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
@@ -326,6 +337,8 @@
     <Content Include="Views\Race\EditForm.cshtml" />
     <Content Include="Views\Race\MarkAsCompletedModal.cshtml" />
     <Content Include="Views\Race\CancelModal.cshtml" />
+    <Content Include="Views\RunnerRaceRecord\ManageRunners.cshtml" />
+    <Content Include="Views\RunnerRaceRecord\EditorTemplates\RunnerViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CCData\CCData.csproj">

@@ -10,9 +10,12 @@
 
 @Html.HiddenFor(m => m.OrganizationId)
 @Html.HiddenFor(m => m.RaceId)
-@Html.HiddenFor(m => m.GenderRestriction)
 @Html.HiddenFor(m => m.CompletedTimeInUTC)
 @Html.HiddenFor(m => m.StartTimeInUTC, new { @id = "raceEditStartTimeInUTC", data_iso_time = @Model.StartTimeInUTC.Value.ToString("o") })
+@if (Model.CompletedTimeInUTC.HasValue || Model.NumberOfRunners > 0)
+{
+    @Html.HiddenFor(m => m.GenderRestriction)
+}
 
 <div class="form-group">
     @Html.LabelFor(m => m.Description, new { @class = "col-sm-2 control-label" })
@@ -28,7 +31,8 @@
         {
             <p class="form-control-static">@Html.DisplayFor(m => m.GenderRestriction)</p>
         }
-        else {
+        else
+        {
             @Html.DropDownListFor(m => m.GenderRestriction, (SelectList)Model.GenderList, new { @class = "form-control" }) 
         }        
     </div>
@@ -36,7 +40,8 @@
 <div class="form-group">
     @Html.LabelFor(m => m.StartTimeInUTC, new { @class = "col-sm-2 control-label" })
     <div class="col-sm-9">
-        @if (Model.CompletedTimeInUTC.HasValue) {
+        @if (Model.CompletedTimeInUTC.HasValue)
+        {
             <p class="form-control-static utc-to-local">@Model.StartTimeInUTC.Value.ToString("o")</p>
         }
         else
@@ -53,7 +58,7 @@
             <p class="form-control-static utc-to-local">@Model.CompletedTimeInUTC.Value.ToString("o")</p>
         </div>
     </div>
-}
+ }
 <div class="form-group">
     @Html.LabelFor(model => model.Remarks, new { @class = "col-sm-2 control-label" })
     <div class="col-sm-9">

@@ -10,7 +10,7 @@ using CCMvc.ViewModels;
 
 namespace CCMvc.Controllers
 {
-    [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach + "," + Role.Names.Athlete)]
+    [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
     public class RaceController : BaseController
     {
         private CCEntities db = new CCEntities();
@@ -191,7 +191,6 @@ namespace CCMvc.Controllers
         } 
         #endregion
 
-
         #region MarkAsCompleted
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -227,7 +226,7 @@ namespace CCMvc.Controllers
             else if (db.Races.Where(r => r.RaceId == raceId).Select(r => r.CompletedOn).SingleOrDefault().HasValue)
                 ModelState.AddModelError("Error", "You may not cancel a completed race");
             else
-                TryDBChange(() => Race.DeleteWithId(raceId));
+                Race.DeleteWithId(raceId);
 
             if (ModelState.IsValid)
                 return Json(new { });
@@ -235,7 +234,6 @@ namespace CCMvc.Controllers
             return Json(new { Errors = ModelState.Errors() });
         } 
         #endregion
-
 
         #region Helper Methods
 

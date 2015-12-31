@@ -24,7 +24,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecord_Race", "Race", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.Race), "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.RunnerRaceRecord), true)]
 [assembly: EdmRelationshipAttribute("CCModel", "FK_User_Role", "Role", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.Role), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.User), true)]
 [assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecord_RunnerClassification", "RunnerClassification", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.RunnerClassification), "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.RunnerRaceRecord), true)]
-[assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.RunnerRaceRecord), "RunnerRaceRecord1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(CCData.RunnerRaceRecord), true)]
 [assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecord_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.User), "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.RunnerRaceRecord), true)]
 [assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecord_VarsityLevel", "VarsityLevel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.VarsityLevel), "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.RunnerRaceRecord), true)]
 [assembly: EdmRelationshipAttribute("CCModel", "FK_RunnerRaceRecordSegment_RunnerRaceRecord", "RunnerRaceRecord", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CCData.RunnerRaceRecord), "RunnerRaceRecordSegment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CCData.RunnerRaceRecordSegment), true)]
@@ -1544,82 +1543,6 @@ namespace CCData
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RunnerClassification>("CCModel.FK_RunnerRaceRecord_RunnerClassification", "RunnerClassification", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord1")]
-        public RunnerRaceRecord RunnerRaceRecord1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<RunnerRaceRecord> RunnerRaceRecord1Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("CCModel", "FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord")]
-        public RunnerRaceRecord RunnerRaceRecord2
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<RunnerRaceRecord> RunnerRaceRecord2Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RunnerRaceRecord>("CCModel.FK_RunnerRaceRecord_RunnerRaceRecord", "RunnerRaceRecord", value);
                 }
             }
         }

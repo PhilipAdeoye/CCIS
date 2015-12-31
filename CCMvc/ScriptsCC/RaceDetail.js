@@ -89,6 +89,15 @@ function editRaceSucceeded() {
 
     if (!errors.is(":visible")) {
         toastrRegularSuccess("Your changes have been saved", "Success!");
+
+        var manageRunnersForm = $("#manageRunnersForm");
+        $.get(manageRunnersForm.data("manageUrl"), {
+            raceId: manageRunnersForm.data("raceId"),
+            organizationId: manageRunnersForm.data("organizationId")
+        })
+        .done(function (data) {
+            manageRunnersForm.html(data);
+        });
     }
 }
 

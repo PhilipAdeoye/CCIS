@@ -21,15 +21,15 @@
 @Html.Partial("CancelModal")
 
 <ul class="nav nav-pills nav-justified" role="tablist">
-    <li role="presentation" class="active">
+    <li role="presentation">
         <a href="#raceDetailsTab" aria-controls="raceDetailsTab" role="tab" data-toggle="tab">Race Details</a>
     </li>
-    <li role="presentation">
-        <a href="#usersTab" aria-controls="usersTab" role="tab" data-toggle="tab">People</a>
+    <li role="presentation"  class="active">
+        <a href="#peopleTab" aria-controls="peopleTab" role="tab" data-toggle="tab">People</a>
     </li>
 </ul>
 <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active fade in" id="raceDetailsTab">
+    <div role="tabpanel" class="tab-pane fade" id="raceDetailsTab">
         <ul class="list-group">
         @if (Model.CompletedOnUTC.HasValue)
         {
@@ -74,10 +74,31 @@
         
     </div>
 
-    <div role="tabpanel" class="tab-pane fade" id="usersTab">
+    <div role="tabpanel" class="tab-pane fade active in" id="peopleTab">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-primary" id="selectAllRunnersBtn">Select All</button>
+                <button type="button" class="btn btn-default" id="unselectAllRunnersBtn">Unselect All</button>
+            </li>
+        </ul>
+        @using (Ajax.BeginForm("ManageRunners", "RunnerRaceRecord", null, new AjaxOptions 
+        {
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "manageRunnersForm",
+            OnSuccess = "manageRunnersSucceeded",
+            OnFailure = "manageRunnersFailed"
+        }, new { @class = "form-horizontal", @id = "frmManageRunners" }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="manageRunnersForm"
+                    data-organization-id="@Model.OrganizationId"
+                    data-race-id='@Model.RaceId' 
+                    data-manage-url="@Url.Action("ManageRunners", "RunnerRaceRecord")">
+                @{ Html.RenderAction("ManageRunners", "RunnerRaceRecord", new { organizationId = Model.OrganizationId, raceId = Model.RaceId }); }
+            </div>
+        }
     </div>
-
-    
 </div>
 
 @using (Html.BeginScriptContext())

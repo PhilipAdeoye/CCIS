@@ -10,29 +10,31 @@ namespace CCMvc
         {
             #region Shared Javascript Bundles
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                            "~/Scripts/jquery-{version}.js"));
+                            "~/Scripts/jquery-2.1.4.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
+                        "~/Scripts/jquery-ui-1.11.4.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.unobtrusive*",
-                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                        "~/Scripts/jquery.validate.min.js",
+                        "~/Scripts/jquery.validate.unobtrusive.min.js",
                         "~/Scripts/mvcfoolproof.unobtrusive.min.js",
                         "~/Scripts/MvcFoolproofJQueryValidation.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                        "~/Scripts/bootstrap.js"));
+                        "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
-                        "~/Scripts/DataTables/jquery.dataTables.*"));
+                        "~/Scripts/DataTables/jquery.dataTables.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/utils").Include(
-                        "~/Scripts/moment.*",
-                        "~/Scripts/bootstrap-datetimepicker.*",
+                        "~/Scripts/moment-with-locales.min.js",
+                        "~/Scripts/moment.min.js",
+                        "~/Scripts/bootstrap-datetimepicker.min.js",
                         "~/Scripts/bootstrap-multiselect.js",
-                        "~/Scripts/typeahead.bundle.*",
-                        "~/Scripts/toastr.*"));
+                        "~/Scripts/typeahead.bundle.min.js",
+                        "~/Scripts/toastr.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                         "~/ScriptsCC/Site.js"));

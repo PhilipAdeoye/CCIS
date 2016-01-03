@@ -9,8 +9,7 @@ using CCData;
 namespace CCMvc.ViewModels
 {
     public class RunnerViewModel
-    {
-        // Make sure to clear this value from the ModelState after creation
+    {        
         public long? RunnerRaceRecordId { get; set; }
         public long UserId { get; set; }
 

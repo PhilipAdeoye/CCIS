@@ -1327,54 +1327,6 @@ namespace CCData
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> StartTime
-        {
-            get
-            {
-                return _StartTime;
-            }
-            set
-            {
-                OnStartTimeChanging(value);
-                ReportPropertyChanging("StartTime");
-                _StartTime = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("StartTime");
-                OnStartTimeChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _StartTime;
-        partial void OnStartTimeChanging(Nullable<global::System.DateTime> value);
-        partial void OnStartTimeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> EndTime
-        {
-            get
-            {
-                return _EndTime;
-            }
-            set
-            {
-                OnEndTimeChanging(value);
-                ReportPropertyChanging("EndTime");
-                _EndTime = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EndTime");
-                OnEndTimeChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _EndTime;
-        partial void OnEndTimeChanging(Nullable<global::System.DateTime> value);
-        partial void OnEndTimeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.DateTime> CreatedOn
         {
             get
@@ -1664,11 +1616,13 @@ namespace CCData
         /// </summary>
         /// <param name="runnerRaceRecordSegmentId">Initial value of the RunnerRaceRecordSegmentId property.</param>
         /// <param name="runnerRaceRecordId">Initial value of the RunnerRaceRecordId property.</param>
-        public static RunnerRaceRecordSegment CreateRunnerRaceRecordSegment(global::System.Int64 runnerRaceRecordSegmentId, global::System.Int64 runnerRaceRecordId)
+        /// <param name="elapsedTimeInSeconds">Initial value of the ElapsedTimeInSeconds property.</param>
+        public static RunnerRaceRecordSegment CreateRunnerRaceRecordSegment(global::System.Int64 runnerRaceRecordSegmentId, global::System.Int64 runnerRaceRecordId, global::System.Int32 elapsedTimeInSeconds)
         {
             RunnerRaceRecordSegment runnerRaceRecordSegment = new RunnerRaceRecordSegment();
             runnerRaceRecordSegment.RunnerRaceRecordSegmentId = runnerRaceRecordSegmentId;
             runnerRaceRecordSegment.RunnerRaceRecordId = runnerRaceRecordId;
+            runnerRaceRecordSegment.ElapsedTimeInSeconds = elapsedTimeInSeconds;
             return runnerRaceRecordSegment;
         }
 
@@ -1726,54 +1680,6 @@ namespace CCData
         private global::System.Int64 _RunnerRaceRecordId;
         partial void OnRunnerRaceRecordIdChanging(global::System.Int64 value);
         partial void OnRunnerRaceRecordIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> StartTime
-        {
-            get
-            {
-                return _StartTime;
-            }
-            set
-            {
-                OnStartTimeChanging(value);
-                ReportPropertyChanging("StartTime");
-                _StartTime = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("StartTime");
-                OnStartTimeChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _StartTime;
-        partial void OnStartTimeChanging(Nullable<global::System.DateTime> value);
-        partial void OnStartTimeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> EndTime
-        {
-            get
-            {
-                return _EndTime;
-            }
-            set
-            {
-                OnEndTimeChanging(value);
-                ReportPropertyChanging("EndTime");
-                _EndTime = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EndTime");
-                OnEndTimeChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _EndTime;
-        partial void OnEndTimeChanging(Nullable<global::System.DateTime> value);
-        partial void OnEndTimeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1870,6 +1776,30 @@ namespace CCData
         private Nullable<global::System.Int64> _ModifiedBy;
         partial void OnModifiedByChanging(Nullable<global::System.Int64> value);
         partial void OnModifiedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ElapsedTimeInSeconds
+        {
+            get
+            {
+                return _ElapsedTimeInSeconds;
+            }
+            set
+            {
+                OnElapsedTimeInSecondsChanging(value);
+                ReportPropertyChanging("ElapsedTimeInSeconds");
+                _ElapsedTimeInSeconds = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ElapsedTimeInSeconds");
+                OnElapsedTimeInSecondsChanged();
+            }
+        }
+        private global::System.Int32 _ElapsedTimeInSeconds;
+        partial void OnElapsedTimeInSecondsChanging(global::System.Int32 value);
+        partial void OnElapsedTimeInSecondsChanged();
 
         #endregion
 

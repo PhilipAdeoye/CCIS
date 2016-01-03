@@ -14,9 +14,6 @@ namespace CCData
 		{
 			var errors = new List<DbValidationError>();
 
-			if (StartTime.HasValue && EndTime.HasValue && EndTime < StartTime)
-				errors.Add(new DbValidationError("End Time cannot be earlier than Start Time", "EndTime"));
-
 			if (errors.Count == 0)
 			{
 				using (var db = new CCEntities())

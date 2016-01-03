@@ -1,0 +1,15 @@
+﻿@model CCMvc.ViewModels.SplitViewModel
+
+<div class="form-group split-view">
+    <div class="col-sm-offset-3 col-sm-3">
+        @Html.TextBoxFor(m => m.ElapsedTimeDisplay, new { @class = "elapsedTime", data_inputmask="'mask': 's:s', 'placeholder': '00:00'"})
+    </div>
+    <div class="col-sm-3 text-right">
+        <span class="intervalTime">@Html.DisplayFor(m => m.IntervalDisplay)</span>
+    </div>
+    <div class="col-sm-3">
+        <span class="glyphicon glyphicon-remove cursor-pointer delete-icon"
+            aria-label="delete" title="Delete"></span>
+    </div>
+</div>
+

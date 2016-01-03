@@ -34,7 +34,8 @@ namespace CCMvc
                         "~/Scripts/bootstrap-datetimepicker.min.js",
                         "~/Scripts/bootstrap-multiselect.js",
                         "~/Scripts/typeahead.bundle.min.js",
-                        "~/Scripts/toastr.min.js"));
+                        "~/Scripts/toastr.min.js",
+                        "~/Scripts/jquery.inputmask.bundle.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                         "~/ScriptsCC/Site.js"));
@@ -74,7 +75,8 @@ namespace CCMvc
 
             bundles.Add(new ScriptBundle("~/bundles/RaceDetail").Include(
                 "~/ScriptsCC/RaceDetail.js",
-                "~/ScriptsCC/RaceDetailRunner.js"));
+                "~/ScriptsCC/RaceDetailRunner.js",
+                "~/ScriptsCC/RunnerSplits.js"));
 
             #endregion
         }

@@ -1,0 +1,37 @@
+﻿@model CCMvc.ViewModels.ManageSplitsViewModel
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger" role="alert" id="splitManageErrorAlert">
+        <strong>Please correct the following errors:</strong>
+        @Html.ValidationSummary(false, "")
+    </div>
+}
+
+<form id="frmManageSplits">
+    @Html.HiddenFor(m => m.RunnerRaceRecordId, new { @id = "hiddenRunnerRaceRecordId", 
+        data_url=@Url.Action("ManageSplits", "RunnerRaceRecordSegment")})
+    @Html.AntiForgeryToken()
+</form>
+
+<div id="splitsContainer" class="form-horizontal">
+@if (Model.Splits.Count() == 0)
+{
+    
+}
+else 
+{
+    @Html.EditorFor(m => m.Splits)
+}
+</div>
+
+<div id="extraSplitContainer" style="display:none">
+    @Html.Partial("~/Views/RunnerRaceRecordSegment/EditorTemplates/SplitViewModel.cshtml", new CCMvc.ViewModels.SplitViewModel());
+</div>
+
+<div class="row">
+    <div class="col-xs-offset-3 col-xs-6">
+        <button id="addSplitBtn" class="btn btn-primary btn-block">Add Split</button>
+    </div>    
+</div>
+

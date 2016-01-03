@@ -146,6 +146,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RaceController.cs" />
     <Compile Include="Controllers\RunnerRaceRecordController.cs" />
+    <Compile Include="Controllers\RunnerRaceRecordSegmentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Global.asax.cs">
@@ -164,11 +165,13 @@
     <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\ManageRunnersViewModel.cs" />
+    <Compile Include="ViewModels\ManageSplitsViewModel.cs" />
     <Compile Include="ViewModels\OrganizationVM.cs" />
     <Compile Include="ViewModels\RaceCreateViewModel.cs" />
     <Compile Include="ViewModels\RaceEditViewModel.cs" />
     <Compile Include="ViewModels\RaceViewModel.cs" />
     <Compile Include="ViewModels\RunnerViewModel.cs" />
+    <Compile Include="ViewModels\SplitViewModel.cs" />
     <Compile Include="ViewModels\UserCreateViewModel.cs" />
     <Compile Include="ViewModels\UserEditViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
@@ -248,6 +251,7 @@
     <Content Include="ScriptsCC\OrganizationDetailUser.js" />
     <Content Include="ScriptsCC\RaceDetail.js" />
     <Content Include="ScriptsCC\RaceDetailRunner.js" />
+    <Content Include="ScriptsCC\RunnerSplits.js" />
     <Content Include="ScriptsCC\SessionTimeout.js" />
     <Content Include="ScriptsCC\Site.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -257,6 +261,7 @@
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.inputmask.bundle.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
@@ -325,6 +330,9 @@
     <Content Include="Views\Race\CancelModal.cshtml" />
     <Content Include="Views\RunnerRaceRecord\ManageRunners.cshtml" />
     <Content Include="Views\RunnerRaceRecord\EditorTemplates\RunnerViewModel.cshtml" />
+    <Content Include="Views\RunnerRaceRecordSegment\ManageSplits.cshtml" />
+    <Content Include="Views\RunnerRaceRecordSegment\EditorTemplates\SplitViewModel.cshtml" />
+    <Content Include="Views\RunnerRaceRecordSegment\ManageModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CCData\CCData.csproj">

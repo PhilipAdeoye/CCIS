@@ -100,8 +100,6 @@
           <Property Name="RaceId" Type="bigint" Nullable="false" />
           <Property Name="RunnerClassificationId" Type="int" Nullable="false" />
           <Property Name="VarsityLevelId" Type="int" Nullable="false" />
-          <Property Name="StartTime" Type="datetime" />
-          <Property Name="EndTime" Type="datetime" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="CreatedBy" Type="bigint" />
           <Property Name="ModifiedOn" Type="datetime" />
@@ -113,8 +111,7 @@
           </Key>
           <Property Name="RunnerRaceRecordSegmentId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RunnerRaceRecordId" Type="bigint" Nullable="false" />
-          <Property Name="StartTime" Type="datetime" />
-          <Property Name="EndTime" Type="datetime" />
+          <Property Name="ElapsedTimeInSeconds" Type="int" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="CreatedBy" Type="bigint" />
           <Property Name="ModifiedOn" Type="datetime" />
@@ -351,8 +348,6 @@
           <Property Name="RaceId" Type="Int64" Nullable="false" />
           <Property Name="RunnerClassificationId" Type="Int32" Nullable="false" />
           <Property Name="VarsityLevelId" Type="Int32" Nullable="false" />
-          <Property Name="StartTime" Type="DateTime" />
-          <Property Name="EndTime" Type="DateTime" />
           <Property Name="CreatedOn" Type="DateTime" />
           <Property Name="CreatedBy" Type="Int64" />
           <Property Name="ModifiedOn" Type="DateTime" />
@@ -369,13 +364,12 @@
           </Key>
           <Property Name="RunnerRaceRecordSegmentId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RunnerRaceRecordId" Type="Int64" Nullable="false" />
-          <Property Name="StartTime" Type="DateTime" />
-          <Property Name="EndTime" Type="DateTime" />
           <Property Name="CreatedOn" Type="DateTime" />
           <Property Name="CreatedBy" Type="Int64" />
           <Property Name="ModifiedOn" Type="DateTime" />
           <Property Name="ModifiedBy" Type="Int64" />
           <NavigationProperty Name="RunnerRaceRecord" Relationship="CCModel.FK_RunnerRaceRecordSegment_RunnerRaceRecord" FromRole="RunnerRaceRecordSegment" ToRole="RunnerRaceRecord" />
+          <Property Type="Int32" Name="ElapsedTimeInSeconds" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -569,8 +563,6 @@
                 <ScalarProperty Name="RaceId" ColumnName="RaceId" />
                 <ScalarProperty Name="RunnerClassificationId" ColumnName="RunnerClassificationId" />
                 <ScalarProperty Name="VarsityLevelId" ColumnName="VarsityLevelId" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
@@ -581,10 +573,9 @@
           <EntitySetMapping Name="RunnerRaceRecordSegments">
             <EntityTypeMapping TypeName="CCModel.RunnerRaceRecordSegment">
               <MappingFragment StoreEntitySet="RunnerRaceRecordSegment">
+                <ScalarProperty Name="ElapsedTimeInSeconds" ColumnName="ElapsedTimeInSeconds" />
                 <ScalarProperty Name="RunnerRaceRecordSegmentId" ColumnName="RunnerRaceRecordSegmentId" />
                 <ScalarProperty Name="RunnerRaceRecordId" ColumnName="RunnerRaceRecordId" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
@@ -649,8 +640,8 @@
         <EntityTypeShape EntityType="CCModel.Race" Width="1.5" PointX="3" PointY="6.25" Height="3.3263964843749996" IsExpanded="true" />
         <EntityTypeShape EntityType="CCModel.Role" Width="1.5" PointX="0.75" PointY="3.25" Height="1.5956835937499996" IsExpanded="true" />
         <EntityTypeShape EntityType="CCModel.RunnerClassification" Width="1.5" PointX="3" PointY="11.875" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="CCModel.RunnerRaceRecord" Width="1.5" PointX="5.25" PointY="5.625" Height="4.4802050781250031" IsExpanded="true" />
-        <EntityTypeShape EntityType="CCModel.RunnerRaceRecordSegment" Width="1.5" PointX="7.5" PointY="6.5" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCModel.RunnerRaceRecord" Width="1.5" PointX="5.25" PointY="5.625" Height="3.7109993489583335" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCModel.RunnerRaceRecordSegment" Width="1.5" PointX="7.5" PointY="6.5" Height="2.5571907552083317" IsExpanded="true" />
         <EntityTypeShape EntityType="CCModel.User" Width="1.5" PointX="3" PointY="0.75" Height="4.2879036458333317" IsExpanded="true" />
         <EntityTypeShape EntityType="CCModel.VarsityLevel" Width="1.5" PointX="3" PointY="14.25" Height="1.5956835937499996" IsExpanded="true" />
         <AssociationConnector Association="CCModel.FK_Race_Organization" ManuallyRouted="false">
@@ -664,8 +655,8 @@
           <ConnectorPoint PointX="3" PointY="2.8939518229166659" />
         </AssociationConnector>
         <AssociationConnector Association="CCModel.FK_RunnerRaceRecord_Race" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="7.9131982421875" />
-          <ConnectorPoint PointX="5.25" PointY="7.9131982421875" />
+          <ConnectorPoint PointX="4.5" PointY="7.7929996744791676" />
+          <ConnectorPoint PointX="5.25" PointY="7.7929996744791676" />
         </AssociationConnector>
         <AssociationConnector Association="CCModel.FK_User_Role" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="4.047841796875" />
@@ -675,24 +666,24 @@
         </AssociationConnector>
         <AssociationConnector Association="CCModel.FK_RunnerRaceRecord_RunnerClassification" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="12.672841796875" />
-          <ConnectorPoint PointX="5.5104141666666671" PointY="12.672841796875" />
-          <ConnectorPoint PointX="5.6770808333333331" PointY="12.672841796875" />
-          <ConnectorPoint PointX="6" PointY="12.672841796875" />
-          <ConnectorPoint PointX="6" PointY="10.105205078125003" />
+          <ConnectorPoint PointX="5.6437157682291668" PointY="12.672841796875" />
+          <ConnectorPoint PointX="5.8103824348958328" PointY="12.672841796875" />
+          <ConnectorPoint PointX="6.2666032031249994" PointY="12.672841796875" />
+          <ConnectorPoint PointX="6.2666032031249994" PointY="9.3359993489583335" />
         </AssociationConnector>
         <AssociationConnector Association="CCModel.FK_RunnerRaceRecord_User" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="2.8939518229166659" />
-          <ConnectorPoint PointX="5.4847090384615385" PointY="2.8939518229166659" />
-          <ConnectorPoint PointX="5.4847090384615385" PointY="5.625" />
+          <ConnectorPoint PointX="4.5" PointY="3.1874995" />
+          <ConnectorPoint PointX="6" PointY="3.1874995" />
+          <ConnectorPoint PointX="6" PointY="5.625" />
         </AssociationConnector>
         <AssociationConnector Association="CCModel.FK_RunnerRaceRecord_VarsityLevel" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="15.047841796875" />
-          <ConnectorPoint PointX="5.5937475" PointY="15.047841796875" />
-          <ConnectorPoint PointX="5.5937475" PointY="10.105205078125003" />
+          <ConnectorPoint PointX="5.7270491015625" PointY="15.047841796875" />
+          <ConnectorPoint PointX="5.7270491015625" PointY="9.3359993489583335" />
         </AssociationConnector>
         <AssociationConnector Association="CCModel.FK_RunnerRaceRecordSegment_RunnerRaceRecord" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="7.87474609375" />
-          <ConnectorPoint PointX="7.5" PointY="7.87474609375" />
+          <ConnectorPoint PointX="6.75" PointY="7.7785953776041659" />
+          <ConnectorPoint PointX="7.5" PointY="7.7785953776041659" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

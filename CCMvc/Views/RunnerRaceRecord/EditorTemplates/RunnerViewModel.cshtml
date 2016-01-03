@@ -16,11 +16,21 @@
     <div class="col-xs-9 col-sm-4">
         <p class="form-control-static">@Model.Name</p>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         @Html.DropDownListFor(m => m.VarsityLevelId, (SelectList)Model.VarsityLevels, new { @class = "form-control"})
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         @Html.DropDownListFor(m => m.RunnerClassificationId, (SelectList)Model.RunnerClassifications, new { @class = "form-control"})
     </div>
+    @if (Model.UserIsEnrolled)
+    {
+        <div class="col-sm-1">
+            <p class="form-control-static">
+                <a href="#" class="runnerSplitBtn"
+                    data-url='@Url.Action("ManageSplits", "RunnerRaceRecordSegment")' 
+                    data-runner-race-record-id="@Model.RunnerRaceRecordId">Splits</a>
+            </p>
+        </div>
+    }
 </div>
 <hr />

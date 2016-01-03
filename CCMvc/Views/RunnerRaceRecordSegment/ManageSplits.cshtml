@@ -15,14 +15,7 @@
 </form>
 
 <div id="splitsContainer" class="form-horizontal">
-@if (Model.Splits.Count() == 0)
-{
-    
-}
-else 
-{
     @Html.EditorFor(m => m.Splits)
-}
 </div>
 
 <div id="extraSplitContainer" style="display:none">

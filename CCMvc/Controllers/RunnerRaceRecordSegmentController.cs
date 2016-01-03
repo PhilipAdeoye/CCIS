@@ -15,6 +15,7 @@ namespace CCMvc.Controllers
     {
         private CCEntities db = new CCEntities();
 
+        #region ManageSplits
         [HttpGet]
         [Authorize(Roles = Role.Names.Admin + "," + Role.Names.Coach)]
         public ActionResult ManageSplits(long runnerRaceRecordId)
@@ -26,7 +27,8 @@ namespace CCMvc.Controllers
             {
                 RunnerRaceRecordId = runnerRaceRecordId,
                 Splits = RunnerRaceRecordSegment.GetSplitsForRunnerRaceRecord(runnerRaceRecordId)
-                    .Select(s => new SplitViewModel { 
+                    .Select(s => new SplitViewModel
+                    {
                         RunnerRaceRecordSegmentId = s.RunnerRaceRecordSegmentId,
                         ElapsedTimeInSeconds = s.ElapsedTimeInSeconds,
                         IntervalFromPriorSplit = s.IntervalFromPriorSplit,
@@ -47,7 +49,7 @@ namespace CCMvc.Controllers
             if (ModelState.IsValid)
             {
                 RunnerRaceRecordSegment.DeleteSegmentsByRunnerRaceRecordId(model.RunnerRaceRecordId);
-     
+
                 foreach (var split in model.Splits)
                 {
                     db.RunnerRaceRecordSegments.AddObject(new RunnerRaceRecordSegment
@@ -58,11 +60,12 @@ namespace CCMvc.Controllers
                     });
                 }
                 TryDBChange(() => db.SaveChanges());
-                if(ModelState.IsValid)
+                if (ModelState.IsValid)
                     return Json(new { });
             }
-            return Json(new { Errors = ModelState.Errors() });            
-        }
+            return Json(new { Errors = ModelState.Errors() });
+        } 
+        #endregion
 
         #region Helper Methods
 

@@ -1,4 +1,4 @@
-# CCCP: Cross Country Cadence Project
+# CCIS: Cross Country Information System
 
 A little tool to keep track of cross country runner's races, times, etc. 
 

@@ -13,16 +13,16 @@ For example:
 
 Add the following keys:
 
-1. An email address for sending exception emails from. I'm using no-reply@cccp.com,
+1. An email address for sending exception emails from. I'm using no-reply@ccis.com,
 	which isn't a real address, but it doesn't matter.
 
-	<add key="SendExceptionEmailsFrom" value="no-reply@cccp.com"/>
+	<add key="SendExceptionEmailsFrom" value="no-reply@ccis.com"/>
 
 2. An email address to receive exception emails at. These emails will help with
 	debugging issues that come up, and the address used should be an actual email
 	address if you intend to actually receive this emails.
 	
-	<add key="SendExceptionEmailsTo" value="cccp.developer@gmail.com"/>
+	<add key="SendExceptionEmailsTo" value="ccis.developer@gmail.com"/>
 
 3. The ISP's mail server address. If you know your ISP, you can usually google
 	for this. ISPs like TWC, Comcast, Consolidated Comms, etc.

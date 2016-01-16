@@ -11,7 +11,7 @@ namespace CCData
     {        
         public class Ids
         {
-            public const long KGB = 1;
+            public const long CCIS = 1;
         }
 
         #region SaveValidate
@@ -40,8 +40,8 @@ namespace CCData
         {
             var errors = new List<DbValidationError>();
 
-            if (OrganizationId == Ids.KGB)
-                errors.Add(new DbValidationError("Sorry, but you cannot dismantle the KGB", "OrganizationId"));
+            if (OrganizationId == Ids.CCIS)
+                errors.Add(new DbValidationError("Sorry, but you cannot dismantle the Sissies!", "OrganizationId"));
 
             return errors;
         } 

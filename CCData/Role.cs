@@ -25,7 +25,7 @@ namespace CCData
         {
             using (var db = new CCEntities())
             {
-                if (creatorRoleId == Ids.Admin && organizationId == Organization.Ids.KGB)
+                if (creatorRoleId == Ids.Admin && organizationId == Organization.Ids.CCIS)
                     return db.Roles.ToList();
                 else
                     return db.Roles.Where(r => r.RoleId != Ids.Admin).ToList();

@@ -40,7 +40,7 @@ namespace Helpers
                     using (MailMessage msg = new MailMessage(
                             ConfigurationManager.AppSettings[ConfigKeys.SendExceptionEmailsFrom],
                             ConfigurationManager.AppSettings[ConfigKeys.SendExceptionEmailsTo],
-                            string.IsNullOrWhiteSpace(Subject) ? "[CCCP] Unhandled Exception" : Subject,
+                            string.IsNullOrWhiteSpace(Subject) ? "[CCIS] Unhandled Exception" : Subject,
                             body))
                     {
                         msg.IsBodyHtml = true;

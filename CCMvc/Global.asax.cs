@@ -62,7 +62,7 @@ namespace CCMvc
                 new ExceptionEmail()
                 {
                     ex = ex,
-                    Subject = "[CCCP] Unhandled Exception in CCMvc",
+                    Subject = "[CCIS] Unhandled Exception in CCMvc",
                     ExtraData = new List<KeyValuePair<string, string>>()
                         {
                             new KeyValuePair<string, string>("URL", Request.Url.ToString()),
@@ -93,7 +93,7 @@ namespace CCMvc
         #region Application_PreSendRequestHeaders
         protected void Application_PreSendRequestHeaders()
         {
-            Response.Headers.Set("Server", "CCCP Resources");
+            Response.Headers.Set("Server", "CCIS Resources");
             Response.Headers.Remove("X-AspNetMvc-Version");
         }
         #endregion

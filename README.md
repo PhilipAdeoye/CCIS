@@ -1,6 +1,6 @@
 # CCIS: Cross Country Information System
 
-A little tool to keep track of cross country runner's races, times, etc. 
+A little ~~tool~~ web app to keep track of cross country runner's races, times, etc. 
 
 Techs used: ASP.NET MVC 4, SQL Server 2012, Twitter Bootstrap, etc
 
